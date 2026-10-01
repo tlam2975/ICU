@@ -480,11 +480,10 @@ a:focus-visible {
 }
 
 .pixel-character-wrap {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  right: 9%;
-  bottom: 5%;
-  width: min(33%, 390px);
+  width: 100%;
+  min-width: 0;
   transform-origin: 50% 96%;
   transform: translate3d(var(--character-x, 0px), var(--character-y, 0px), 0) rotateY(var(--character-tilt, 0deg));
 }
@@ -520,7 +519,15 @@ a:focus-visible {
 }
 
 .about-inner {
-  padding: 100px 0 110px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: 32px;
+  padding: 96px 0;
+}
+
+.about-copy {
+  min-width: 0;
 }
 
 .about-inner h2,
@@ -552,8 +559,8 @@ a:focus-visible {
 
 .music-section {
   padding: 210px 0 190px;
-  background: linear-gradient(180deg, #243b3f 0%, #dfe7e2 160px, #dfe7e2 calc(100% - 140px), #080d16 100%);
-  color: #14242b;
+  background: linear-gradient(180deg, #243b3f 0%, #253a37 38%, #1b2b2b 72%, #080d16 100%);
+  color: var(--moon);
 }
 
 .music-inner {
@@ -564,7 +571,7 @@ a:focus-visible {
 }
 
 .music-heading .eyebrow {
-  color: #8a534b;
+  color: var(--rose);
 }
 
 .music-heading h2 {
@@ -576,12 +583,12 @@ a:focus-visible {
 .music-heading > p:last-child {
   max-width: 440px;
   margin: 0;
-  color: rgba(20, 36, 43, 0.77);
+  color: rgba(245, 241, 232, 0.78);
   line-height: 1.65;
 }
 
 .music-links {
-  border-top: 1px solid rgba(20, 36, 43, 0.2);
+  border-top: 1px solid var(--line);
 }
 
 .music-link {
@@ -591,7 +598,7 @@ a:focus-visible {
   gap: 18px;
   min-height: 90px;
   padding: 18px 2px;
-  border-bottom: 1px solid rgba(20, 36, 43, 0.2);
+  border-bottom: 1px solid var(--line);
   transition: padding 180ms ease, background 180ms ease;
 }
 
@@ -599,7 +606,7 @@ a:focus-visible {
 .music-link:focus-visible {
   padding-right: 12px;
   padding-left: 12px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(245, 241, 232, 0.045);
 }
 
 .music-link span {
@@ -609,7 +616,7 @@ a:focus-visible {
 }
 
 .music-link small {
-  color: #745e57;
+  color: rgba(245, 241, 232, 0.72);
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -623,7 +630,7 @@ a:focus-visible {
 
 .music-link svg {
   flex: 0 0 auto;
-  color: #8a534b;
+  color: var(--rose);
 }
 
 .site-footer {
@@ -857,7 +864,6 @@ dialog::backdrop {
   .fragment-paper { padding: 19px 18px; }
   .fragment-text { font-size: 0.76rem; }
   .about-inner h2 { max-width: 540px; font-size: 3.5rem; }
-  .pixel-character-wrap { right: 4%; width: 36%; }
 }
 
 @media (max-width: 900px) {
@@ -872,6 +878,13 @@ dialog::backdrop {
   .header-actions { gap: 6px; }
   .social-trigger { width: 40px; justify-content: center; }
   .social-trigger span { display: none; }
+  .about-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+    padding: 72px 0 52px;
+  }
+  .about-copy { max-width: 600px; }
+  .pixel-character-wrap { width: min(100%, 660px); justify-self: center; }
 }
 
 @media (max-width: 700px) {
@@ -905,12 +918,12 @@ dialog::backdrop {
   .hero-mark { display: none; }
   .about-section {
     align-items: flex-start;
-    min-height: 770px;
+    min-height: 0;
   }
   .about-horizon { bottom: 9%; }
   .about-inner,
   .section-inner { width: min(100% - 12%, 1300px); }
-  .about-inner { padding: 62px 0 330px; }
+  .about-inner { gap: 40px; padding: 62px 0 52px; }
   .about-inner h2 {
     max-width: 520px;
     margin: 14px 0 17px;
@@ -923,12 +936,9 @@ dialog::backdrop {
   }
   .about-signature { margin-top: 22px; font-size: 1.1rem; }
   .pixel-character-wrap {
-    right: 50%;
-    bottom: 3%;
-    width: 280px;
-    max-width: 65%;
-    transform: translateX(50%);
-    animation: none;
+    width: 100%;
+    max-width: 540px;
+    transform: none;
   }
   .pixel-character {
     animation: character-mobile 6s ease-in-out infinite;
@@ -960,8 +970,6 @@ dialog::backdrop {
   .hero-content h1 { font-size: 5.35rem; }
   .hero-body { max-width: 265px; }
   .about-inner h2 { font-size: 2.3rem; }
-  .about-section { min-height: 810px; }
-  .pixel-character-wrap { width: 265px; }
   .note-dialog-inner { min-height: 300px; padding: 48px 28px 28px; }
   .note-dialog h2 { font-size: 2.5rem; }
   .social-dialog-inner { padding: 38px 26px 28px; }

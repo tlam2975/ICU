@@ -132,6 +132,9 @@ function setLanguage(nextLanguage) {
   document.querySelectorAll('[data-copy]').forEach((element) => {
     element.textContent = nestedValue(copy, element.dataset.copy) || '';
   });
+  document.querySelectorAll('[data-copy-alt]').forEach((element) => {
+    element.alt = nestedValue(copy, element.dataset.copyAlt) || '';
+  });
   noteButtons.forEach((button, index) => {
     const note = copy.notes.items[index];
     const fragment = button.querySelector('.fragment-text');

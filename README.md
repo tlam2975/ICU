@@ -12,7 +12,7 @@ npm run dev
 ## Edit the site
 
 - Change English and Vietnamese copy, social links, and the instrumental path in `public/content.json`.
-- Replace `public/images/pixel-guitarist.png` when the group's own artwork is ready.
+- Replace `public/images/pixel-trio.png` when the group's own artwork is ready. Its English and Vietnamese image descriptions are in `about.artworkAlt` in the content JSON.
 - The instrumental file is `public/audio/biet_saubienkaraoke1.mp3`.
 
 ## Deploy to GitHub Pages
