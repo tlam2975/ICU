@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d16" />
+    <meta name="description" content="ICU, innerchild.universe. Music for the feelings we carry." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>ICU · innerchild.universe</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="ICU, innerchild.universe">
+          <span class="wordmark-symbol">ICU</span>
+          <span class="wordmark-name">innerchild.universe</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="#about" data-copy="nav.about"></a>
+          <a href="#music" data-copy="nav.music"></a>
+        </nav>
+        <div class="header-actions">
+          <div class="language-switch" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="vi" aria-pressed="false">VI</button>
+          </div>
+          <button class="icon-button audio-button" id="audio-toggle" type="button" aria-pressed="false" aria-label="Play instrumental">
+            <span class="icon-audio-off"><i data-lucide="volume-x"></i></span>
+            <span class="icon-audio-on"><i data-lucide="volume-2"></i></span>
+          </button>
+          <button class="social-trigger" id="social-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+            <span data-copy="nav.socials"></span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="top" aria-labelledby="hero-title">
+          <canvas id="universe" class="universe-canvas" aria-hidden="true"></canvas>
+          <div class="hero-shade" aria-hidden="true"></div>
+          <div class="note-field" id="note-field" aria-label="Floating notes"></div>
+          <div class="hero-content">
+            <p class="eyebrow hero-eyebrow" data-copy="hero.eyebrow"></p>
+            <h1 id="hero-title">ICU</h1>
+            <p class="hero-name">innerchild.universe</p>
+            <p class="hero-body" data-copy="hero.body"></p>
+          </div>
+          <a class="hero-next" href="#about">
+            <span data-copy="hero.next"></span>
+            <i data-lucide="arrow-down"></i>
+          </a>
+          <p class="hero-mark" aria-hidden="true">I · C · U</p>
+        </section>
+
+        <section class="about-section" id="about" aria-labelledby="about-title">
+          <div class="about-scene" aria-hidden="true">
+            <div class="about-star about-star-a"></div>
+            <div class="about-star about-star-b"></div>
+            <div class="about-star about-star-c"></div>
+            <div class="about-horizon"></div>
+            <div class="pixel-character-wrap">
+              <img class="pixel-character" src="/images/pixel-guitarist.png" alt="" loading="lazy" />
+              <span class="character-shadow"></span>
+            </div>
+          </div>
+          <div class="about-inner">
+            <p class="eyebrow" data-copy="about.eyebrow"></p>
+            <h2 id="about-title" data-copy="about.title"></h2>
+            <p class="about-body" data-copy="about.body"></p>
+            <p class="about-signature" data-copy="about.signature"></p>
+          </div>
+        </section>
+
+        <section class="music-section" id="music" aria-labelledby="music-title">
+          <div class="section-inner music-inner">
+            <div class="music-heading">
+              <p class="eyebrow" data-copy="music.eyebrow"></p>
+              <h2 id="music-title" data-copy="music.title"></h2>
+              <p data-copy="music.body"></p>
+            </div>
+            <div class="music-links">
+              <a id="latest-track-link" class="music-link primary-link" target="_blank" rel="noopener noreferrer">
+                <span>
+                  <small data-copy="music.latestLabel"></small>
+                  <strong data-copy="music.spotify"></strong>
+                </span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+              <a id="apple-link" class="music-link" target="_blank" rel="noopener noreferrer">
+                <span>
+                  <small data-copy="music.artistLabel"></small>
+                  <strong data-copy="music.apple"></strong>
+                </span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="section-inner footer-inner">
+          <div>
+            <p class="footer-brand">ICU</p>
+            <p class="footer-line" data-copy="footer.line"></p>
+          </div>
+          <div class="footer-contact">
+            <a id="footer-email" href="mailto:innerchilduniverse@gmail.com">innerchilduniverse@gmail.com</a>
+            <button id="footer-socials" type="button" data-copy="footer.socials"></button>
+          </div>
+          <div class="footer-meta">
+            <p>© <span id="year"></span> innerchild.universe</p>
+            <p data-copy="footer.credit"></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <dialog class="note-dialog" id="note-dialog" aria-labelledby="note-dialog-title">
+      <div class="note-dialog-inner">
+        <button class="icon-button dialog-close" id="note-close" type="button" aria-label="Close note"><i data-lucide="x"></i></button>
+        <p class="eyebrow" data-copy="notes.label"></p>
+        <p class="note-dialog-index" id="note-dialog-index"></p>
+        <h2 id="note-dialog-title"></h2>
+        <div class="note-dialog-nav">
+          <button class="icon-button" id="note-prev" type="button" aria-label="Previous note"><i data-lucide="arrow-left"></i></button>
+          <button class="icon-button" id="note-next" type="button" aria-label="Next note"><i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="social-dialog" id="social-dialog" aria-labelledby="social-dialog-title">
+      <div class="social-dialog-inner">
+        <div class="social-dialog-header">
+          <div>
+            <p class="eyebrow" data-copy="social.eyebrow"></p>
+            <h2 id="social-dialog-title" data-copy="social.title"></h2>
+          </div>
+          <button class="icon-button dialog-close" id="social-close" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
+        </div>
+        <div id="social-links" class="social-links"></div>
+        <a id="social-latest" class="social-latest" target="_blank" rel="noopener noreferrer">
+          <span data-copy="social.latest"></span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </dialog>
+
+    <audio id="instrumental" loop preload="none"></audio>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

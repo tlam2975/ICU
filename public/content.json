@@ -1,0 +1,120 @@
+{
+  "settings": {
+    "audioSrc": "/audio/biet_saubienkaraoke1.mp3",
+    "latestTrackUrl": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
+    "appleMusicUrl": "https://music.apple.com/vn/artist/icu"
+  },
+  "socials": [
+    { "label": "TikTok", "url": "https://www.tiktok.com/@innerchild_universe" },
+    { "label": "Instagram", "url": "https://www.instagram.com/innerchild.universe" },
+    { "label": "YouTube", "url": "https://www.youtube.com/@innerchilduniverse" },
+    { "label": "Spotify", "url": "https://open.spotify.com/artist/1KzxDLIMpdM4o02vb1srH1" },
+    { "label": "Apple Music", "url": "https://music.apple.com/vn/artist/icu" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/innerchilduniverse" },
+    { "label": "Email", "url": "mailto:innerchilduniverse@gmail.com" }
+  ],
+  "en": {
+    "nav": { "about": "Our universe", "music": "Music", "socials": "Elsewhere" },
+    "hero": {
+      "eyebrow": "a quiet place for what you feel",
+      "body": "Some feelings stay with us. Here, they have room to glow.",
+      "next": "Come closer"
+    },
+    "notes": {
+      "label": "a note for you",
+      "items": [
+        { "short": "you are still here", "full": "You are still here. Let that be enough for tonight." },
+        { "short": "grow at your own pace", "full": "The younger you never needed to grow in a hurry." },
+        { "short": "the quiet has a pulse", "full": "Even in the quiet, something in you keeps singing." },
+        { "short": "let the sea hold it", "full": "For a moment, let the sea hold what your heart cannot." },
+        { "short": "tenderness survived", "full": "After everything, your tenderness is still here." },
+        { "short": "begin again, softly", "full": "You can begin again without making a sound." },
+        { "short": "keep one small light", "full": "Keep one small light for the child you used to be." }
+      ]
+    },
+    "about": {
+      "eyebrow": "three people, one inner sky",
+      "title": "The feelings we carry become songs.",
+      "body": "ICU is three people making music for the parts of us that are hard to name. A place for memory, tenderness, and the child within who still looks up at the sky.",
+      "signature": "innerchild.universe"
+    },
+    "music": {
+      "eyebrow": "stay for a song",
+      "title": "Listen from where you are.",
+      "body": "The latest release is waiting on Spotify. The instrumental you hear here is yours to start or pause.",
+      "latestLabel": "Latest release",
+      "spotify": "Listen on Spotify",
+      "artistLabel": "Artist page",
+      "apple": "Find ICU on Apple Music"
+    },
+    "social": {
+      "eyebrow": "find the signal",
+      "title": "Elsewhere with ICU",
+      "latest": "Listen to the latest release"
+    },
+    "footer": { "line": "A little light, for the feelings inside.", "socials": "All our places", "credit": "Designed by Tung Lam" },
+    "controls": {
+      "mainNav": "Main navigation",
+      "language": "Language",
+      "noteField": "Floating notes",
+      "playAudio": "Play instrumental",
+      "pauseAudio": "Pause instrumental",
+      "closeNote": "Close note",
+      "previousNote": "Previous note",
+      "nextNote": "Next note",
+      "closeMenu": "Close menu"
+    }
+  },
+  "vi": {
+    "nav": { "about": "Vũ trụ của mình", "music": "Âm nhạc", "socials": "Gặp ICU" },
+    "hero": {
+      "eyebrow": "một chốn yên cho những điều mình cảm",
+      "body": "Có những cảm xúc ở lại rất lâu. Ở đây, chúng được phép sáng lên.",
+      "next": "Lại gần hơn"
+    },
+    "notes": {
+      "label": "một lời nhắn cho bạn",
+      "items": [
+        { "short": "mình vẫn ở đây", "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
+        { "short": "cứ lớn lên từ từ", "full": "Đứa trẻ ngày ấy đâu cần mình phải lớn vội." },
+        { "short": "lặng im vẫn có nhịp", "full": "Ngay cả khi im lặng, trong mình vẫn có điều gì đang hát." },
+        { "short": "để biển giữ hộ", "full": "Một lát thôi, cứ để biển giữ hộ điều trái tim chưa mang nổi." },
+        { "short": "dịu dàng vẫn còn", "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
+        { "short": "bắt đầu lại, khẽ thôi", "full": "Mình có thể bắt đầu lại, thật khẽ thôi." },
+        { "short": "giữ một đốm sáng", "full": "Giữ lại một đốm sáng cho đứa trẻ mình từng là." }
+      ]
+    },
+    "about": {
+      "eyebrow": "ba người, một bầu trời bên trong",
+      "title": "Những điều mình mang theo, rồi thành bài hát.",
+      "body": "ICU là ba người làm nhạc cho những góc lòng khó gọi tên. Một chốn nhỏ cho ký ức, cho sự dịu dàng, và cho đứa trẻ trong mình vẫn hay ngước nhìn trời.",
+      "signature": "innerchild.universe"
+    },
+    "music": {
+      "eyebrow": "ở lại nghe một bài nhé",
+      "title": "Nghe từ nơi bạn đang đứng.",
+      "body": "Bài hát mới nhất đang chờ trên Spotify. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
+      "latestLabel": "Bài hát mới nhất",
+      "spotify": "Nghe trên Spotify",
+      "artistLabel": "Trang nghệ sĩ",
+      "apple": "Tìm ICU trên Apple Music"
+    },
+    "social": {
+      "eyebrow": "theo dấu âm thanh",
+      "title": "Gặp ICU ở những nơi này",
+      "latest": "Nghe bài hát mới nhất"
+    },
+    "footer": { "line": "Một chút ánh sáng cho những điều ở bên trong.", "socials": "Mọi nơi có ICU", "credit": "Thiết kế bởi Tung Lam" },
+    "controls": {
+      "mainNav": "Điều hướng chính",
+      "language": "Ngôn ngữ",
+      "noteField": "Những lời nhắn lơ lửng",
+      "playAudio": "Phát nhạc không lời",
+      "pauseAudio": "Tạm dừng nhạc không lời",
+      "closeNote": "Đóng lời nhắn",
+      "previousNote": "Lời nhắn trước",
+      "nextNote": "Lời nhắn tiếp theo",
+      "closeMenu": "Đóng menu"
+    }
+  }
+}
