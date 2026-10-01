@@ -15,10 +15,12 @@ npm run dev
 - Replace `public/images/pixel-guitarist.png` when the group's own artwork is ready.
 - The instrumental file is `public/audio/biet_saubienkaraoke1.mp3`.
 
-## Build for GitHub Pages
+## Deploy to GitHub Pages
+
+In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. The workflow in `.github/workflows/pages.yml` builds the Vite site and deploys `dist/` whenever `main` changes.
+
+To build locally:
 
 ```sh
 npm run build
 ```
-
-Publish the contents of `dist/` at the repository's GitHub Pages URL. The build uses relative asset paths, so it works under `/ICU/` as well as at a custom domain.
