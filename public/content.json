@@ -67,35 +67,35 @@
     }
   },
   "vi": {
-    "nav": { "about": "Vũ trụ của mình", "music": "Âm nhạc", "socials": "Gặp ICU" },
+    "nav": { "about": "Vũ trụ của chúng tớ", "music": "Âm nhạc", "socials": "ICU ở đây" },
     "hero": {
-      "eyebrow": "một chốn yên cho những điều mình cảm",
-      "body": "Có những cảm xúc ở lại rất lâu. Ở đây, chúng được phép sáng lên.",
-      "next": "Lại gần hơn"
+      "eyebrow": "Chào mừng đến với vũ trụ của",
+      "body": "Hãy để âm nhạc được vang lên và đi thật xa hơn nữa!",
+      "next": "Đi tiếp nào"
     },
     "notes": {
       "label": "một mảnh dành cho bạn",
       "items": [
-        { "fragment": "mình vẫn ở đây", "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
-        { "full": "Đứa trẻ ngày ấy đâu cần mình phải lớn vội." },
-        { "full": "Ngay cả khi im lặng, trong mình vẫn có điều gì đang hát." },
-        { "full": "Một lát thôi, cứ để biển giữ hộ điều trái tim chưa mang nổi." },
-        { "fragment": "dịu dàng vẫn còn", "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
-        { "full": "Mình có thể bắt đầu lại, thật khẽ thôi." },
-        { "fragment": "từng mảnh cũng là mình", "full": "Chưa cần liền mạch. Từng mảnh trong mình đều có một chỗ ở đây." }
+        { "fragment": "Biết", "full": "Em biết... và tôi khóc..." },
+        { "full": "Em như bông hoa hướng dương" },
+        { "full": "Hướng về mặt trời nhưng không dành cho tôi" },
+        { "full": "Hướng về một người từng nhớ tên tôi" },
+        { "fragment": "Giữa rừng cây...", "full": "Anh không biết mình làm gì sai, anh không biết mình đã yêu..." },
+        { "full": ".Giữa rừng cây nhiều mây và lá" },
+        { "fragment": "Em đi đến để lại rừng hoa", "full": "Cớ sao em không ở lại" }
       ]
     },
     "about": {
-      "eyebrow": "ba người, một bầu trời bên trong",
-      "title": "Những điều mình mang theo, rồi thành bài hát.",
-      "body": "ICU là ba người làm nhạc cho những góc lòng khó gọi tên. Một chốn nhỏ cho ký ức, cho sự dịu dàng, và cho đứa trẻ trong mình vẫn hay ngước nhìn trời.",
+      "eyebrow": "3 ",
+      "title": "Những điều mình bình thường nhất, rồi thành bài hát.",
+      "body": "ICU chỉ là sự kết hợp của 3 đứa trẻ còn nhiều hoài bão bên trong, mong muốn được đem đến cho mọi người những điều đơn giản nhất.",
       "artworkAlt": "Minh họa pixel ba chàng trai trong nhóm nhạc, mặc áo flannel và đội mũ lưỡi trai, đứng cạnh nhau. Một người ôm đàn guitar mộc.",
-      "signature": "innerchild.universe"
+      "signature": "innerchilduniverse"
     },
     "music": {
-      "eyebrow": "ở lại nghe một bài nhé",
+      "eyebrow": "Cùng nghe nhạc nhé",
       "title": "Nghe từ nơi bạn đang đứng.",
-      "body": "Bài hát mới nhất đang chờ trên Spotify. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
+      "body": "Biết đã có mặt trên mọi nền tảng, hãy stream cùng ICU nhé. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
       "latestLabel": "Bài hát mới nhất",
       "spotify": "Nghe trên Spotify",
       "artistLabel": "Trang nghệ sĩ",
