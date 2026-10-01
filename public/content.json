@@ -21,15 +21,15 @@
       "next": "Come closer"
     },
     "notes": {
-      "label": "a note for you",
+      "label": "a fragment for you",
       "items": [
-        { "full": "You are still here. Let that be enough for tonight." },
+        { "fragment": "still here", "full": "You are still here. Let that be enough for tonight." },
         { "full": "The younger you never needed to grow in a hurry." },
         { "full": "Even in the quiet, something in you keeps singing." },
         { "full": "For a moment, let the sea hold what your heart cannot." },
-        { "full": "After everything, your tenderness is still here." },
+        { "fragment": "softness survived", "full": "After everything, your tenderness is still here." },
         { "full": "You can begin again without making a sound." },
-        { "full": "Keep one small light for the child you used to be." }
+        { "fragment": "whole, in pieces", "full": "Every piece of you belongs here, even the ones still finding their place." }
       ]
     },
     "about": {
@@ -56,7 +56,7 @@
     "controls": {
       "mainNav": "Main navigation",
       "language": "Language",
-      "noteField": "Floating notes",
+      "noteField": "Floating musical notes and fragments",
       "playAudio": "Play instrumental",
       "pauseAudio": "Pause instrumental",
       "closeNote": "Close note",
@@ -73,15 +73,15 @@
       "next": "Lại gần hơn"
     },
     "notes": {
-      "label": "một lời nhắn cho bạn",
+      "label": "một mảnh dành cho bạn",
       "items": [
-        { "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
+        { "fragment": "mình vẫn ở đây", "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
         { "full": "Đứa trẻ ngày ấy đâu cần mình phải lớn vội." },
         { "full": "Ngay cả khi im lặng, trong mình vẫn có điều gì đang hát." },
         { "full": "Một lát thôi, cứ để biển giữ hộ điều trái tim chưa mang nổi." },
-        { "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
+        { "fragment": "dịu dàng vẫn còn", "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
         { "full": "Mình có thể bắt đầu lại, thật khẽ thôi." },
-        { "full": "Giữ lại một đốm sáng cho đứa trẻ mình từng là." }
+        { "fragment": "từng mảnh cũng là mình", "full": "Chưa cần liền mạch. Từng mảnh trong mình đều có một chỗ ở đây." }
       ]
     },
     "about": {
@@ -108,7 +108,7 @@
     "controls": {
       "mainNav": "Điều hướng chính",
       "language": "Ngôn ngữ",
-      "noteField": "Những lời nhắn lơ lửng",
+      "noteField": "Những nốt nhạc và mảnh cảm xúc lơ lửng",
       "playAudio": "Phát nhạc không lời",
       "pauseAudio": "Tạm dừng nhạc không lời",
       "closeNote": "Đóng lời nhắn",

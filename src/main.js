@@ -29,19 +29,20 @@ const audio = document.querySelector('#instrumental');
 const audioButton = document.querySelector('#audio-toggle');
 const langButtons = [...document.querySelectorAll('[data-lang]')];
 const musicalSymbols = ['♪', '♫', '♩', '♬', '♫', '♪', '♬'];
+const fragmentIndices = new Set([0, 4, 6]);
 const layouts = {
   wide: [
-    { x: 0.67, y: 0.20, z: 0.7, tilt: -5 },
-    { x: 0.84, y: 0.36, z: -1.2, tilt: 4 },
-    { x: 0.55, y: 0.47, z: 1.1, tilt: 3 },
-    { x: 0.80, y: 0.68, z: 0.2, tilt: -4 },
-    { x: 0.38, y: 0.21, z: -1.8, tilt: 5 },
-    { x: 0.55, y: 0.78, z: -0.7, tilt: 2 },
-    { x: 0.86, y: 0.82, z: -1.7, tilt: -3 }
+    { x: 0.67, y: 0.20, z: 2.8, tilt: -5 },
+    { x: 0.84, y: 0.36, z: -2.5, tilt: 4 },
+    { x: 0.60, y: 0.47, z: 2.1, tilt: 3 },
+    { x: 0.80, y: 0.68, z: -0.8, tilt: -4 },
+    { x: 0.38, y: 0.21, z: -3.6, tilt: 5 },
+    { x: 0.57, y: 0.78, z: 1.4, tilt: 2 },
+    { x: 0.86, y: 0.82, z: -2.1, tilt: -3 }
   ],
   narrow: [
-    { x: 0.26, y: 0.20, z: 0.6, tilt: -5 },
-    { x: 0.75, y: 0.27, z: -0.7, tilt: 4 },
+    { x: 0.26, y: 0.18, z: 0.6, tilt: -5 },
+    { x: 0.75, y: 0.22, z: -0.7, tilt: 4 },
     { x: 0.71, y: 0.80, z: 0.9, tilt: 3 },
     { x: 0.25, y: 0.82, z: -0.5, tilt: -4 }
   ]
@@ -71,9 +72,17 @@ function makeNoteButtons() {
     button.type = 'button';
     button.className = 'floating-note note-' + index;
     button.dataset.noteIndex = String(index);
-    spark.className = 'note-spark';
-    spark.textContent = musicalSymbols[index];
-    spark.setAttribute('aria-hidden', 'true');
+    if (fragmentIndices.has(index)) {
+      button.classList.add('fragment-note');
+      spark.className = 'fragment-paper';
+      const label = document.createElement('span');
+      label.className = 'fragment-text';
+      spark.append(label);
+    } else {
+      spark.className = 'note-spark';
+      spark.textContent = musicalSymbols[index % musicalSymbols.length];
+      spark.setAttribute('aria-hidden', 'true');
+    }
     button.append(spark);
     button.addEventListener('click', () => openNote(index));
     noteField.append(button);
@@ -125,6 +134,8 @@ function setLanguage(nextLanguage) {
   });
   noteButtons.forEach((button, index) => {
     const note = copy.notes.items[index];
+    const fragment = button.querySelector('.fragment-text');
+    if (fragment) fragment.textContent = note.fragment;
     button.setAttribute('aria-label', note.full);
     button.title = note.full;
   });
@@ -195,9 +206,13 @@ class Universe {
   constructor(canvas, elements) {
     this.canvas = canvas;
     this.elements = elements;
-    this.hero = canvas.closest('.hero');
+    this.hero = document.querySelector('.hero');
+    this.stage = canvas.closest('.universe-stage');
+    this.flow = canvas.closest('.universe-flow');
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.pointer = { x: 0, y: 0 };
+    this.motion = { x: 0, y: 0 };
+    this.baseCameraZ = 18;
     this.width = 0;
     this.height = 0;
     this.visible = true;
@@ -215,6 +230,7 @@ class Universe {
     } catch {
       canvas.hidden = true;
       this.placeFallbackNotes();
+      window.addEventListener('resize', () => this.placeFallbackNotes());
       return;
     }
 
@@ -222,17 +238,20 @@ class Universe {
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(44, 1, 0.1, 100);
-    this.camera.position.z = 18;
+    this.camera.position.z = this.baseCameraZ;
     this.addStars();
+    this.addConstellations();
+    this.addPlanet();
     this.addNoteGlows();
     this.resize();
 
-    this.hero.addEventListener('pointermove', (event) => {
-      const bounds = this.hero.getBoundingClientRect();
+    this.flow.addEventListener('pointermove', (event) => {
+      if (this.reducedMotion || event.pointerType === 'touch') return;
+      const bounds = this.stage.getBoundingClientRect();
       this.pointer.x = (event.clientX - bounds.left) / bounds.width * 2 - 1;
       this.pointer.y = (event.clientY - bounds.top) / bounds.height * 2 - 1;
     });
-    this.hero.addEventListener('pointerleave', () => {
+    this.flow.addEventListener('pointerleave', () => {
       this.pointer.x = 0;
       this.pointer.y = 0;
     });
@@ -243,9 +262,12 @@ class Universe {
       element.addEventListener('blur', () => delete element.dataset.settled);
     });
     window.addEventListener('resize', () => this.resize());
+    window.addEventListener('scroll', () => {
+      if (this.reducedMotion) this.renderFrame(0);
+    }, { passive: true });
     new IntersectionObserver((entries) => {
       this.visible = entries[0]?.isIntersecting ?? true;
-    }).observe(this.hero);
+    }).observe(this.flow);
 
     if (this.reducedMotion) {
       this.renderFrame(0);
@@ -308,6 +330,112 @@ class Universe {
       blending: THREE.AdditiveBlending
     }));
     this.scene.add(this.dust);
+
+    const nearPositions = new Float32Array(80 * 3);
+    for (let index = 0; index < 80; index += 1) {
+      nearPositions[index * 3] = (random() - 0.5) * 28;
+      nearPositions[index * 3 + 1] = (random() - 0.5) * 18;
+      nearPositions[index * 3 + 2] = 2 + random() * 5;
+    }
+    const nearGeometry = new THREE.BufferGeometry();
+    nearGeometry.setAttribute('position', new THREE.BufferAttribute(nearPositions, 3));
+    this.nearStars = new THREE.Points(nearGeometry, new THREE.PointsMaterial({
+      color: '#f5f1e8',
+      size: 0.075,
+      map: this.texture,
+      transparent: true,
+      opacity: 0.48,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    }));
+    this.scene.add(this.nearStars);
+  }
+
+  addConstellations() {
+    this.constellations = new THREE.Group();
+    const paths = [
+      [[-3, 5, -9], [1, 3.5, -6], [5, 4, -4], [8, 1, -7]],
+      [[-2, -3, -5], [2, -4, -8], [6, -1.5, -6], [7, 2, -9]]
+    ];
+    paths.forEach((path, index) => {
+      const curve = new THREE.CatmullRomCurve3(path.map((point) => new THREE.Vector3(...point)));
+      const geometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(70));
+      this.constellations.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
+        color: index ? '#83bdb2' : '#d6b977',
+        transparent: true,
+        opacity: 0.12,
+        depthWrite: false
+      })));
+      const stars = new THREE.BufferGeometry().setFromPoints(curve.getPoints(6));
+      this.constellations.add(new THREE.Points(stars, new THREE.PointsMaterial({
+        color: index ? '#b4d8cf' : '#e8d6a8',
+        size: 0.14,
+        map: this.texture,
+        transparent: true,
+        opacity: 0.6,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      })));
+    });
+    this.constellations.position.x = 3;
+    this.scene.add(this.constellations);
+  }
+
+  addPlanet() {
+    this.planet = new THREE.Group();
+    this.planetPieces = [];
+    const colors = ['#a8c8c0', '#a4b9c9', '#d5aaa1'];
+    const radius = 1.05;
+    const innerRadius = 0.86;
+    const capShape = new THREE.Shape();
+    for (let index = 0; index <= 24; index += 1) {
+      const angle = index / 24 * Math.PI;
+      const x = Math.sin(angle) * radius;
+      const y = Math.cos(angle) * radius;
+      if (index === 0) capShape.moveTo(x, y);
+      else capShape.lineTo(x, y);
+    }
+    for (let index = 24; index >= 0; index -= 1) {
+      const angle = index / 24 * Math.PI;
+      capShape.lineTo(Math.sin(angle) * innerRadius, Math.cos(angle) * innerRadius);
+    }
+    capShape.closePath();
+    const capGeometry = new THREE.ShapeGeometry(capShape);
+
+    colors.forEach((color, index) => {
+      const piece = new THREE.Group();
+      const start = index * Math.PI * 2 / 3 + 0.075;
+      const length = Math.PI * 2 / 3 - 0.15;
+      const material = new THREE.MeshStandardMaterial({ color, roughness: 0.92, flatShading: true });
+      piece.add(new THREE.Mesh(new THREE.SphereGeometry(radius, 14, 16, start, length), material));
+      piece.add(new THREE.Mesh(new THREE.SphereGeometry(innerRadius, 14, 16, start, length), new THREE.MeshStandardMaterial({
+        color: '#425862', roughness: 1, side: THREE.BackSide
+      })));
+      // Close the exposed sides of each spherical shell fragment.
+      [start, start + length].forEach((angle) => {
+        const cap = new THREE.Mesh(capGeometry, new THREE.MeshStandardMaterial({
+          color: '#71938c', roughness: 1, side: THREE.DoubleSide
+        }));
+        cap.rotation.y = angle - Math.PI;
+        piece.add(cap);
+      });
+      const middle = start + length / 2;
+      piece.userData.offset = new THREE.Vector3(-Math.cos(middle), (index - 1) * 0.18, Math.sin(middle));
+      this.planetPieces.push(piece);
+      this.planet.add(piece);
+    });
+    const shardGeometry = new THREE.TetrahedronGeometry(0.11);
+    for (let index = 0; index < 3; index += 1) {
+      const shard = new THREE.Mesh(shardGeometry, new THREE.MeshStandardMaterial({ color: colors[index], roughness: 1 }));
+      const angle = index * Math.PI * 2 / 3;
+      shard.position.set(Math.cos(angle) * 1.55, Math.sin(angle) * 1.25, 0.3);
+      this.planet.add(shard);
+    }
+    this.scene.add(this.planet);
+    this.scene.add(new THREE.AmbientLight('#d8e8e4', 1.4));
+    const moonlight = new THREE.DirectionalLight('#fff1df', 2.4);
+    moonlight.position.set(-4, 6, 8);
+    this.scene.add(moonlight);
   }
 
   addNoteGlows() {
@@ -317,7 +445,7 @@ class Universe {
         map: this.texture,
         color: colors[index],
         transparent: true,
-        opacity: 0.36,
+        opacity: fragmentIndices.has(index) ? 0.18 : 0.36,
         depthWrite: false,
         blending: THREE.AdditiveBlending
       }));
@@ -328,11 +456,11 @@ class Universe {
   }
 
   layout() {
-    return this.width < 700 ? layouts.narrow : layouts.wide;
+    return this.width <= 1100 ? layouts.narrow : layouts.wide;
   }
 
   worldPosition(layout) {
-    const depth = this.camera.position.z - layout.z;
+    const depth = this.baseCameraZ - layout.z;
     const halfHeight = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)) * depth;
     const halfWidth = halfHeight * this.camera.aspect;
     return new THREE.Vector3(
@@ -347,17 +475,18 @@ class Universe {
       this.placeFallbackNotes();
       return;
     }
-    const bounds = this.hero.getBoundingClientRect();
+    const bounds = this.stage.getBoundingClientRect();
     this.width = Math.max(1, bounds.width);
     this.height = Math.max(1, bounds.height);
     this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height, false);
+    this.constellations.scale.x = Math.min(1.5, this.camera.aspect / 1.5);
     if (this.reducedMotion) this.renderFrame(0);
   }
 
   placeFallbackNotes() {
-    const layout = window.innerWidth < 700 ? layouts.narrow : layouts.wide;
+    const layout = window.innerWidth <= 1100 ? layouts.narrow : layouts.wide;
     this.elements.forEach((element, index) => {
       const place = layout[index];
       element.hidden = !place;
@@ -371,11 +500,35 @@ class Universe {
 
   renderFrame(time) {
     this.time = time;
-    this.camera.position.x += (this.pointer.x * 0.24 - this.camera.position.x) * 0.025;
-    this.camera.position.y += (-this.pointer.y * 0.18 - this.camera.position.y) * 0.025;
+    const heroBounds = this.hero.getBoundingClientRect();
+    const stageBounds = this.stage.getBoundingClientRect();
+    const scrollProgress = THREE.MathUtils.clamp(-heroBounds.top / this.height, 0, 1);
+    const noteScroll = stageBounds.top - heroBounds.top;
+    this.motion.x += (this.pointer.x - this.motion.x) * 0.035;
+    this.motion.y += (this.pointer.y - this.motion.y) * 0.035;
+    this.camera.position.x = this.motion.x * 0.9;
+    this.camera.position.y = -this.motion.y * 0.55;
+    this.camera.position.z = this.baseCameraZ - (this.reducedMotion ? 0 : scrollProgress * 1.35);
     this.camera.lookAt(0, 0, 0);
-    this.stars.rotation.y = Math.sin(time * 0.00007) * 0.028;
+    this.stars.rotation.y = Math.sin(time * 0.00007) * 0.045;
     this.dust.rotation.z = time * 0.000008;
+    this.nearStars.rotation.z = Math.sin(time * 0.00005) * 0.012;
+    this.constellations.rotation.set(0.2, Math.sin(time * 0.00008) * 0.1, -0.12);
+    const planetLayout = this.width <= 700
+      ? { x: 0.77, y: 0.12, z: -2 }
+      : this.width <= 1100
+        ? { x: 0.89, y: 0.43, z: -2 }
+        : { x: 0.88, y: 0.16, z: -2 };
+    this.planet.position.copy(this.worldPosition({ ...planetLayout, y: planetLayout.y - scrollProgress }));
+    this.planet.scale.setScalar(this.width <= 700 ? 0.66 : 1);
+    this.planet.rotation.set(0.2 + this.motion.y * 0.07, 0.35 + time * 0.000045, -0.2 + this.motion.x * 0.06);
+    this.planetPieces.forEach((piece, index) => {
+      const separation = 0.18 + Math.sin(time * 0.00035 + index) * 0.025;
+      piece.position.copy(piece.userData.offset).multiplyScalar(separation);
+    });
+    this.flow.style.setProperty('--character-x', (this.motion.x * 12).toFixed(2) + 'px');
+    this.flow.style.setProperty('--character-y', (-this.motion.y * 7).toFixed(2) + 'px');
+    this.flow.style.setProperty('--character-tilt', (this.motion.x * 5).toFixed(2) + 'deg');
 
     const layout = this.layout();
     this.elements.forEach((element, index) => {
@@ -384,19 +537,28 @@ class Universe {
       element.hidden = !place;
       glow.visible = Boolean(place);
       if (!place) return;
-      if (element.dataset.settled === 'true') return;
 
       const position = this.worldPosition(place);
       if (!this.reducedMotion) {
-        position.y += Math.sin(time * 0.00053 + index * 1.7) * 0.12;
-        position.x += Math.cos(time * 0.00032 + index * 2.1) * 0.045;
+        position.y += Math.sin(time * 0.00053 + index * 1.7) * 0.16;
+        position.x += Math.cos(time * 0.00032 + index * 2.1) * 0.06;
       }
-      glow.position.copy(position);
-      glow.material.opacity = 0.30 + Math.sin(time * 0.0012 + index) * 0.06;
       const projected = position.clone().project(this.camera);
-      element.style.left = ((projected.x + 1) * 0.5 * this.width) + 'px';
-      element.style.top = ((1 - projected.y) * 0.5 * this.height) + 'px';
-      element.style.transform = 'translate(-50%, -50%) rotate(' + place.tilt + 'deg)';
+      if (element.dataset.settled !== 'true') {
+        element.style.left = ((projected.x + 1) * 0.5 * this.width) + 'px';
+        element.style.top = ((1 - projected.y) * 0.5 * this.height) + 'px';
+        const tilt = place.tilt + (this.reducedMotion ? 0 : Math.sin(time * 0.0004 + index) * 2);
+        const scale = THREE.MathUtils.clamp(this.baseCameraZ / (this.camera.position.z - place.z), 0.84, 1.15);
+        element.style.transform = 'translate(-50%, -50%) rotateX(' + (-this.motion.y * 9) + 'deg) rotateY(' + (this.motion.x * 12) + 'deg) rotate(' + tilt + 'deg) scale(' + scale + ')';
+      }
+      // Hover pauses the paper, but its glow still follows the page when scrolling.
+      const glowProjection = new THREE.Vector3(
+        parseFloat(element.style.left) / this.width * 2 - 1,
+        1 - (parseFloat(element.style.top) - noteScroll) / this.height * 2,
+        projected.z
+      );
+      glow.position.copy(glowProjection.unproject(this.camera));
+      glow.material.opacity = (fragmentIndices.has(index) ? 0.14 : 0.30) + Math.sin(time * 0.0012 + index) * 0.04;
     });
     this.renderer.render(this.scene, this.camera);
   }

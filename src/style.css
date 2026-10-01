@@ -191,12 +191,32 @@ a:focus-visible {
   color: var(--rose);
 }
 
+.universe-flow {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(180deg, #080d16 0%, #101d28 48%, #142b31 78%, #243b3f 100%);
+}
+
+.universe-stage {
+  position: sticky;
+  z-index: 0;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  margin-bottom: -100vh;
+  margin-bottom: -100svh;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(#000 0%, #000 76%, transparent 100%);
+}
+
 .hero {
   position: relative;
-  height: 88svh;
+  z-index: 1;
+  height: 100vh;
+  height: 100svh;
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(180deg, #080d16 0%, #101d28 67%, #24343a 100%);
 }
 
 .universe-canvas,
@@ -216,14 +236,14 @@ a:focus-visible {
 .hero-shade {
   z-index: 2;
   pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(4, 8, 15, 0.39) 0%, transparent 55%),
-    linear-gradient(0deg, rgba(7, 13, 19, 0.37) 0%, transparent 25%);
+  background: linear-gradient(90deg, rgba(4, 8, 15, 0.26) 0%, transparent 55%);
+  mask-image: linear-gradient(#000 65%, transparent 100%);
 }
 
 .note-field {
   z-index: 7;
   pointer-events: none;
+  perspective: 900px;
 }
 
 .floating-note {
@@ -239,6 +259,7 @@ a:focus-visible {
   background: transparent;
   color: rgb(var(--note-rgb));
   pointer-events: auto;
+  transform-style: preserve-3d;
   transition: filter 180ms ease;
 }
 
@@ -275,6 +296,44 @@ a:focus-visible {
   transition: transform 180ms ease;
 }
 
+.floating-note:nth-child(2n) .note-spark { animation-delay: -2.4s; }
+.floating-note:nth-child(3n) .note-spark { animation-delay: -4.1s; }
+
+.fragment-note {
+  width: 182px;
+  height: 116px;
+  filter: drop-shadow(0 0 16px rgba(var(--note-rgb), 0.2));
+}
+
+.fragment-paper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 23px 24px;
+  background:
+    repeating-linear-gradient(8deg, transparent 0 3px, rgba(245, 241, 232, 0.025) 3px 4px),
+    linear-gradient(135deg, rgba(var(--note-rgb), 0.26), rgba(var(--note-rgb), 0.1));
+  clip-path: polygon(5% 8%, 17% 5%, 29% 9%, 42% 4%, 55% 7%, 70% 3%, 84% 7%, 96% 4%, 98% 25%, 95% 43%, 99% 61%, 96% 80%, 98% 94%, 82% 97%, 68% 93%, 51% 98%, 36% 94%, 20% 98%, 4% 92%, 6% 74%, 2% 58%, 5% 40%, 2% 21%);
+  box-shadow: inset 0 0 28px rgba(var(--note-rgb), 0.1);
+}
+
+.fragment-text {
+  color: rgba(245, 241, 232, 0.93);
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.fragment-note:hover,
+.fragment-note:focus-visible {
+  filter: drop-shadow(0 0 24px rgba(var(--note-rgb), 0.4));
+}
+
 .floating-note:hover .note-spark,
 .floating-note:focus-visible .note-spark {
   transform: scale(1.08);
@@ -284,7 +343,7 @@ a:focus-visible {
 .hero-content {
   position: absolute;
   z-index: 5;
-  top: 43%;
+  top: 36%;
   left: 6%;
   width: min(560px, 43%);
   pointer-events: none;
@@ -303,16 +362,16 @@ a:focus-visible {
 }
 
 .hero-content h1 {
-  margin: 15px 0 0;
+  margin: 32px 0 0;
   font-family: 'Newsreader', Georgia, serif;
   font-size: 10rem;
   font-style: italic;
   font-weight: 300;
-  line-height: 0.82;
+  line-height: 0.95;
 }
 
 .hero-name {
-  margin: 16px 0 27px 7px;
+  margin: 30px 0 34px 7px;
   color: rgba(245, 241, 232, 0.77);
   font-size: 1rem;
   font-weight: 500;
@@ -325,7 +384,7 @@ a:focus-visible {
   font-family: 'Newsreader', Georgia, serif;
   font-size: 1.55rem;
   font-weight: 300;
-  line-height: 1.18;
+  line-height: 1.35;
   text-wrap: balance;
 }
 
@@ -364,26 +423,24 @@ a:focus-visible {
 
 .about-section {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   min-height: 690px;
   overflow: hidden;
-  background: #12262d;
 }
 
 .about-scene {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, #172a32 0%, #25333a 61%, #34403f 100%);
 }
 
 .about-scene::before {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: linear-gradient(90deg, rgba(12, 27, 33, 0.88) 0%, rgba(12, 27, 33, 0.48) 52%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(20, 43, 49, 0.18) 50%, transparent 100%);
   content: '';
 }
 
@@ -393,8 +450,7 @@ a:focus-visible {
   bottom: 15%;
   left: 0;
   height: 1px;
-  background: rgba(223, 169, 155, 0.36);
-  box-shadow: 0 0 30px rgba(223, 169, 155, 0.32);
+  background: linear-gradient(90deg, transparent, rgba(223, 169, 155, 0.2) 65%, transparent);
 }
 
 .about-star {
@@ -430,7 +486,7 @@ a:focus-visible {
   bottom: 5%;
   width: min(33%, 390px);
   transform-origin: 50% 96%;
-  animation: character-sway 6s ease-in-out infinite;
+  transform: translate3d(var(--character-x, 0px), var(--character-y, 0px), 0) rotateY(var(--character-tilt, 0deg));
 }
 
 .pixel-character {
@@ -441,6 +497,7 @@ a:focus-visible {
   height: auto;
   image-rendering: pixelated;
   filter: drop-shadow(0 20px 26px rgba(6, 11, 16, 0.36));
+  animation: character-sway 6s ease-in-out infinite;
 }
 
 .character-shadow {
@@ -473,7 +530,7 @@ a:focus-visible {
   font-family: 'Newsreader', Georgia, serif;
   font-size: 4rem;
   font-weight: 300;
-  line-height: 0.98;
+  line-height: 1.08;
   text-wrap: balance;
 }
 
@@ -494,8 +551,8 @@ a:focus-visible {
 }
 
 .music-section {
-  padding: 105px 0 118px;
-  background: #dfe7e2;
+  padding: 210px 0 190px;
+  background: linear-gradient(180deg, #243b3f 0%, #dfe7e2 160px, #dfe7e2 calc(100% - 140px), #080d16 100%);
   color: #14242b;
 }
 
@@ -791,12 +848,19 @@ dialog::backdrop {
 @media (max-width: 1100px) {
   .wordmark { min-width: 0; }
   .site-nav { gap: 22px; }
-  .hero-content h1 { font-size: 8.3rem; }
+  .hero-content { top: 32%; }
+  .hero-content h1 { margin-top: 28px; font-size: 7rem; }
+  .hero-name { margin-top: 24px; margin-bottom: 28px; }
+  .floating-note { width: 82px; height: 78px; }
+  .note-spark { font-size: 4rem; }
+  .fragment-note { width: 144px; height: 102px; }
+  .fragment-paper { padding: 19px 18px; }
+  .fragment-text { font-size: 0.76rem; }
   .about-inner h2 { max-width: 540px; font-size: 3.5rem; }
   .pixel-character-wrap { right: 4%; width: 36%; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .site-header {
     gap: 14px;
     padding: 18px 5%;
@@ -808,37 +872,30 @@ dialog::backdrop {
   .header-actions { gap: 6px; }
   .social-trigger { width: 40px; justify-content: center; }
   .social-trigger span { display: none; }
-  .hero-content h1 { font-size: 7rem; }
 }
 
 @media (max-width: 700px) {
-  .hero { height: 88svh; }
   .hero-shade {
-    background: linear-gradient(0deg, rgba(7, 13, 19, 0.28), transparent 55%);
+    background: linear-gradient(90deg, rgba(7, 13, 19, 0.18), transparent);
   }
-  .floating-note {
-    width: 82px;
-    height: 78px;
-  }
-  .note-spark { font-size: 4rem; }
   .hero-content {
-    top: 36%;
+    top: 35%;
     left: 7%;
     width: 86%;
   }
   .hero-content h1 {
-    margin-top: 12px;
+    margin-top: 24px;
     font-size: 5.8rem;
   }
   .hero-name {
-    margin: 11px 0 18px 4px;
+    margin: 24px 0 26px 4px;
     font-size: 0.83rem;
   }
   .hero-body {
     max-width: 310px;
     margin-left: 4px;
     font-size: 1.18rem;
-    line-height: 1.15;
+    line-height: 1.4;
   }
   .hero-next {
     bottom: 15px;
@@ -849,9 +906,6 @@ dialog::backdrop {
   .about-section {
     align-items: flex-start;
     min-height: 770px;
-  }
-  .about-scene::before {
-    background: linear-gradient(180deg, rgba(12, 27, 33, 0.53) 0%, rgba(12, 27, 33, 0.35) 46%, transparent 75%);
   }
   .about-horizon { bottom: 9%; }
   .about-inner,
@@ -882,7 +936,7 @@ dialog::backdrop {
   .about-star-a { left: 15%; top: 60%; }
   .about-star-b { left: 83%; top: 64%; }
   .about-star-c { left: 71%; top: 81%; }
-  .music-section { padding: 73px 0 84px; }
+  .music-section { padding: 190px 0 180px; }
   .music-inner { grid-template-columns: 1fr; gap: 44px; }
   .music-heading h2 { margin-top: 16px; font-size: 2.8rem; }
   .music-heading > p:last-child { font-size: 0.95rem; }
@@ -903,7 +957,6 @@ dialog::backdrop {
   .wordmark-name { display: none; }
   .header-actions { gap: 2px; }
   .language-switch button { min-width: 32px; }
-  .hero-content { top: 38%; }
   .hero-content h1 { font-size: 5.35rem; }
   .hero-body { max-width: 265px; }
   .about-inner h2 { font-size: 2.3rem; }
@@ -914,9 +967,17 @@ dialog::backdrop {
   .social-dialog-inner { padding: 38px 26px 28px; }
 }
 
-@media (max-width: 700px) and (max-height: 650px) {
-  .hero-content { top: 34%; }
+@media (max-width: 1100px) and (max-height: 720px) {
+  .hero-content { top: 30%; }
+  .hero-content h1 { margin-top: 20px; font-size: 5.5rem; }
+  .hero-name { margin-top: 20px; margin-bottom: 22px; }
+  .hero-body { font-size: 1.2rem; }
+}
+
+@media (max-width: 700px) and (max-height: 720px) {
+  .hero-content { top: 30%; }
   .hero-content h1 { font-size: 4.7rem; }
+  .hero-name { margin-top: 18px; margin-bottom: 20px; }
   .hero-body { font-size: 1.06rem; }
 }
 
