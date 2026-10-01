@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright-core';
 
+const siteUrl = process.env.SITE_URL || 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({
   executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   headless: true,
@@ -21,14 +22,16 @@ try {
     });
     const errors = [];
     page.on('pageerror', (error) => errors.push(error.message));
-    await page.goto('http://127.0.0.1:4173/', { waitUntil: 'networkidle' });
+    await page.goto(siteUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.floating-note');
+    await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(400);
 
     const measurements = await page.evaluate(() => {
       const canvas = document.querySelector('#universe');
       const hero = document.querySelector('.hero').getBoundingClientRect();
       const heading = document.querySelector('.hero-content').getBoundingClientRect();
+      const heroTitle = document.querySelector('.hero-content h1').getBoundingClientRect();
       const notes = [...document.querySelectorAll('.floating-note:not([hidden])')].map((element) => {
         const rect = element.getBoundingClientRect();
         return {
@@ -57,12 +60,13 @@ try {
           width: Math.round(heading.width),
           height: Math.round(heading.height)
         },
+        heroTitleLeft: Math.round(heroTitle.left),
         notes,
         notesOverHeading: notes.some((note) =>
-          note.x < heading.right &&
-          note.x + note.width > heading.left &&
-          note.y < heading.bottom &&
-          note.y + note.height > heading.top
+          note.x < heading.x + heading.width &&
+          note.x + note.width > heading.x &&
+          note.y < heading.y + heading.height &&
+          note.y + note.height > heading.y
         ),
         horizontalOverflow: document.documentElement.scrollWidth - innerWidth
       };
@@ -71,9 +75,11 @@ try {
     await page.screenshot({ path: '/private/tmp/icu-' + viewport.name + '.png', fullPage: true });
     assert.equal(errors.length, 0, viewport.name + ' page errors: ' + errors.join(', '));
     assert.ok(measurements.notes.length >= 4, viewport.name + ' has too few visible notes');
+    assert.ok(measurements.notes.every((note) => /^[♪♫♩♬]$/.test(note.text)), viewport.name + ' has a visible text card');
     assert.ok(measurements.canvasWidth > 0 && measurements.canvasHeight > 0, viewport.name + ' canvas has no size');
     assert.ok(measurements.canvasPixelsLit > 0, viewport.name + ' 3D canvas is blank');
     assert.equal(measurements.notesOverHeading, false, viewport.name + ' notes overlap heading');
+    assert.ok(measurements.heroTitleLeft >= 0, viewport.name + ' hero title is clipped on the left');
     assert.ok(measurements.horizontalOverflow <= 1, viewport.name + ' has horizontal overflow');
     console.log(JSON.stringify({ viewport: viewport.name, ...measurements }));
 

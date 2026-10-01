@@ -230,42 +230,22 @@ a:focus-visible {
   --note-rgb: 214, 185, 119;
   position: absolute;
   display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  width: 185px;
-  min-height: 66px;
-  padding: 14px 15px 13px 12px;
-  border: 1px solid rgba(var(--note-rgb), 0.42);
-  border-radius: 7px;
-  background: rgba(16, 25, 33, 0.59);
-  box-shadow: 0 0 28px rgba(var(--note-rgb), 0.24), inset 0 0 22px rgba(var(--note-rgb), 0.04);
-  color: var(--moon);
-  text-align: left;
-  text-shadow: 0 0 17px rgba(var(--note-rgb), 0.64);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  align-items: center;
+  justify-content: center;
+  width: 148px;
+  height: 116px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--note-rgb));
   pointer-events: auto;
-  animation: note-breathe 5.5s ease-in-out infinite alternate;
-  transition: box-shadow 180ms ease, background 180ms ease, filter 180ms ease;
-}
-
-.floating-note:nth-child(2n) {
-  width: 170px;
-  animation-delay: -2.4s;
-}
-
-.floating-note:nth-child(3n) {
-  width: 196px;
-  animation-delay: -4.1s;
+  transition: filter 180ms ease;
 }
 
 .floating-note:hover,
 .floating-note:focus-visible {
   z-index: 2;
-  animation-play-state: paused;
-  background: rgba(24, 37, 45, 0.91);
-  box-shadow: 0 0 48px rgba(var(--note-rgb), 0.48), inset 0 0 24px rgba(var(--note-rgb), 0.08);
-  filter: brightness(1.15);
+  filter: brightness(1.22);
 }
 
 .note-1,
@@ -283,20 +263,22 @@ a:focus-visible {
 }
 
 .note-spark {
-  flex: 0 0 auto;
-  margin-top: 2px;
   color: rgb(var(--note-rgb));
-  font-size: 0.84rem;
-  line-height: 1;
+  font-family: 'Apple Symbols', 'Segoe UI Symbol', sans-serif;
+  font-size: 5.8rem;
+  line-height: 0.9;
+  text-shadow:
+    0 0 10px rgba(var(--note-rgb), 0.88),
+    0 0 29px rgba(var(--note-rgb), 0.6),
+    0 0 62px rgba(var(--note-rgb), 0.27);
+  animation: musical-glow 4.8s ease-in-out infinite alternate;
+  transition: transform 180ms ease;
 }
 
-.note-text {
-  font-family: 'Newsreader', Georgia, serif;
-  font-size: 1.38rem;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 0.99;
-  text-wrap: balance;
+.floating-note:hover .note-spark,
+.floating-note:focus-visible .note-spark {
+  transform: scale(1.08);
+  animation-play-state: paused;
 }
 
 .hero-content {
@@ -787,9 +769,13 @@ dialog::backdrop {
   color: var(--rose);
 }
 
-@keyframes note-breathe {
-  from { box-shadow: 0 0 24px rgba(var(--note-rgb), 0.16), inset 0 0 19px rgba(var(--note-rgb), 0.03); }
-  to { box-shadow: 0 0 46px rgba(var(--note-rgb), 0.34), inset 0 0 25px rgba(var(--note-rgb), 0.07); }
+@keyframes musical-glow {
+  from {
+    text-shadow: 0 0 8px rgba(var(--note-rgb), 0.7), 0 0 24px rgba(var(--note-rgb), 0.42);
+  }
+  to {
+    text-shadow: 0 0 14px rgba(var(--note-rgb), 1), 0 0 42px rgba(var(--note-rgb), 0.74), 0 0 78px rgba(var(--note-rgb), 0.32);
+  }
 }
 
 @keyframes character-sway {
@@ -830,16 +816,11 @@ dialog::backdrop {
   .hero-shade {
     background: linear-gradient(0deg, rgba(7, 13, 19, 0.28), transparent 55%);
   }
-  .floating-note,
-  .floating-note:nth-child(2n),
-  .floating-note:nth-child(3n) {
-    width: 138px;
-    min-height: 55px;
-    gap: 6px;
-    padding: 10px 9px;
+  .floating-note {
+    width: 82px;
+    height: 78px;
   }
-  .note-text { font-size: 1.06rem; }
-  .note-spark { font-size: 0.68rem; }
+  .note-spark { font-size: 4rem; }
   .hero-content {
     top: 36%;
     left: 7%;
@@ -937,7 +918,6 @@ dialog::backdrop {
   .hero-content { top: 34%; }
   .hero-content h1 { font-size: 4.7rem; }
   .hero-body { font-size: 1.06rem; }
-  .floating-note { font-size: 0.95rem; }
 }
 
 @keyframes character-mobile {

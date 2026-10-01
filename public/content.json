@@ -1,6 +1,6 @@
 {
   "settings": {
-    "audioSrc": "/audio/biet_saubienkaraoke1.mp3",
+    "audioSrc": "audio/biet_saubienkaraoke1.mp3",
     "latestTrackUrl": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
     "appleMusicUrl": "https://music.apple.com/vn/artist/icu"
   },
@@ -23,13 +23,13 @@
     "notes": {
       "label": "a note for you",
       "items": [
-        { "short": "you are still here", "full": "You are still here. Let that be enough for tonight." },
-        { "short": "grow at your own pace", "full": "The younger you never needed to grow in a hurry." },
-        { "short": "the quiet has a pulse", "full": "Even in the quiet, something in you keeps singing." },
-        { "short": "let the sea hold it", "full": "For a moment, let the sea hold what your heart cannot." },
-        { "short": "tenderness survived", "full": "After everything, your tenderness is still here." },
-        { "short": "begin again, softly", "full": "You can begin again without making a sound." },
-        { "short": "keep one small light", "full": "Keep one small light for the child you used to be." }
+        { "full": "You are still here. Let that be enough for tonight." },
+        { "full": "The younger you never needed to grow in a hurry." },
+        { "full": "Even in the quiet, something in you keeps singing." },
+        { "full": "For a moment, let the sea hold what your heart cannot." },
+        { "full": "After everything, your tenderness is still here." },
+        { "full": "You can begin again without making a sound." },
+        { "full": "Keep one small light for the child you used to be." }
       ]
     },
     "about": {
@@ -75,13 +75,13 @@
     "notes": {
       "label": "một lời nhắn cho bạn",
       "items": [
-        { "short": "mình vẫn ở đây", "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
-        { "short": "cứ lớn lên từ từ", "full": "Đứa trẻ ngày ấy đâu cần mình phải lớn vội." },
-        { "short": "lặng im vẫn có nhịp", "full": "Ngay cả khi im lặng, trong mình vẫn có điều gì đang hát." },
-        { "short": "để biển giữ hộ", "full": "Một lát thôi, cứ để biển giữ hộ điều trái tim chưa mang nổi." },
-        { "short": "dịu dàng vẫn còn", "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
-        { "short": "bắt đầu lại, khẽ thôi", "full": "Mình có thể bắt đầu lại, thật khẽ thôi." },
-        { "short": "giữ một đốm sáng", "full": "Giữ lại một đốm sáng cho đứa trẻ mình từng là." }
+        { "full": "Mình vẫn ở đây. Đêm nay, như thế đã là đủ rồi." },
+        { "full": "Đứa trẻ ngày ấy đâu cần mình phải lớn vội." },
+        { "full": "Ngay cả khi im lặng, trong mình vẫn có điều gì đang hát." },
+        { "full": "Một lát thôi, cứ để biển giữ hộ điều trái tim chưa mang nổi." },
+        { "full": "Đi qua nhiều chuyện, sự dịu dàng trong mình vẫn còn đây." },
+        { "full": "Mình có thể bắt đầu lại, thật khẽ thôi." },
+        { "full": "Giữ lại một đốm sáng cho đứa trẻ mình từng là." }
       ]
     },
     "about": {

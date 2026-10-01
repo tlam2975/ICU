@@ -28,6 +28,7 @@ const socialTrigger = document.querySelector('#social-trigger');
 const audio = document.querySelector('#instrumental');
 const audioButton = document.querySelector('#audio-toggle');
 const langButtons = [...document.querySelectorAll('[data-lang]')];
+const musicalSymbols = ['♪', '♫', '♩', '♬', '♫', '♪', '♬'];
 const layouts = {
   wide: [
     { x: 0.67, y: 0.20, z: 0.7, tilt: -5 },
@@ -36,12 +37,12 @@ const layouts = {
     { x: 0.80, y: 0.68, z: 0.2, tilt: -4 },
     { x: 0.38, y: 0.21, z: -1.8, tilt: 5 },
     { x: 0.55, y: 0.78, z: -0.7, tilt: 2 },
-    { x: 0.92, y: 0.82, z: -1.7, tilt: -3 }
+    { x: 0.86, y: 0.82, z: -1.7, tilt: -3 }
   ],
   narrow: [
     { x: 0.26, y: 0.20, z: 0.6, tilt: -5 },
-    { x: 0.75, y: 0.31, z: -0.7, tilt: 4 },
-    { x: 0.71, y: 0.78, z: 0.9, tilt: 3 },
+    { x: 0.75, y: 0.27, z: -0.7, tilt: 4 },
+    { x: 0.71, y: 0.80, z: 0.9, tilt: 3 },
     { x: 0.25, y: 0.82, z: -0.5, tilt: -4 }
   ]
 };
@@ -67,15 +68,13 @@ function makeNoteButtons() {
   for (let index = 0; index < count; index += 1) {
     const button = document.createElement('button');
     const spark = document.createElement('span');
-    const label = document.createElement('span');
     button.type = 'button';
     button.className = 'floating-note note-' + index;
     button.dataset.noteIndex = String(index);
     spark.className = 'note-spark';
-    spark.textContent = '✦';
+    spark.textContent = musicalSymbols[index];
     spark.setAttribute('aria-hidden', 'true');
-    label.className = 'note-text';
-    button.append(spark, label);
+    button.append(spark);
     button.addEventListener('click', () => openNote(index));
     noteField.append(button);
   }
@@ -126,8 +125,8 @@ function setLanguage(nextLanguage) {
   });
   noteButtons.forEach((button, index) => {
     const note = copy.notes.items[index];
-    button.querySelector('.note-text').textContent = note.short;
     button.setAttribute('aria-label', note.full);
+    button.title = note.full;
   });
   langButtons.forEach((button) => {
     button.setAttribute('aria-pressed', String(button.dataset.lang === language));
@@ -409,14 +408,14 @@ class Universe {
 }
 
 async function init() {
-  const response = await fetch('/content.json');
+  const response = await fetch(new URL('content.json', document.baseURI));
   if (!response.ok) throw new Error('Could not load content');
   content = await response.json();
   document.querySelector('#year').textContent = new Date().getFullYear();
   document.querySelector('#latest-track-link').href = content.settings.latestTrackUrl;
   document.querySelector('#social-latest').href = content.settings.latestTrackUrl;
   document.querySelector('#apple-link').href = content.settings.appleMusicUrl;
-  audio.src = content.settings.audioSrc;
+  audio.src = new URL(content.settings.audioSrc, document.baseURI).href;
   audio.volume = 0.55;
 
   makeNoteButtons();
