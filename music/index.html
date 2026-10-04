@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080d16" />
+    <meta name="description" content="Listen to ICU, innerchild.universe. Releases and all the places to find the band." />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <title>Music · ICU · innerchild.universe</title>
+  </head>
+  <body data-page="music" data-site-base="../">
+    <div id="app">
+      <header class="site-header">
+        <a class="wordmark" href="../" data-route="story" aria-label="ICU, innerchild.universe">
+          <span class="wordmark-symbol">ICU</span>
+          <span class="wordmark-name">innerchild.universe</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="../" data-route="story" data-copy="nav.about"></a>
+          <a href="./" data-route="music" aria-current="page" data-copy="nav.music"></a>
+        </nav>
+        <div class="header-actions">
+          <div class="language-switch" role="group" aria-label="Language">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="vi" aria-pressed="false">VI</button>
+          </div>
+          <button class="icon-button audio-button" id="audio-toggle" type="button" aria-pressed="false" aria-label="Play instrumental">
+            <span class="icon-audio-off"><i data-lucide="volume-x"></i></span>
+            <span class="icon-audio-on"><i data-lucide="volume-2"></i></span>
+          </button>
+          <button class="social-trigger" id="social-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+            <span data-copy="nav.socials"></span>
+            <i data-lucide="menu"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="music-page" id="main-content">
+        <section class="release-section" aria-labelledby="music-title">
+          <div class="section-inner release-inner">
+            <div class="music-heading">
+              <p class="eyebrow" data-copy="music.eyebrow"></p>
+              <h1 id="music-title" data-copy="music.pageTitle"></h1>
+              <h2 data-copy="music.title"></h2>
+              <p data-copy="music.body"></p>
+            </div>
+            <div id="release-list" class="release-list"></div>
+          </div>
+        </section>
+
+        <section class="social-section" id="socials" aria-labelledby="socials-title">
+          <div class="section-inner social-section-inner">
+            <div class="social-heading">
+              <p class="eyebrow" data-copy="social.eyebrow"></p>
+              <h2 id="socials-title" data-copy="social.title"></h2>
+              <p data-copy="social.body"></p>
+            </div>
+            <div class="social-directory" data-social-links></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="section-inner footer-inner">
+          <div>
+            <p class="footer-brand">ICU</p>
+            <p class="footer-line" data-copy="footer.line"></p>
+          </div>
+          <div class="footer-contact">
+            <a id="footer-email" href="mailto:innerchilduniverse@gmail.com">innerchilduniverse@gmail.com</a>
+            <a class="footer-socials" href="../" data-route="story" data-copy="nav.about"></a>
+          </div>
+          <div class="footer-meta">
+            <p>© <span id="year"></span> innerchild.universe</p>
+            <p data-copy="footer.credit"></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <dialog class="social-dialog" id="social-dialog" aria-labelledby="social-dialog-title">
+      <div class="social-dialog-inner">
+        <div class="social-dialog-header">
+          <div>
+            <p class="eyebrow" data-copy="social.eyebrow"></p>
+            <h2 id="social-dialog-title" data-copy="nav.menuTitle"></h2>
+          </div>
+          <button class="icon-button dialog-close" id="social-close" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
+        </div>
+        <nav class="drawer-nav" aria-label="Main navigation">
+          <a href="../" data-route="story"><span data-copy="nav.about"></span><i data-lucide="arrow-right"></i></a>
+          <a href="./" data-route="music" aria-current="page"><span data-copy="nav.music"></span><i data-lucide="arrow-right"></i></a>
+        </nav>
+        <div id="social-links" class="social-links" data-social-links></div>
+        <a id="social-latest" class="social-latest" target="_blank" rel="noopener noreferrer">
+          <span data-copy="social.latest"></span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </dialog>
+
+    <audio id="instrumental" loop preload="none"></audio>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

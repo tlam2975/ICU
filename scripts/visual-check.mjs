@@ -1,12 +1,50 @@
 import assert from 'node:assert/strict';
+import { createServer } from 'node:http';
+import { readFile, stat } from 'node:fs/promises';
+import { extname, resolve, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 
-const siteUrl = process.env.SITE_URL || 'http://127.0.0.1:4173/';
+let siteUrl = process.env.SITE_URL;
+let previewServer;
 const browser = await chromium.launch({
-  executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  executablePath: process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   headless: true,
   args: ['--enable-webgl', '--use-angle=swiftshader', '--ignore-gpu-blocklist']
 });
+
+async function startPagesPreview() {
+  const root = fileURLToPath(new URL('../dist/', import.meta.url));
+  const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.svg': 'image/svg+xml', '.mp3': 'audio/mpeg', '.woff2': 'font/woff2', '.woff': 'font/woff' };
+  // A project-site prefix and real directory entries: no SPA fallback.
+  previewServer = createServer(async (request, response) => {
+    try {
+      const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+      if (!pathname.startsWith('/ICU/')) throw new Error('Outside project');
+      let path = resolve(root, pathname.slice('/ICU/'.length));
+      if (path !== resolve(root) && !path.startsWith(resolve(root) + sep)) throw new Error('Outside build');
+      if ((await stat(path)).isDirectory()) {
+        if (!pathname.endsWith('/')) {
+          response.writeHead(301, { Location: pathname + '/' });
+          response.end();
+          return;
+        }
+        path = resolve(path, 'index.html');
+      }
+      response.writeHead(200, { 'Content-Type': types[extname(path)] || 'application/octet-stream' });
+      response.end(await readFile(path));
+    } catch {
+      response.writeHead(404);
+      response.end('Not found');
+    }
+  });
+  await new Promise((done) => previewServer.listen(0, '127.0.0.1', done));
+  return 'http://127.0.0.1:' + previewServer.address().port + '/ICU/';
+}
+
+async function waitForSky(page) {
+  await page.waitForFunction(() => document.querySelector('.floating-note')?.style.left.endsWith('px'));
+}
 
 const viewports = [
   { name: 'desktop', width: 1440, height: 900 },
@@ -32,6 +70,8 @@ async function canvasSignature(page) {
 }
 
 try {
+  if (!siteUrl) siteUrl = await startPagesPreview();
+  const musicUrl = new URL('music/', siteUrl).href;
   for (const viewport of viewports) {
     const page = await browser.newPage({
       viewport: { width: viewport.width, height: viewport.height },
@@ -39,9 +79,14 @@ try {
     });
     page.setDefaultTimeout(60000);
     const errors = [];
+    const failedAssets = [];
     page.on('pageerror', (error) => errors.push(error.message));
+    page.on('response', (response) => {
+      if (new URL(response.url()).origin === new URL(siteUrl).origin && response.status() >= 400) failedAssets.push(response.url());
+    });
     await page.goto(siteUrl, { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.floating-note');
+    await waitForSky(page);
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(400);
 
@@ -97,6 +142,8 @@ try {
 
     await page.screenshot({ path: '/private/tmp/icu-' + viewport.name + '.png', fullPage: true });
     assert.equal(errors.length, 0, viewport.name + ' page errors: ' + errors.join(', '));
+    assert.equal(await page.locator('.release-entry').count(), 0, 'Releases still appear on the story page');
+    assert.equal(await page.locator('#story-intro-image').evaluate((image) => image.complete && image.naturalWidth > 0), true, 'Temporary trio illustration is missing');
     assert.ok(measurements.notes.length >= 4, viewport.name + ' has too few visible notes');
     assert.ok(measurements.notes.filter((note) => note.type === 'music').every((note) => /^[♪♫♩♬]$/.test(note.text)), viewport.name + ' has an invalid music symbol');
     assert.ok(measurements.notes.some((note) => note.type === 'fragment' && note.text.length > 0), viewport.name + ' has no paper fragment');
@@ -150,12 +197,97 @@ try {
     assert.equal(await page.locator('#instrumental').evaluate((element) => element.paused), false);
     await page.locator('#audio-toggle').click();
     assert.equal(await page.locator('#instrumental').evaluate((element) => element.paused), true);
+
+    await page.locator('#social-trigger').click();
+    await page.locator('.drawer-nav [data-route="music"]').click();
+    await page.waitForURL(musicUrl);
+    await page.waitForSelector('.release-entry');
+    await page.evaluate(() => document.fonts.ready);
+    assert.equal(await page.locator('html').getAttribute('lang'), 'vi', 'Language was lost between routes');
+    assert.equal(await page.locator('.release-entry').count(), 1, 'Expected only the current release');
+    assert.equal(await page.locator('.release-copy h2').textContent(), 'Biết');
+    assert.equal(await page.locator('.social-directory a').count(), 7);
+    assert.equal(await page.locator('.site-nav [aria-current="page"]').getAttribute('data-route'), 'music');
+    assert.equal(await page.locator('#universe').count(), 0, 'Music page still initializes the story scene');
+    assert.equal(await page.locator('#instrumental').getAttribute('src'), new URL('audio/biet_saubienkaraoke1.mp3', siteUrl).href);
+    await page.waitForFunction(() => document.querySelector('.release-artwork img').naturalWidth > 0);
+    await page.screenshot({ path: '/private/tmp/icu-music-' + viewport.name + '-vi.png', fullPage: true });
+    await page.locator('[data-lang="en"]').click();
+    assert.equal(await page.locator('#music-title').textContent(), 'Music');
+    assert.ok((await page.locator('.release-meta').textContent()).includes('Single'));
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), viewport.name + ' music page overflows');
+    await page.screenshot({ path: '/private/tmp/icu-music-' + viewport.name + '.png', fullPage: true });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.release-entry');
+    assert.equal(await page.locator('#music-title').textContent(), 'Music', 'Music route failed on reload');
+    await page.locator('#audio-toggle').click();
+    assert.equal(await page.locator('#instrumental').evaluate((element) => element.paused), false, 'Audio path is broken on the nested route');
+    await page.locator('#audio-toggle').click();
+    await page.locator('#social-trigger').click();
+    await page.locator('.drawer-nav [data-route="story"]').click();
+    await page.waitForURL(siteUrl);
+    await waitForSky(page);
+    assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+    assert.equal(errors.length, 0, viewport.name + ' route errors: ' + errors.join(', '));
+    assert.deepEqual(failedAssets, [], viewport.name + ' missing assets');
+    console.log(viewport.name + ': both routes, direct reload, social links, cover artwork, language persistence, and nested audio passed.');
     await page.close();
   }
+
+  const directPage = await browser.newPage();
+  await directPage.goto(musicUrl.replace(/\/$/, ''), { waitUntil: 'domcontentloaded' });
+  await directPage.waitForSelector('.release-entry');
+  assert.equal(directPage.url(), musicUrl, 'Directory URL was not canonicalized');
+  await directPage.goto(new URL('music/index.html', siteUrl).href, { waitUntil: 'domcontentloaded' });
+  await directPage.waitForSelector('.release-entry');
+  assert.equal(await directPage.locator('.social-directory a').count(), 7, 'Direct HTML entry is broken');
+  await directPage.close();
+
+  for (const viewport of [viewports[0], viewports[2]]) {
+    const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'reduce' });
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.route('**/content.json', async (route) => {
+      const response = await route.fetch();
+      const fixture = await response.json();
+      fixture.story.introImage.pixelArt = false;
+      fixture.story.chapters = Array.from({ length: 10 }, (_, index) => ({
+        id: 'test-chapter-' + (index + 1),
+        image: 'images/pixel-trio.png',
+        width: 1536,
+        height: 1024,
+        en: { title: 'Chapter ' + (index + 1), paragraphs: ['English story paragraph.', 'Another paragraph.'], alt: 'Test photo', caption: 'English caption' },
+        vi: { title: 'Chương ' + (index + 1), paragraphs: ['Đoạn chuyện bằng tiếng Việt.', 'Một đoạn nữa.'], alt: 'Ảnh thử', caption: 'Chú thích tiếng Việt' }
+      }));
+      await route.fulfill({ response, json: fixture });
+    });
+    await page.goto(siteUrl, { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.story-chapter');
+    await waitForSky(page);
+    assert.equal(await page.locator('.story-chapter').count(), 10);
+    assert.equal(await page.locator('.story-photo img').count(), 10);
+    assert.equal(await page.locator('.story-paragraphs p').count(), 20);
+    assert.equal(await page.locator('#story-intro-image').getAttribute('class'), 'intro-photo');
+    await page.locator('[data-lang="vi"]').click();
+    assert.equal(await page.locator('.story-chapter h2').last().textContent(), 'Chương 10');
+    for (let index = 0; index < 10; index += 1) {
+      await page.locator('.story-photo img').nth(index).evaluate((image) => image.scrollIntoView({ behavior: 'instant' }));
+      await page.waitForFunction((index) => {
+        const image = document.querySelectorAll('.story-photo img')[index];
+        return image.complete && image.naturalWidth > 0;
+      }, index);
+    }
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Ten photo chapters overflow');
+    await page.screenshot({ path: '/private/tmp/icu-story-chapters-' + viewport.name + '.png', fullPage: true });
+    assert.deepEqual(errors, []);
+    await page.close();
+  }
+  console.log('Ten bilingual photo chapters and configurable intro photo passed on desktop/mobile.');
 
   const reducedPage = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   await reducedPage.goto(siteUrl, { waitUntil: 'domcontentloaded' });
   await reducedPage.waitForSelector('.fragment-note');
+  await waitForSky(reducedPage);
   const staticFrame = await canvasSignature(reducedPage);
   const staticTransform = await reducedPage.locator('.fragment-note').first().evaluate((element) => element.style.transform);
   await reducedPage.mouse.move(350, 500);
@@ -168,4 +300,5 @@ try {
   console.log('Animation, pointer depth, sticky transitions, and reduced motion passed.');
 } finally {
   await browser.close();
+  if (previewServer) await new Promise((done) => previewServer.close(done));
 }

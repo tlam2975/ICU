@@ -4,6 +4,28 @@
     "latestTrackUrl": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
     "appleMusicUrl": "https://music.apple.com/vn/artist/icu"
   },
+  "story": {
+    "introImage": {
+      "src": "images/pixel-trio.png",
+      "width": 1536,
+      "height": 1024,
+      "pixelArt": true
+    },
+    "chapters": []
+  },
+  "releases": [
+    {
+      "id": "biet",
+      "title": "Biết",
+      "artist": "ICU",
+      "cover": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d114f0719cfb225d72f66df7",
+      "width": 300,
+      "height": 300,
+      "url": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
+      "en": { "type": "Single", "coverAlt": "Cover artwork for Biết by ICU" },
+      "vi": { "type": "Đĩa đơn", "coverAlt": "Ảnh bìa Biết của ICU" }
+    }
+  ],
   "socials": [
     { "label": "TikTok", "url": "https://www.tiktok.com/@innerchild_universe" },
     { "label": "Instagram", "url": "https://www.instagram.com/innerchild.universe" },
@@ -14,7 +36,7 @@
     { "label": "Email", "url": "mailto:innerchilduniverse@gmail.com" }
   ],
   "en": {
-    "nav": { "about": "Our universe", "music": "Music", "socials": "Elsewhere" },
+    "nav": { "about": "Our universe", "music": "Music", "socials": "Elsewhere", "menuTitle": "Find your way" },
     "hero": {
       "eyebrow": "a quiet place for what you feel",
       "body": "Some feelings stay with us. Here, they have room to glow.",
@@ -39,11 +61,18 @@
       "artworkAlt": "Three male bandmates together in flannel shirts and caps, illustrated in pixel art. One holds an acoustic guitar.",
       "signature": "innerchild.universe"
     },
+    "story": {
+      "outroEyebrow": "from our sky to yours",
+      "outroTitle": "The story continues in a song.",
+      "musicLink": "Music & all our places"
+    },
     "music": {
+      "pageTitle": "Music",
       "eyebrow": "stay for a song",
       "title": "Listen from where you are.",
       "body": "The latest release is waiting on Spotify. The instrumental you hear here is yours to start or pause.",
       "latestLabel": "Latest release",
+      "releaseLabel": "Release",
       "spotify": "Listen on Spotify",
       "artistLabel": "Artist page",
       "apple": "Find ICU on Apple Music"
@@ -51,7 +80,8 @@
     "social": {
       "eyebrow": "find the signal",
       "title": "Elsewhere with ICU",
-      "latest": "Listen to the latest release"
+      "latest": "Listen to the latest release",
+      "body": "The songs travel. So do we. Meet us wherever feels like you."
     },
     "footer": { "line": "A little light, for the feelings inside.", "socials": "All our places", "credit": "Designed by Tung Lam" },
     "controls": {
@@ -63,11 +93,12 @@
       "closeNote": "Close note",
       "previousNote": "Previous note",
       "nextNote": "Next note",
-      "closeMenu": "Close menu"
+      "closeMenu": "Close menu",
+      "loadError": "The page could not load. Please refresh to try again."
     }
   },
   "vi": {
-    "nav": { "about": "Vũ trụ của chúng tớ", "music": "Âm nhạc", "socials": "ICU ở đây" },
+    "nav": { "about": "Vũ trụ của chúng tớ", "music": "Âm nhạc", "socials": "ICU ở đây", "menuTitle": "Một lối vào vũ trụ" },
     "hero": {
       "eyebrow": "Chào mừng đến với vũ trụ của",
       "body": "Hãy để âm nhạc được vang lên và đi thật xa hơn nữa!",
@@ -92,11 +123,18 @@
       "artworkAlt": "Minh họa pixel ba chàng trai trong nhóm nhạc, mặc áo flannel và đội mũ lưỡi trai, đứng cạnh nhau. Một người ôm đàn guitar mộc.",
       "signature": "innerchilduniverse"
     },
+    "story": {
+      "outroEyebrow": "từ bầu trời chúng tớ, đến bạn",
+      "outroTitle": "Câu chuyện còn tiếp, trong một bài hát.",
+      "musicLink": "Âm nhạc & những nơi có ICU"
+    },
     "music": {
+      "pageTitle": "Âm nhạc",
       "eyebrow": "Cùng nghe nhạc nhé",
       "title": "Nghe từ nơi bạn đang đứng.",
       "body": "Biết đã có mặt trên mọi nền tảng, hãy stream cùng ICU nhé. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
       "latestLabel": "Bài hát mới nhất",
+      "releaseLabel": "Bài hát",
       "spotify": "Nghe trên Spotify",
       "artistLabel": "Trang nghệ sĩ",
       "apple": "Tìm ICU trên Apple Music"
@@ -104,7 +142,8 @@
     "social": {
       "eyebrow": "theo dấu âm thanh",
       "title": "Gặp ICU ở những nơi này",
-      "latest": "Nghe bài hát mới nhất"
+      "latest": "Nghe bài hát mới nhất",
+      "body": "Những bài hát đi xa, mang theo một chút chúng tớ. Gặp ICU ở nơi bạn thấy gần mình nhé."
     },
     "footer": { "line": "Một chút ánh sáng cho những điều ở bên trong.", "socials": "Mọi nơi có ICU", "credit": "Thiết kế bởi Tung Lam" },
     "controls": {
@@ -116,7 +155,8 @@
       "closeNote": "Đóng lời nhắn",
       "previousNote": "Lời nhắn trước",
       "nextNote": "Lời nhắn tiếp theo",
-      "closeMenu": "Đóng menu"
+      "closeMenu": "Đóng menu",
+      "loadError": "Chưa tải được trang. Bạn thử làm mới trang nhé."
     }
   }
 }

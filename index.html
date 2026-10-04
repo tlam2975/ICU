@@ -8,16 +8,16 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>ICU · innerchild.universe</title>
   </head>
-  <body>
+  <body data-page="story" data-site-base="./">
     <div id="app">
       <header class="site-header">
-        <a class="wordmark" href="#top" aria-label="ICU, innerchild.universe">
+        <a class="wordmark" href="./" data-route="story" aria-label="ICU, innerchild.universe">
           <span class="wordmark-symbol">ICU</span>
           <span class="wordmark-name">innerchild.universe</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="#about" data-copy="nav.about"></a>
-          <a href="#music" data-copy="nav.music"></a>
+          <a href="./" data-route="story" aria-current="page" data-copy="nav.about"></a>
+          <a href="./music/" data-route="music" data-copy="nav.music"></a>
         </nav>
         <div class="header-actions">
           <div class="language-switch" role="group" aria-label="Language">
@@ -35,7 +35,7 @@
         </div>
       </header>
 
-      <main>
+      <main id="main-content">
         <div class="universe-flow">
           <div class="universe-stage" aria-hidden="true">
             <canvas id="universe" class="universe-canvas"></canvas>
@@ -70,37 +70,23 @@
               <p class="about-body" data-copy="about.body"></p>
               <p class="about-signature" data-copy="about.signature"></p>
             </div>
-            <div class="pixel-character-wrap">
-              <img class="pixel-character" src="./images/pixel-trio.png" alt="Three male bandmates together, illustrated in pixel art." data-copy-alt="about.artworkAlt" width="1536" height="1024" loading="lazy" />
+            <div class="pixel-character-wrap" id="story-intro-artwork">
+              <img class="pixel-character" id="story-intro-image" src="./images/pixel-trio.png" alt="Three male bandmates together, illustrated in pixel art." data-copy-alt="about.artworkAlt" width="1536" height="1024" loading="lazy" />
               <span class="character-shadow" aria-hidden="true"></span>
             </div>
           </div>
         </section>
+        <div id="story-chapters"></div>
         </div>
 
-        <section class="music-section" id="music" aria-labelledby="music-title">
-          <div class="section-inner music-inner">
-            <div class="music-heading">
-              <p class="eyebrow" data-copy="music.eyebrow"></p>
-              <h2 id="music-title" data-copy="music.title"></h2>
-              <p data-copy="music.body"></p>
-            </div>
-            <div class="music-links">
-              <a id="latest-track-link" class="music-link primary-link" target="_blank" rel="noopener noreferrer">
-                <span>
-                  <small data-copy="music.latestLabel"></small>
-                  <strong data-copy="music.spotify"></strong>
-                </span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
-              <a id="apple-link" class="music-link" target="_blank" rel="noopener noreferrer">
-                <span>
-                  <small data-copy="music.artistLabel"></small>
-                  <strong data-copy="music.apple"></strong>
-                </span>
-                <i data-lucide="arrow-up-right"></i>
-              </a>
-            </div>
+        <section class="story-outro" aria-labelledby="story-outro-title">
+          <div class="section-inner">
+            <p class="eyebrow" data-copy="story.outroEyebrow"></p>
+            <h2 id="story-outro-title" data-copy="story.outroTitle"></h2>
+            <a class="text-link" href="./music/" data-route="music">
+              <span data-copy="story.musicLink"></span>
+              <i data-lucide="arrow-right"></i>
+            </a>
           </div>
         </section>
       </main>
@@ -113,7 +99,7 @@
           </div>
           <div class="footer-contact">
             <a id="footer-email" href="mailto:innerchilduniverse@gmail.com">innerchilduniverse@gmail.com</a>
-            <button id="footer-socials" type="button" data-copy="footer.socials"></button>
+            <a class="footer-socials" href="./music/#socials" data-route="music" data-anchor="socials" data-copy="footer.socials"></a>
           </div>
           <div class="footer-meta">
             <p>© <span id="year"></span> innerchild.universe</p>
@@ -141,11 +127,15 @@
         <div class="social-dialog-header">
           <div>
             <p class="eyebrow" data-copy="social.eyebrow"></p>
-            <h2 id="social-dialog-title" data-copy="social.title"></h2>
+            <h2 id="social-dialog-title" data-copy="nav.menuTitle"></h2>
           </div>
           <button class="icon-button dialog-close" id="social-close" type="button" aria-label="Close menu"><i data-lucide="x"></i></button>
         </div>
-        <div id="social-links" class="social-links"></div>
+        <nav class="drawer-nav" aria-label="Main navigation">
+          <a href="./" data-route="story" aria-current="page"><span data-copy="nav.about"></span><i data-lucide="arrow-right"></i></a>
+          <a href="./music/" data-route="music"><span data-copy="nav.music"></span><i data-lucide="arrow-right"></i></a>
+        </nav>
+        <div id="social-links" class="social-links" data-social-links></div>
         <a id="social-latest" class="social-latest" target="_blank" rel="noopener noreferrer">
           <span data-copy="social.latest"></span>
           <i data-lucide="arrow-up-right"></i>
