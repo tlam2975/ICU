@@ -1,0 +1,23 @@
+.font-lab { position: fixed; z-index: 100; right: 20px; bottom: 20px; color: #243932; font: 13px/1.5 Arial,sans-serif; }
+.font-lab button, .font-lab input, .font-lab select { font: inherit; }
+.font-lab-toggle { display: flex; gap: 10px; align-items: center; margin-left: auto; padding: 12px 17px; border: 1px solid #d1d8c8; border-radius: 30px; color: #243932; background: #f4f4e9; box-shadow: 0 4px 20px #0002; }
+#font-lab-panel { position: absolute; right: 0; bottom: 58px; width: min(350px,calc(100vw - 32px)); max-height: calc(100svh - 110px); overflow-y: auto; padding: 22px; border: 1px solid #c0cebd; border-radius: 14px; background: #f4f4e9; box-shadow: 0 15px 60px #0004; }
+.font-lab-top { display: flex; justify-content: space-between; gap: 14px; align-items: center; }
+.font-lab-top strong { font-size: 18px; }
+.font-lab button { color: inherit; cursor: pointer; }
+.font-lab-top button { border: 0; background: transparent; font-size: 26px; }
+.font-lab form { display: grid; gap: 12px; }
+.font-lab label { display: grid; gap: 5px; font-weight: 600; }
+.font-lab input, .font-lab select { width: 100%; min-height: 42px; padding: 8px 10px; border: 1px solid #a8b8a3; border-radius: 5px; background: white; color: #243932; }
+.font-lab .font-lab-apply { min-height: 42px; border: 0; border-radius: 5px; background: #294b3d; color: white; font-weight: 600; }
+.font-lab .font-lab-apply:disabled { opacity: .5; }
+.font-lab-status { min-height: 40px; white-space: pre-line; }
+.font-lab-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+.font-lab-actions button, .font-lab-history button { min-height: 34px; padding: 5px 8px; border: 1px solid #acbca4; border-radius: 4px; background: transparent; }
+.font-lab-actions [aria-pressed=true] { background: #d4dfc6; }
+.font-lab-current { font-size: 11px; color: #50604c; }
+.font-lab-history { display: flex; flex-wrap: wrap; gap: 6px; max-height: 130px; overflow-y: auto; margin: 14px 0; }
+.font-lab a { text-decoration: underline; }
+.font-lab small { display: block; margin-top: 10px; color: #596650; }
+.font-lab :focus-visible { outline: 2px solid #365941; outline-offset: 3px; }
+@media(max-width:700px) { .font-lab { right: 12px; bottom: 12px; } }

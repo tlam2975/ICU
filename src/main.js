@@ -12,10 +12,18 @@ import {
 import '@fontsource/newsreader/300.css';
 import '@fontsource/newsreader/300-italic.css';
 import '@fontsource/newsreader/400.css';
+import '@fontsource/newsreader/500.css';
+import '@fontsource/newsreader/500-italic.css';
+import '@fontsource/newsreader/600.css';
+import '@fontsource/montserrat/700.css';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
 import './style.css';
+import './upgrades.css';
+import { initExperience, revealArrival } from './experience.js';
+import { initFontLab } from './font-lab.js';
+revealArrival();
 
 const iconSet = { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Menu, Volume2, VolumeX, X };
 const noteField = document.querySelector('#note-field');
@@ -131,6 +139,7 @@ function makeStoryChapters() {
     const caption = document.createElement('figcaption');
     const layout = chapter.layout || (index % 3 === 2 ? 'wide' : 'split');
     section.className = 'story-chapter' + (layout === 'wide' ? ' story-chapter--wide' : '') + (!chapter.image ? ' story-chapter--text' : '');
+    if (layout === 'portrait') section.classList.add('story-chapter--portrait');
     section.id = chapter.id || 'chapter-' + (index + 1);
     title.id = 'chapter-title-' + index;
     inner.className = 'section-inner story-chapter-inner';
@@ -319,6 +328,8 @@ async function init() {
   }
   setLanguage(content[language] ? language : 'en');
   iconize();
+  initExperience();
+  initFontLab();
 
   langButtons.forEach((button) => {
     button.addEventListener('click', () => setLanguage(button.dataset.lang));

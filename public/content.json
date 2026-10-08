@@ -6,12 +6,98 @@
   },
   "story": {
     "introImage": {
-      "src": "images/pixel-trio.png",
-      "width": 1536,
-      "height": 1024,
-      "pixelArt": true
+      "src": "images/main.webp",
+      "width": 1411,
+      "height": 1500,
+      "pixelArt": false
     },
-    "chapters": []
+    "chapters": [
+      {
+        "id": "dscf2560",
+        "layout": "wide",
+        "image": "images/story/DSCF2560.webp",
+        "width": 2000,
+        "height": 1333,
+        "en": {
+          "title": "A little closer to earth.",
+          "alt": "Three bandmates lying on the grass with a guitar.",
+          "paragraphs": []
+        },
+        "vi": {
+          "title": "Gần mặt đất hơn một chút.",
+          "alt": "Ba thành viên nằm trên cỏ bên cây đàn guitar.",
+          "paragraphs": []
+        }
+      },
+      {
+        "id": "dscf2534",
+        "layout": "split",
+        "image": "images/story/DSCF2534.webp",
+        "width": 2000,
+        "height": 1333,
+        "en": {
+          "title": "Room to wander.",
+          "alt": "The band walking beside a lake.",
+          "paragraphs": []
+        },
+        "vi": {
+          "title": "Một khoảng trời để lang thang.",
+          "alt": "Các thành viên đi dạo bên hồ.",
+          "paragraphs": []
+        }
+      },
+      {
+        "id": "dscf2593",
+        "layout": "wide",
+        "image": "images/story/DSCF2593.webp",
+        "width": 2000,
+        "height": 1333,
+        "en": {
+          "title": "Together, in the in-between.",
+          "alt": "Three bandmates on a tree-lined walkway.",
+          "paragraphs": []
+        },
+        "vi": {
+          "title": "Cùng nhau, giữa những khoảng lặng.",
+          "alt": "Ba thành viên trên lối đi rợp bóng cây.",
+          "paragraphs": []
+        }
+      },
+      {
+        "id": "dscf2603",
+        "layout": "portrait",
+        "image": "images/story/DSCF2603.webp",
+        "width": 1333,
+        "height": 2000,
+        "en": {
+          "title": "",
+          "alt": "Bandmates standing beside the trees.",
+          "paragraphs": []
+        },
+        "vi": {
+          "title": "",
+          "alt": "Các thành viên đứng bên hàng cây.",
+          "paragraphs": []
+        }
+      },
+      {
+        "id": "dscf2633",
+        "layout": "portrait",
+        "image": "images/story/DSCF2633.webp",
+        "width": 1333,
+        "height": 2000,
+        "en": {
+          "title": "",
+          "alt": "The band looking up from a garden path.",
+          "paragraphs": []
+        },
+        "vi": {
+          "title": "",
+          "alt": "Các thành viên ngước nhìn từ lối đi trong vườn.",
+          "paragraphs": []
+        }
+      }
+    ]
   },
   "releases": [
     {
@@ -22,21 +108,53 @@
       "width": 300,
       "height": 300,
       "url": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
-      "en": { "type": "Single", "coverAlt": "Cover artwork for Biết by ICU" },
-      "vi": { "type": "Đĩa đơn", "coverAlt": "Ảnh bìa Biết của ICU" }
+      "en": {
+        "type": "Single",
+        "coverAlt": "Cover artwork for Biết by ICU"
+      },
+      "vi": {
+        "type": "Đĩa đơn",
+        "coverAlt": "Ảnh bìa Biết của ICU"
+      }
     }
   ],
   "socials": [
-    { "label": "TikTok", "url": "https://www.tiktok.com/@innerchild_universe" },
-    { "label": "Instagram", "url": "https://www.instagram.com/innerchild.universe" },
-    { "label": "YouTube", "url": "https://www.youtube.com/@innerchilduniverse" },
-    { "label": "Spotify", "url": "https://open.spotify.com/artist/1KzxDLIMpdM4o02vb1srH1" },
-    { "label": "Apple Music", "url": "https://music.apple.com/vn/artist/icu" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/innerchilduniverse" },
-    { "label": "Email", "url": "mailto:innerchilduniverse@gmail.com" }
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@innerchild_universe"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/innerchild.universe"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@innerchilduniverse"
+    },
+    {
+      "label": "Spotify",
+      "url": "https://open.spotify.com/artist/1KzxDLIMpdM4o02vb1srH1"
+    },
+    {
+      "label": "Apple Music",
+      "url": "https://music.apple.com/vn/artist/icu"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/innerchilduniverse"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:innerchilduniverse@gmail.com"
+    }
   ],
   "en": {
-    "nav": { "about": "Our universe", "music": "Music", "socials": "Elsewhere", "menuTitle": "Find your way" },
+    "nav": {
+      "about": "Our universe",
+      "music": "Music",
+      "socials": "Elsewhere",
+      "menuTitle": "Find your way"
+    },
     "hero": {
       "eyebrow": "a quiet place for what you feel",
       "body": "Some feelings stay with us. Here, they have room to glow.",
@@ -45,26 +163,50 @@
     "notes": {
       "label": "a fragment for you",
       "items": [
-        { "fragment": "still here", "full": "You are still here. Let that be enough for tonight." },
-        { "full": "The younger you never needed to grow in a hurry." },
-        { "full": "Even in the quiet, something in you keeps singing." },
-        { "full": "For a moment, let the sea hold what your heart cannot." },
-        { "fragment": "softness survived", "full": "After everything, your tenderness is still here." },
-        { "full": "You can begin again without making a sound." },
-        { "fragment": "whole, in pieces", "full": "Every piece of you belongs here, even the ones still finding their place." }
+        {
+          "fragment": "still here",
+          "full": "You are still here. Let that be enough for tonight."
+        },
+        {
+          "full": "The younger you never needed to grow in a hurry."
+        },
+        {
+          "full": "Even in the quiet, something in you keeps singing."
+        },
+        {
+          "full": "For a moment, let the sea hold what your heart cannot."
+        },
+        {
+          "fragment": "softness survived",
+          "full": "After everything, your tenderness is still here."
+        },
+        {
+          "full": "You can begin again without making a sound."
+        },
+        {
+          "fragment": "whole, in pieces",
+          "full": "Every piece of you belongs here, even the ones still finding their place."
+        }
       ]
     },
     "about": {
       "eyebrow": "three people, one inner sky",
       "title": "The feelings we carry become songs.",
       "body": "ICU is three people making music for the parts of us that are hard to name. A place for memory, tenderness, and the child within who still looks up at the sky.",
-      "artworkAlt": "Three male bandmates together in flannel shirts and caps, illustrated in pixel art. One holds an acoustic guitar.",
+      "artworkAlt": "The three members of ICU standing together.",
       "signature": "innerchild.universe"
     },
     "story": {
       "outroEyebrow": "from our sky to yours",
       "outroTitle": "The story continues in a song.",
-      "musicLink": "Music & all our places"
+      "musicLink": "Music & all our places",
+      "eyebrow": "feet on the grass, heads in the clouds",
+      "title": "Our little world.",
+      "body": "Three people. A few songs. And all the moments in between.",
+      "descent": "A little closer to earth",
+      "footerTitle": "See you under the same sky.",
+      "contact": "Say hello",
+      "back": "Back to the sky"
     },
     "music": {
       "pageTitle": "Music",
@@ -83,7 +225,11 @@
       "latest": "Listen to the latest release",
       "body": "The songs travel. So do we. Meet us wherever feels like you."
     },
-    "footer": { "line": "A little light, for the feelings inside.", "socials": "All our places", "credit": "Designed by Tung Lam" },
+    "footer": {
+      "line": "A little light, for the feelings inside.",
+      "socials": "All our places",
+      "credit": "Designed by Tung Lam"
+    },
     "controls": {
       "mainNav": "Main navigation",
       "language": "Language",
@@ -98,7 +244,12 @@
     }
   },
   "vi": {
-    "nav": { "about": "Vũ trụ của chúng tớ", "music": "Âm nhạc", "socials": "ICU ở đây", "menuTitle": "Một lối vào vũ trụ" },
+    "nav": {
+      "about": "Vũ trụ của chúng tớ",
+      "music": "Âm nhạc",
+      "socials": "ICU ở đây",
+      "menuTitle": "Một lối vào vũ trụ"
+    },
     "hero": {
       "eyebrow": "Chào mừng đến với vũ trụ của",
       "body": "Hãy để âm nhạc được vang lên và đi thật xa hơn nữa!",
@@ -107,26 +258,50 @@
     "notes": {
       "label": "một mảnh dành cho bạn",
       "items": [
-        { "fragment": "Biết", "full": "Em biết... và tôi khóc..." },
-        { "full": "Em như bông hoa hướng dương" },
-        { "full": "Hướng về mặt trời nhưng không dành cho tôi" },
-        { "full": "Hướng về một người từng nhớ tên tôi" },
-        { "fragment": "Giữa rừng cây...", "full": "Anh không biết mình làm gì sai, anh không biết mình đã yêu..." },
-        { "full": ".Giữa rừng cây nhiều mây và lá" },
-        { "fragment": "Em đi đến để lại rừng hoa", "full": "Cớ sao em không ở lại" }
+        {
+          "fragment": "Biết",
+          "full": "Em biết... và tôi khóc..."
+        },
+        {
+          "full": "Em như bông hoa hướng dương"
+        },
+        {
+          "full": "Hướng về mặt trời nhưng không dành cho tôi"
+        },
+        {
+          "full": "Hướng về một người từng nhớ tên tôi"
+        },
+        {
+          "fragment": "Giữa rừng cây...",
+          "full": "Anh không biết mình làm gì sai, anh không biết mình đã yêu..."
+        },
+        {
+          "full": ".Giữa rừng cây nhiều mây và lá"
+        },
+        {
+          "fragment": "Em đi đến để lại rừng hoa",
+          "full": "Cớ sao em không ở lại"
+        }
       ]
     },
     "about": {
       "eyebrow": "3 ",
       "title": "Những điều mình bình thường nhất, rồi thành bài hát.",
       "body": "ICU chỉ là sự kết hợp của 3 đứa trẻ còn nhiều hoài bão bên trong, mong muốn được đem đến cho mọi người những điều đơn giản nhất.",
-      "artworkAlt": "Minh họa pixel ba chàng trai trong nhóm nhạc, mặc áo flannel và đội mũ lưỡi trai, đứng cạnh nhau. Một người ôm đàn guitar mộc.",
+      "artworkAlt": "Ba thành viên ICU đứng bên nhau.",
       "signature": "innerchilduniverse"
     },
     "story": {
       "outroEyebrow": "từ bầu trời chúng tớ, đến bạn",
       "outroTitle": "Câu chuyện còn tiếp, trong một bài hát.",
-      "musicLink": "Âm nhạc & những nơi có ICU"
+      "musicLink": "Âm nhạc & những nơi có ICU",
+      "eyebrow": "chân chạm cỏ, đầu chạm mây",
+      "title": "Thế giới nhỏ của chúng tớ.",
+      "body": "Ba con người. Vài bài hát. Và những khoảnh khắc ở giữa.",
+      "descent": "Gần mặt đất hơn một chút",
+      "footerTitle": "Hẹn gặp dưới cùng một bầu trời.",
+      "contact": "Gửi lời chào",
+      "back": "Trở lại bầu trời"
     },
     "music": {
       "pageTitle": "Âm nhạc",
@@ -145,7 +320,11 @@
       "latest": "Nghe bài hát mới nhất",
       "body": "Những bài hát đi xa, mang theo một chút chúng tớ. Gặp ICU ở nơi bạn thấy gần mình nhé."
     },
-    "footer": { "line": "Một chút ánh sáng cho những điều ở bên trong.", "socials": "Mọi nơi có ICU", "credit": "Thiết kế bởi Tung Lam" },
+    "footer": {
+      "line": "Một chút ánh sáng cho những điều ở bên trong.",
+      "socials": "Mọi nơi có ICU",
+      "credit": "Thiết kế bởi Tung Lam"
+    },
     "controls": {
       "mainNav": "Điều hướng chính",
       "language": "Ngôn ngữ",

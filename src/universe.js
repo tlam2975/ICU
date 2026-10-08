@@ -80,6 +80,7 @@ export default class Universe {
     this.camera = new THREE.PerspectiveCamera(44, 1, 0.1, 100);
     this.camera.position.z = this.baseCameraZ;
     this.addStars();
+    this.addBrightStars();
     this.addConstellations();
     this.addPlanet();
     this.addNoteGlows();
@@ -129,7 +130,7 @@ export default class Universe {
       positions[index * 3 + 1] = (random() - 0.5) * 26;
       positions[index * 3 + 2] = -8 - random() * 30;
       color.set(palette[Math.floor(random() * palette.length)]);
-      const brightness = 0.35 + random() * 0.65;
+      const brightness = 0.55 + random() * 0.45;
       colors[index * 3] = color.r * brightness;
       colors[index * 3 + 1] = color.g * brightness;
       colors[index * 3 + 2] = color.b * brightness;
@@ -138,7 +139,7 @@ export default class Universe {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     const material = new THREE.PointsMaterial({
-      size: 0.26,
+      size: 0.32,
       map: this.texture,
       vertexColors: true,
       transparent: true,
@@ -189,6 +190,33 @@ export default class Universe {
       blending: THREE.AdditiveBlending
     }));
     this.scene.add(this.nearStars);
+  }
+
+  addBrightStars() {
+    const random = seededRandom(4321);
+    this.brightStars = new THREE.Group();
+    for (let index = 0; index < 32; index += 1) {
+      const star = new THREE.Group();
+      const material = new THREE.SpriteMaterial({ map: this.texture, color: index % 4 ? '#fff2cf' : '#c5f1ef', transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+      const halo = new THREE.Sprite(material);
+      const size = 0.35 + random() * 0.5;
+      halo.scale.set(size, size, 1);
+      star.add(halo);
+      const core = new THREE.Sprite(material.clone());
+      core.scale.set(size * 0.22, size * 0.22, 1);
+      star.add(core);
+      if (index % 4 === 0) {
+        const vertical = new THREE.Sprite(material.clone());
+        vertical.scale.set(size * 0.1, size * 1.1, 1);
+        const horizontal = new THREE.Sprite(material.clone());
+        horizontal.scale.set(size * 0.85, size * 0.1, 1);
+        star.add(vertical, horizontal);
+      }
+      star.position.set((random() - 0.5) * 33, (random() - 0.5) * 21, -3 - random() * 12);
+      star.userData.phase = random() * Math.PI * 2;
+      this.brightStars.add(star);
+    }
+    this.scene.add(this.brightStars);
   }
 
   addConstellations() {
@@ -351,6 +379,10 @@ export default class Universe {
     this.camera.position.z = this.baseCameraZ - (this.reducedMotion ? 0 : scrollProgress * 1.35);
     this.camera.lookAt(0, 0, 0);
     this.stars.rotation.y = Math.sin(time * 0.00007) * 0.045;
+    this.brightStars.children.forEach((star) => {
+      const pulse = this.reducedMotion ? 0.9 : 0.8 + Math.sin(time * 0.001 + star.userData.phase) * 0.2;
+      star.children.forEach((part) => { part.material.opacity = pulse; });
+    });
     this.dust.rotation.z = time * 0.000008;
     this.nearStars.rotation.z = Math.sin(time * 0.00005) * 0.012;
     this.constellations.rotation.set(0.2, Math.sin(time * 0.00008) * 0.1, -0.12);

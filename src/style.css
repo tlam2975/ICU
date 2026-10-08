@@ -7,7 +7,7 @@
   --gold: #d6b977;
   --line: rgba(245, 241, 232, 0.16);
   color-scheme: dark;
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: var(--font-body, 'Montserrat'), Arial, sans-serif;
 }
 
 * {
@@ -71,7 +71,7 @@ a:focus-visible {
 }
 
 .wordmark-symbol {
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 2rem;
   font-style: italic;
   font-weight: 300;
@@ -328,7 +328,7 @@ a:focus-visible {
 
 .fragment-text {
   color: rgba(245, 241, 232, 0.93);
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: var(--font-body, 'Montserrat'), Arial, sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
@@ -370,7 +370,7 @@ a:focus-visible {
 
 .hero-content h1 {
   margin: 32px 0 0;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 10rem;
   font-style: italic;
   font-weight: 300;
@@ -388,7 +388,7 @@ a:focus-visible {
   max-width: 390px;
   margin: 0 0 0 7px;
   color: rgba(245, 241, 232, 0.89);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 1.55rem;
   font-weight: 300;
   line-height: 1.35;
@@ -423,7 +423,7 @@ a:focus-visible {
   bottom: 34px;
   margin: 0;
   color: rgba(245, 241, 232, 0.39);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 0.96rem;
   font-style: italic;
 }
@@ -541,7 +541,7 @@ a:focus-visible {
 .music-heading h2 {
   max-width: 670px;
   margin: 20px 0 26px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 4rem;
   font-weight: 300;
   line-height: 1.08;
@@ -559,7 +559,7 @@ a:focus-visible {
 .about-signature {
   margin: 38px 0 0;
   color: var(--rose);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 1.35rem;
   font-style: italic;
 }
@@ -625,7 +625,7 @@ a:focus-visible {
 .story-outro h2,
 .social-heading h2 {
   margin: 20px 0 28px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 3.3rem;
   font-weight: 300;
   line-height: 1.14;
@@ -715,7 +715,7 @@ a:focus-visible {
 
 .music-heading h1 {
   margin: 28px 0 32px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 5.4rem;
   font-weight: 300;
   line-height: 1;
@@ -767,7 +767,7 @@ a:focus-visible {
 
 .cover-fallback {
   position: absolute;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 3rem;
   font-style: italic;
   color: var(--glass);
@@ -779,7 +779,7 @@ a:focus-visible {
 
 .release-copy h2 {
   margin: 22px 0 14px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 3.2rem;
   font-weight: 300;
   line-height: 1.1;
@@ -857,7 +857,7 @@ a:focus-visible {
 
 .footer-brand {
   margin: 0 0 8px;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 3.2rem;
   font-style: italic;
   font-weight: 300;
@@ -867,7 +867,7 @@ a:focus-visible {
 .footer-line {
   margin: 0;
   color: rgba(245, 241, 232, 0.63);
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 1.17rem;
   font-style: italic;
 }
@@ -947,7 +947,7 @@ dialog::backdrop {
 .note-dialog h2 {
   max-width: 510px;
   margin: 0;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 3.3rem;
   font-style: italic;
   font-weight: 300;
@@ -998,7 +998,7 @@ dialog::backdrop {
 
 .social-dialog-header h2 {
   margin: 15px 0 0;
-  font-family: 'Newsreader', Georgia, serif;
+  font-family: var(--font-heading, 'Newsreader'), Georgia, serif;
   font-size: 2.45rem;
   font-weight: 300;
   line-height: 1.02;
