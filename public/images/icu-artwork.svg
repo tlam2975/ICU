@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="320" viewBox="0 0 680 320" fill="none">
+  <title>ICU — innerchild.universe</title>
+  <defs>
+    <linearGradient id="cream" x1="295" y1="50" x2="338" y2="268" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7DE"/>
+      <stop offset="1" stop-color="#E9D7AE"/>
+    </linearGradient>
+    <g id="letters">
+      <!-- Hand-shaped lettering: the artwork has no font dependency. -->
+      <path d="M57 73C51 60 61 47 78 47L180 44C198 44 206 54 202 68C199 80 184 82 166 85L150 210C169 211 182 216 180 231C178 246 163 250 147 251L45 255C26 256 18 245 22 233C26 220 41 216 58 214L75 87C65 85 60 81 57 73Z"/>
+      <path d="M411 77C393 56 365 43 333 46C259 51 219 100 213 165C207 224 236 268 295 274C339 279 375 261 396 233C407 219 405 205 392 197C379 189 367 196 356 205C343 217 328 224 313 219C288 211 283 185 289 154C295 123 311 103 334 101C349 99 362 106 373 115C385 125 397 125 407 114C418 103 421 89 411 77Z"/>
+      <path d="M460 48C439 48 428 60 429 82L434 183C437 242 466 273 519 271C575 269 611 237 616 181L626 81C629 59 616 44 595 45C573 46 563 58 562 80L558 177C557 204 546 218 528 219C509 220 499 205 498 180L499 82C499 59 484 47 460 48Z"/>
+    </g>
+  </defs>
+  <!-- A drawn orbit, passing behind the letters and back across the foreground. -->
+  <path d="M54 210C-9 240 16 283 147 284C304 286 518 212 625 125C692 70 661 39 584 49" stroke="#9CBCAF" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+  <use href="#letters" transform="translate(2 7)" fill="#7B9280" stroke="#102A30" stroke-width="7" stroke-linejoin="round"/>
+  <use href="#letters" fill="url(#cream)" stroke="#FFF5D7" stroke-width="1.5" stroke-linejoin="round"/>
+  <g stroke="#FFFCF0" stroke-width="3" stroke-linecap="round" opacity=".75">
+    <path d="M78 58L177 56M89 94L77 192"/>
+    <path d="M247 147C254 101 288 65 330 60"/>
+    <path d="M445 85L450 171C451 199 457 217 468 229"/>
+  </g>
+  <path d="M53 251C150 283 367 226 527 143" stroke="#9CBCAF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M340 139C346 158 350 162 369 169C350 175 346 180 340 199C334 180 329 175 310 169C329 162 334 158 340 139Z" fill="#DEA594"/>
+  <path d="M580 7L586 27L606 33L586 39L580 59L574 39L554 33L574 27Z" fill="#EDD49D"/>
+  <path d="M201 273L205 286L218 290L205 294L201 307L197 294L184 290L197 286Z" fill="#EDD49D"/>
+  <circle cx="640" cy="113" r="7" fill="#DEA594"/>
+  <circle cx="36" cy="146" r="4" fill="#9CBCAF"/>
+  <circle cx="415" cy="24" r="3" fill="#EDD49D"/>
+</svg>

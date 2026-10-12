@@ -3,7 +3,7 @@
 A bilingual website for ICU, built with Vite and Three.js.
 
 - `/`: the glowing universe, cloud descent, and a meadow photo story.
-- `/music/`: releases and all social links.
+- `/music/`: releases and all social links, with a starry universe without the planet, a subtle garland of pastel notes that scrolls with the page, and a bright cream card matching the introduction text. The page ends with the social directory without a repeated footer.
 
 ## Run locally
 
@@ -16,7 +16,9 @@ npm run dev
 
 - Change English and Vietnamese copy, social links, and the instrumental path in `public/content.json`.
 - Add photos to `public/images/story/`, then add entries to `story.chapters` in the JSON. Chapters support an image, a heading, multiple paragraphs, and a caption in both languages. The five supplied band photos are included as optimized WebP images.
-- The band introduction uses an optimized copy of `assets/main.png`. Change `story.introImage` to replace it. Keep `pixelArt` set to `false` for photos and update `en.about.artworkAlt` and `vi.about.artworkAlt`.
+- The opening sky uses four night photos in `public/images/night/`; the band introduction uses a fifth photo from the same shoot. The daylight photos in `public/images/story/` are reserved for the meadow chapters, so the two sections do not repeat images. Change `story.introImage` to replace the introduction photo, keep `pixelArt` set to `false`, and update `en.about.artworkAlt` and `vi.about.artworkAlt`. The original `public/images/main.webp` is preserved.
+- The large ICU lettering is custom vector artwork in `public/images/icu-artwork.svg`. Its sizing and the buttons' raised/pressed states live in `src/refinements.css`; reduced motion removes their movement.
+- Music-page typography, poster framing, and background notes live in `src/music.css`. The ambient mode in `src/universe.js` reuses the opening sky without its photos or interactive paper fragments.
 - The original `public/images/pixel-guitarist.png` and `public/images/pixel-trio.png` are preserved. There is no need to overwrite either file.
 - The `releases` array currently contains only "Biết", with its official Spotify artwork and track URL. Add new releases to this array, newest first.
 - The instrumental file is `public/audio/biet_saubienkaraoke1.mp3`.

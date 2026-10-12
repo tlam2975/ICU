@@ -6,9 +6,9 @@
   },
   "story": {
     "introImage": {
-      "src": "images/main.webp",
-      "width": 1411,
-      "height": 1500,
+      "src": "images/night/S0N02071.webp",
+      "width": 1800,
+      "height": 1200,
       "pixelArt": false
     },
     "chapters": [
@@ -108,6 +108,7 @@
       "width": 300,
       "height": 300,
       "url": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
+      "appleMusicUrl": "https://music.apple.com/vn/album/bi%E1%BA%BFt/6818998459?i=6818998462",
       "en": {
         "type": "Single",
         "coverAlt": "Cover artwork for Biết by ICU"
@@ -193,7 +194,7 @@
       "eyebrow": "three people, one inner sky",
       "title": "The feelings we carry become songs.",
       "body": "ICU is three people making music for the parts of us that are hard to name. A place for memory, tenderness, and the child within who still looks up at the sky.",
-      "artworkAlt": "The three members of ICU standing together.",
+      "artworkAlt": "The three members of ICU together with their guitars at night.",
       "signature": "innerchild.universe"
     },
     "story": {
@@ -216,6 +217,7 @@
       "latestLabel": "Latest release",
       "releaseLabel": "Release",
       "spotify": "Listen on Spotify",
+      "appleListen": "Listen on Apple Music",
       "artistLabel": "Artist page",
       "apple": "Find ICU on Apple Music"
     },
@@ -232,7 +234,7 @@
     },
     "controls": {
       "mainNav": "Main navigation",
-      "language": "Language",
+      "language": "Language: English. Switch to Vietnamese",
       "noteField": "Floating musical notes and fragments",
       "playAudio": "Play instrumental",
       "pauseAudio": "Pause instrumental",
@@ -288,7 +290,7 @@
       "eyebrow": "3 ",
       "title": "Những điều mình bình thường nhất, rồi thành bài hát.",
       "body": "ICU chỉ là sự kết hợp của 3 đứa trẻ còn nhiều hoài bão bên trong, mong muốn được đem đến cho mọi người những điều đơn giản nhất.",
-      "artworkAlt": "Ba thành viên ICU đứng bên nhau.",
+      "artworkAlt": "Ba thành viên ICU bên những cây đàn guitar trong buổi chụp đêm.",
       "signature": "innerchilduniverse"
     },
     "story": {
@@ -311,6 +313,7 @@
       "latestLabel": "Bài hát mới nhất",
       "releaseLabel": "Bài hát",
       "spotify": "Nghe trên Spotify",
+      "appleListen": "Nghe trên Apple Music",
       "artistLabel": "Trang nghệ sĩ",
       "apple": "Tìm ICU trên Apple Music"
     },
@@ -327,7 +330,7 @@
     },
     "controls": {
       "mainNav": "Điều hướng chính",
-      "language": "Ngôn ngữ",
+      "language": "Ngôn ngữ: Tiếng Việt. Đổi sang tiếng Anh",
       "noteField": "Những nốt nhạc và mảnh cảm xúc lơ lửng",
       "playAudio": "Phát nhạc không lời",
       "pauseAudio": "Tạm dừng nhạc không lời",

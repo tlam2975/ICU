@@ -1,0 +1,191 @@
+/* The same sky as the opening page, behind the music rather than photos. */
+.music-page.universe-flow {
+  --music-cream: #fff8e2;
+  background: linear-gradient(180deg, #101e2c 0%, #182f39 48%, #29484b 100%);
+}
+.music-sky { pointer-events: none; }
+.music-sky .universe-canvas { opacity: .88; }
+/* Keep the garland outside the sticky sky so it leaves with the first section. */
+.music-garland {
+  position: absolute;
+  z-index: 1;
+  inset: 100px 0 auto;
+  height: clamp(160px, 16vw, 280px);
+  overflow: hidden;
+  opacity: .58;
+  pointer-events: none;
+}
+.music-note-garland {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: max(100%, 780px);
+  height: auto;
+  transform: translateX(-50%);
+  overflow: visible;
+  pointer-events: none;
+}
+.garland-cord { stroke: #d6d8c2; stroke-width: 1; opacity: .4; }
+.garland-beads {
+  stroke: #e6ddbf;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1 29;
+  filter: drop-shadow(0 0 3px #fff8e240);
+}
+.garland-charm {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: garland-sway 6s ease-in-out var(--sway-delay, 0s) infinite alternate;
+}
+.garland-charm > circle { fill: #eee6cc; }
+.garland-charm > use {
+  animation: note-shimmer 4s ease-in-out var(--sway-delay, 0s) infinite;
+}
+.garland-sparkles > * {
+  fill: #eee6cc;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: garland-twinkle 3.6s ease-in-out var(--twinkle-delay, 0s) infinite;
+}
+
+.music-page .release-section { position: relative; padding-top: 290px; padding-bottom: 125px; }
+.music-page .release-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 7%; }
+.music-page .music-heading { position: relative; }
+.music-page .music-heading::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -20px -18px;
+  background: radial-gradient(ellipse, #101e2cbd 25%, #101e2c00 72%);
+  pointer-events: none;
+}
+.music-page .music-heading .eyebrow { color: var(--music-cream); letter-spacing: .1em; }
+.music-page .music-heading h1 {
+  width: fit-content;
+  max-width: 100%;
+  margin: 24px 0 34px;
+  padding-bottom: 18px;
+  color: var(--music-cream);
+  font-size: clamp(4.3rem, 7.5vw, 7.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.045em;
+  text-shadow: 0 3px 0 #746f5766, 0 0 44px #f0d6a01f;
+  border-bottom: 2px solid #d6b97780;
+}
+.music-page .music-heading h2 {
+  color: var(--music-cream);
+  font-size: clamp(2.3rem, 3.3vw, 3.3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  text-shadow: 0 2px 16px #08141dcc;
+}
+.music-page .music-heading > p:last-child { color: var(--music-cream); }
+
+/* One bright cream frame holds the artwork, release details, and both platforms. */
+.music-page .release-entry {
+  gap: 26px;
+  padding: clamp(18px, 2vw, 28px);
+  border: 2px solid #fffcee;
+  border-radius: 32px;
+  background: var(--music-cream);
+  color: #294b40;
+  box-shadow: 0 7px 0 #c7bea2, 0 28px 58px #04101870, 0 0 85px #ffefc52b;
+}
+.music-page .release-artwork {
+  padding: 0;
+  border: 1px solid #d9cdad;
+  border-radius: 20px;
+  background: #f4ebd0;
+  box-shadow: 0 3px 12px #4d4e3214;
+}
+.music-page .release-artwork img {
+  border-radius: 18px;
+}
+.music-page .cover-fallback { color: #42574b; }
+.music-page .release-copy .eyebrow {
+  display: inline-block;
+  padding: 7px 10px;
+  border: 1px solid #bac4a6;
+  border-radius: 6px;
+  background: #e8edd9;
+  color: #385443;
+  font-size: .68rem;
+  line-height: 1.6;
+  letter-spacing: .04em;
+}
+.music-page .release-copy h2 {
+  margin: 22px 0 14px;
+  color: #294b40;
+  font-size: clamp(3.8rem, 5.5vw, 5.8rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  text-shadow: none;
+}
+.music-page .release-meta { color: #52634f; }
+.release-actions { display: grid; gap: 14px; justify-items: stretch; }
+.music-page .release-actions .text-link {
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: .74rem;
+  text-align: left;
+}
+.release-actions .release-spotify {
+  --button-face: #2c5142;
+  --button-edge: #44644f;
+  --button-base: #152f25;
+  --button-ink: #fff9e8;
+}
+.release-actions .release-apple {
+  --button-face: #f0e8cd;
+  --button-edge: #b7af91;
+  --button-base: #b7af91;
+  --button-ink: #294638;
+}
+.release-actions .press-button:focus-visible { outline-color: #385d48; }
+.music-page .social-heading h2 {
+  color: #fff0cb;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.12;
+  text-shadow: 0 2px 18px #08141dcc;
+}
+@keyframes garland-sway {
+  from { transform: rotate(-3deg) scale(.86); }
+  to { transform: rotate(3deg) scale(.86); }
+}
+@keyframes note-shimmer {
+  0%, 100% { filter: drop-shadow(0 0 3px #e6ddbf30); }
+  50% { filter: drop-shadow(0 0 6px #fff8e280) drop-shadow(0 0 12px #bbc8b838); }
+}
+@keyframes garland-twinkle {
+  0%, 100% { opacity: .3; transform: scale(.65); filter: drop-shadow(0 0 2px #e6ddbf30); }
+  45% { opacity: .9; transform: scale(1.1); filter: drop-shadow(0 0 5px #fff8e299) drop-shadow(0 0 9px #d9dfca55); }
+}
+@media (max-width: 1100px) {
+  .music-page .release-inner { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 9%; }
+  .music-page .release-section { padding-top: 235px; padding-bottom: 80px; }
+  .music-page .release-artwork { max-width: 350px; }
+  .music-page .release-entry { gap: 32px; }
+  .music-page .release-copy h2 { margin-top: 16px; }
+}
+@media (max-width: 700px) {
+  .music-page .release-section { padding-top: 220px; padding-bottom: 70px; }
+  .music-page .release-inner { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .music-page .music-heading h1 { margin-top: 22px; font-size: clamp(3.65rem, 16vw, 5.9rem); }
+  .music-page .music-heading h2 { font-size: 2.4rem; }
+  .music-page .release-entry { padding: 20px; border-radius: 28px; gap: 26px; }
+  .music-page .release-artwork { width: 100%; max-width: none; border-radius: 17px; }
+  .music-page .release-artwork img { border-radius: 15px; }
+  .music-page .release-copy h2 { font-size: 4.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garland-charm, .garland-charm > use, .garland-sparkles > * { animation: none; }
+  .garland-charm { transform: scale(.86); }
+  .garland-charm > use { filter: drop-shadow(0 0 4px #e6ddbf40); }
+}

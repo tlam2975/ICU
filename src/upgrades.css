@@ -80,7 +80,7 @@ body { font-weight: var(--body-weight); }
   font-weight: var(--heading-weight);
 }
 .eyebrow, .site-nav a, .social-trigger, .hero-next, .text-link,
-.language-switch button, .wordmark-name, .hero-name, .footer-directory a {
+.language-switch, .wordmark-name, .hero-name, .footer-directory a {
   font-family: var(--font-label), Arial, sans-serif;
   font-weight: var(--label-weight);
 }

@@ -1,0 +1,187 @@
+/* Custom lettering stays crisp at every viewport size. */
+.hero-content { top: 30%; }
+.hero-content .hero-artwork {
+  width: min(100%, 440px);
+  margin: 24px 0 0;
+  line-height: 0;
+}
+.hero-artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 12px 24px #05171c30);
+}
+.hero-name { margin-top: 22px; }
+.memory-photo img { filter: saturate(.88) contrast(.97) brightness(1.08); }
+.memory-photo-portrait img { object-position: 50% 55%; }
+.memory-photo-walk img { object-position: 50% 50%; }
+.memory-photo-guitar img { object-position: 50% 55%; }
+.memory-photo-lake img { object-position: 55% 50%; }
+.story-photo-wrap {
+  padding: 12px 12px 28px;
+  border: 1px solid #a7b3a35c;
+  background: #aab7a3;
+  box-shadow: 0 20px 50px #081c223d;
+  rotate: 2deg;
+}
+.intro-photo { border-radius: 1px; filter: none; }
+
+/* One tactile treatment for navigation, actions, and directory links. */
+:root .press-button {
+  --button-face: #253e43;
+  --button-edge: #708781;
+  --button-base: #0a2027;
+  --button-ink: #f5f1e8;
+  --button-travel: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 11px 18px;
+  border: 1px solid var(--button-edge);
+  border-radius: 12px;
+  background: var(--button-face);
+  color: var(--button-ink);
+  box-shadow: 0 var(--button-travel) 0 var(--button-base), inset 0 1px 0 #ffffff12;
+  text-decoration: none;
+  line-height: 1.45;
+  translate: 0 0;
+  transition: translate 170ms cubic-bezier(.2,.8,.3,1), box-shadow 170ms ease, background-color 170ms ease, border-color 170ms ease;
+  touch-action: manipulation;
+}
+:root .press-button svg { flex-shrink: 0; color: inherit; }
+:root .press-button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+}
+@media (hover: hover) {
+  :root .press-button:hover {
+    translate: 0 -2px;
+    border-color: #c8cbb1;
+    box-shadow: 0 calc(var(--button-travel) + 2px) 0 var(--button-base), inset 0 1px 0 #ffffff20;
+  }
+}
+:root .press-button:active {
+  translate: 0 var(--button-travel);
+  box-shadow: 0 0 0 var(--button-base), inset 0 2px 4px #00000018;
+  transition-duration: 65ms;
+}
+.site-nav { gap: 10px; }
+.site-nav .press-button { font-size: .75rem; padding: 10px 15px; }
+.site-nav .press-button[aria-current='page'] {
+  --button-face: #d9dfca;
+  --button-ink: #203b36;
+  --button-edge: #e9ecd8;
+  --button-base: #7f9584;
+}
+.header-actions { gap: 10px; }
+.language-switch.press-button {
+  --button-travel: 3px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: stretch;
+  gap: 0;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 48px;
+  padding: 2px;
+  border-radius: 10px;
+  line-height: 1;
+  isolation: isolate;
+}
+.language-switch::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc((100% - 4px) / 2);
+  border-radius: 7px;
+  background: #d9dfca;
+  box-shadow: inset 0 1px 0 #fff8e280;
+  transition: transform 200ms ease;
+}
+.language-switch[data-language='vi']::before { transform: translateY(100%); }
+.language-switch span {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  color: #c2cec7;
+  transition: color 200ms ease;
+}
+.language-switch[data-language='en'] .language-en,
+.language-switch[data-language='vi'] .language-vi { color: #203b36; }
+.site-nav a.press-button[aria-current='page'] {
+  background: var(--button-face);
+  color: var(--button-ink);
+  text-decoration: none;
+}
+.icon-button.press-button { width: 44px; height: 44px; flex-basis: 44px; padding: 0; border-radius: 50%; }
+.social-trigger.press-button { padding: 10px 16px; }
+.hero-next.press-button,
+.text-link.press-button,
+.social-latest.press-button {
+  --button-face: #eadfbd;
+  --button-edge: #fff1cb;
+  --button-base: #9a936e;
+  --button-ink: #253b36;
+  padding: 13px 21px;
+  border-radius: 14px;
+}
+.hero-next.press-button:hover svg { transform: none; }
+.earth-story .press-button {
+  --button-face: #314e40;
+  --button-edge: #526b4f;
+  --button-base: #172e25;
+  --button-ink: #f5f1e8;
+}
+.social-directory { gap: 16px; }
+.social-directory .press-button,
+.social-links .press-button,
+.drawer-nav .press-button { justify-content: space-between; text-align: left; }
+.social-directory .press-button { min-height: 64px; }
+.social-links { display: grid; gap: 12px; border-top: 0; margin-bottom: 28px; }
+.social-links .press-button { min-height: 50px; font-size: .9rem; }
+.drawer-nav { gap: 12px; }
+.drawer-nav .press-button[aria-current='page'] { border-color: var(--gold); }
+.social-latest.press-button { font-size: .85rem; }
+.footer-directory { gap: 12px; }
+.footer-directory .press-button { padding: 9px 13px; font-size: .72rem; }
+.footer-contact .press-button { padding: 9px 13px; font-size: .78rem; overflow-wrap: anywhere; }
+.floating-note:active .note-spark,
+.floating-note:active .fragment-paper { transform: translateY(4px) scale(.96); }
+.fragment-paper { transition: transform 140ms ease; }
+
+@media (max-width: 1100px) {
+  .site-header { gap: 14px; }
+  .wordmark-name { font-size: .68rem; }
+  .hero-content .hero-artwork { width: 340px; max-width: 100%; }
+}
+@media (max-width: 900px) {
+  .social-trigger.press-button { width: 44px; padding: 0; }
+}
+@media (max-width: 700px) {
+  .hero-content { top: 31%; }
+  .hero-content .hero-artwork { width: 290px; margin-top: 22px; }
+  .hero-name { margin-top: 20px; margin-bottom: 20px; }
+  .hero-next.press-button { bottom: 24px; padding: 10px 16px; }
+  .header-actions { gap: 8px; }
+  .social-directory { gap: 13px; }
+  .social-directory .press-button { padding: 12px; font-size: .8rem; }
+  .text-link.press-button { font-size: .78rem; padding: 12px 16px; }
+}
+@media (max-width: 700px) and (max-height: 720px) {
+  .hero-content { top: 29%; }
+  .hero-content .hero-artwork { width: 240px; margin-top: 20px; }
+  .hero-name { margin-top: 18px; margin-bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .press-button { transition: none; }
+  .language-switch::before, .language-switch span { transition: none; }
+  :root .press-button:hover, :root .press-button:active { translate: none; }
+  .floating-note:active .note-spark, .floating-note:active .fragment-paper { transform: none; }
+}

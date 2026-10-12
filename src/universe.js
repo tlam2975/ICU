@@ -43,12 +43,13 @@ function glowTexture() {
 }
 
 export default class Universe {
-  constructor(canvas, elements) {
+  constructor(canvas, elements = [], { ambient = false } = {}) {
     this.canvas = canvas;
     this.elements = elements;
-    this.hero = document.querySelector('.hero');
     this.stage = canvas.closest('.universe-stage');
     this.flow = canvas.closest('.universe-flow');
+    this.hero = this.flow.querySelector('.hero') || this.flow;
+    this.ambient = ambient;
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.pointer = { x: 0, y: 0 };
     this.motion = { x: 0, y: 0 };
@@ -82,7 +83,7 @@ export default class Universe {
     this.addStars();
     this.addBrightStars();
     this.addConstellations();
-    this.addPlanet();
+    if (!this.ambient) this.addPlanet();
     this.addNoteGlows();
     this.resize();
 
@@ -231,7 +232,7 @@ export default class Universe {
       this.constellations.add(new THREE.Line(geometry, new THREE.LineBasicMaterial({
         color: index ? '#83bdb2' : '#d6b977',
         transparent: true,
-        opacity: 0.12,
+        opacity: this.ambient ? 0.26 : 0.12,
         depthWrite: false
       })));
       const stars = new THREE.BufferGeometry().setFromPoints(curve.getPoints(6));
@@ -370,7 +371,7 @@ export default class Universe {
     this.time = time;
     const heroBounds = this.hero.getBoundingClientRect();
     const stageBounds = this.stage.getBoundingClientRect();
-    const scrollProgress = THREE.MathUtils.clamp(-heroBounds.top / this.height, 0, 1);
+    const scrollProgress = this.ambient ? 0 : THREE.MathUtils.clamp(-heroBounds.top / this.height, 0, 1);
     const noteScroll = stageBounds.top - heroBounds.top;
     this.motion.x += (this.pointer.x - this.motion.x) * 0.035;
     this.motion.y += (this.pointer.y - this.motion.y) * 0.035;
@@ -386,18 +387,20 @@ export default class Universe {
     this.dust.rotation.z = time * 0.000008;
     this.nearStars.rotation.z = Math.sin(time * 0.00005) * 0.012;
     this.constellations.rotation.set(0.2, Math.sin(time * 0.00008) * 0.1, -0.12);
-    const planetLayout = this.width <= 700
-      ? { x: 0.77, y: 0.12, z: -2 }
-      : this.width <= 1100
-        ? { x: 0.89, y: 0.43, z: -2 }
-        : { x: 0.88, y: 0.16, z: -2 };
-    this.planet.position.copy(this.worldPosition({ ...planetLayout, y: planetLayout.y - scrollProgress }));
-    this.planet.scale.setScalar(this.width <= 700 ? 0.66 : 1);
-    this.planet.rotation.set(0.2 + this.motion.y * 0.07, 0.35 + time * 0.000045, -0.2 + this.motion.x * 0.06);
-    this.planetPieces.forEach((piece, index) => {
-      const separation = 0.18 + Math.sin(time * 0.00035 + index) * 0.025;
-      piece.position.copy(piece.userData.offset).multiplyScalar(separation);
-    });
+    if (this.planet) {
+      const planetLayout = this.width <= 700
+        ? { x: 0.77, y: 0.12, z: -2 }
+        : this.width <= 1100
+          ? { x: 0.89, y: 0.43, z: -2 }
+          : { x: 0.88, y: 0.16, z: -2 };
+      this.planet.position.copy(this.worldPosition({ ...planetLayout, y: planetLayout.y - scrollProgress }));
+      this.planet.scale.setScalar(this.width <= 700 ? 0.66 : 1);
+      this.planet.rotation.set(0.2 + this.motion.y * 0.07, 0.35 + time * 0.000045, -0.2 + this.motion.x * 0.06);
+      this.planetPieces.forEach((piece, index) => {
+        const separation = 0.18 + Math.sin(time * 0.00035 + index) * 0.025;
+        piece.position.copy(piece.userData.offset).multiplyScalar(separation);
+      });
+    }
     this.flow.style.setProperty('--character-x', (this.motion.x * 12).toFixed(2) + 'px');
     this.flow.style.setProperty('--character-y', (-this.motion.y * 7).toFixed(2) + 'px');
     this.flow.style.setProperty('--character-tilt', (this.motion.x * 5).toFixed(2) + 'deg');

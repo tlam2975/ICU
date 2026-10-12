@@ -173,7 +173,7 @@ try {
     await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
     await page.waitForTimeout(300);
 
-    await page.locator('[data-lang="vi"]').click();
+    await page.locator('.language-switch').click();
     assert.equal(await page.locator('html').getAttribute('lang'), 'vi');
     const vietnameseOverlap = await page.evaluate(() => {
       const heading = document.querySelector('.hero-content').getBoundingClientRect();
@@ -212,7 +212,7 @@ try {
     assert.equal(await page.locator('#instrumental').getAttribute('src'), new URL('audio/biet_saubienkaraoke1.mp3', siteUrl).href);
     await page.waitForFunction(() => document.querySelector('.release-artwork img').naturalWidth > 0);
     await page.screenshot({ path: '/private/tmp/icu-music-' + viewport.name + '-vi.png', fullPage: true });
-    await page.locator('[data-lang="en"]').click();
+    await page.locator('.language-switch').click();
     assert.equal(await page.locator('#music-title').textContent(), 'Music');
     assert.ok((await page.locator('.release-meta').textContent()).includes('Single'));
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), viewport.name + ' music page overflows');
@@ -268,7 +268,7 @@ try {
     assert.equal(await page.locator('.story-photo img').count(), 10);
     assert.equal(await page.locator('.story-paragraphs p').count(), 20);
     assert.equal(await page.locator('#story-intro-image').getAttribute('class'), 'intro-photo');
-    await page.locator('[data-lang="vi"]').click();
+    await page.locator('.language-switch').click();
     assert.equal(await page.locator('.story-chapter h2').last().textContent(), 'Chương 10');
     for (let index = 0; index < 10; index += 1) {
       await page.locator('.story-photo img').nth(index).evaluate((image) => image.scrollIntoView({ behavior: 'instant' }));

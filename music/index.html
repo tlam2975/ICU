@@ -20,10 +20,10 @@
           <a href="./" data-route="music" aria-current="page" data-copy="nav.music"></a>
         </nav>
         <div class="header-actions">
-          <div class="language-switch" role="group" aria-label="Language">
-            <button type="button" data-lang="en" aria-pressed="true">EN</button>
-            <button type="button" data-lang="vi" aria-pressed="false">VI</button>
-          </div>
+          <button class="language-switch" type="button" data-language="en" aria-label="Language: English. Switch to Vietnamese">
+            <span class="language-en" aria-hidden="true">EN</span>
+            <span class="language-vi" aria-hidden="true">VI</span>
+          </button>
           <button class="icon-button audio-button" id="audio-toggle" type="button" aria-pressed="false" aria-label="Play instrumental">
             <span class="icon-audio-off"><i data-lucide="volume-x"></i></span>
             <span class="icon-audio-on"><i data-lucide="volume-2"></i></span>
@@ -35,7 +35,62 @@
         </div>
       </header>
 
-      <main class="music-page" id="main-content">
+      <main class="music-page universe-flow" id="main-content">
+        <div class="universe-stage music-sky" aria-hidden="true">
+          <canvas id="music-universe" class="universe-canvas"></canvas>
+        </div>
+        <div class="music-garland" aria-hidden="true">
+          <svg class="music-note-garland" viewBox="0 0 1440 230" fill="none" focusable="false">
+            <defs>
+              <linearGradient id="note-gold" x1="-15" y1="0" x2="18" y2="78" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#fff8e2" />
+                <stop offset=".48" stop-color="#e6ddbf" />
+                <stop offset="1" stop-color="#bbc8b8" />
+              </linearGradient>
+              <g id="hanging-quarter" fill="url(#note-gold)">
+                <path d="M2 0C4 21 4 45 3 68L-1 69C0 44-1 19 2 0Z" />
+                <ellipse cx="-6" cy="68" rx="10" ry="6.5" transform="rotate(-19 -6 68)" />
+              </g>
+              <g id="hanging-single" fill="url(#note-gold)">
+                <use href="#hanging-quarter" />
+                <path d="M2 13C7 25 23 25 21 40C20 45 17 49 13 52C21 37 9 37 2 31Z" />
+              </g>
+              <g id="hanging-pair" fill="url(#note-gold)">
+                <path d="M0 0L2 28L19 24L18 68L14 69L15 34L-10 40L-11 77L-15 77L-14 33L-2 30Z" />
+                <ellipse cx="-20" cy="77" rx="10" ry="6.5" transform="rotate(-19 -20 77)" />
+                <ellipse cx="9" cy="68" rx="10" ry="6.5" transform="rotate(-19 9 68)" />
+              </g>
+              <g id="garland-star" fill="#fff8e2">
+                <path d="M0-7C1-2 2-1 7 0C2 1 1 2 0 7C-1 2-2 1-7 0C-2-1-1-2 0-7Z" />
+              </g>
+            </defs>
+            <path class="garland-cord" d="M-40 34Q720 105 1480 34" />
+            <path class="garland-beads" d="M-40 34Q720 105 1480 34" />
+            <g transform="translate(135 48)"><g class="garland-charm" style="--sway-delay: -1s"><circle r="2.5" /><use href="#hanging-pair" y="8" /></g></g>
+            <g transform="translate(325 61)"><g class="garland-charm" style="--sway-delay: -3s"><circle r="2" /><use href="#hanging-quarter" y="8" /></g></g>
+            <g transform="translate(520 67)"><g class="garland-charm" style="--sway-delay: -5s"><circle r="2.5" /><use href="#hanging-pair" y="8" /></g></g>
+            <g transform="translate(720 70)"><g class="garland-charm" style="--sway-delay: -2s"><circle r="2" /><use href="#hanging-single" y="8" /></g></g>
+            <g transform="translate(920 67)"><g class="garland-charm" style="--sway-delay: -4s"><circle r="2.5" /><use href="#hanging-pair" y="8" /></g></g>
+            <g transform="translate(1115 61)"><g class="garland-charm" style="--sway-delay: -6s"><circle r="2" /><use href="#hanging-quarter" y="8" /></g></g>
+            <g transform="translate(1305 48)"><g class="garland-charm" style="--sway-delay: -2.5s"><circle r="2.5" /><use href="#hanging-pair" y="8" /></g></g>
+            <g class="garland-sparkles">
+              <use href="#garland-star" x="64" y="38" style="--twinkle-delay: -1s" />
+              <circle cx="215" cy="62" r="2.5" style="--twinkle-delay: -2.4s" />
+              <use href="#garland-star" x="260" y="45" style="--twinkle-delay: -.3s" />
+              <circle cx="408" cy="75" r="3" style="--twinkle-delay: -3.2s" />
+              <use href="#garland-star" x="462" y="60" style="--twinkle-delay: -1.7s" />
+              <circle cx="590" cy="51" r="2" style="--twinkle-delay: -.8s" />
+              <use href="#garland-star" x="642" y="78" style="--twinkle-delay: -2.8s" />
+              <circle cx="788" cy="82" r="2.5" style="--twinkle-delay: -1.1s" />
+              <use href="#garland-star" x="841" y="55" style="--twinkle-delay: -3.5s" />
+              <circle cx="990" cy="58" r="3" style="--twinkle-delay: -2.1s" />
+              <use href="#garland-star" x="1050" y="73" style="--twinkle-delay: -.5s" />
+              <circle cx="1183" cy="43" r="2.5" style="--twinkle-delay: -3s" />
+              <use href="#garland-star" x="1237" y="59" style="--twinkle-delay: -1.5s" />
+              <circle cx="1375" cy="37" r="3" style="--twinkle-delay: -2.6s" />
+            </g>
+          </svg>
+        </div>
         <section class="release-section" aria-labelledby="music-title">
           <div class="section-inner release-inner">
             <div class="music-heading">
@@ -60,29 +115,6 @@
         </section>
       </main>
 
-      <footer class="site-footer">
-        <div class="footer-sky" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span></div>
-        <div class="section-inner footer-invitation">
-          <p class="eyebrow">innerchild.universe</p>
-          <h2 data-copy="story.footerTitle"></h2>
-          <a class="text-link" href="mailto:innerchilduniverse@gmail.com"><span data-copy="story.contact"></span><i data-lucide="arrow-up-right"></i></a>
-        </div>
-        <div class="section-inner footer-inner">
-          <div>
-            <p class="footer-brand">ICU</p>
-            <p class="footer-line" data-copy="footer.line"></p>
-          </div>
-          <div class="footer-contact">
-            <a id="footer-email" href="mailto:innerchilduniverse@gmail.com">innerchilduniverse@gmail.com</a>
-            <a class="footer-socials" href="../" data-route="story" data-copy="nav.about"></a>
-          </div>
-          <nav class="footer-directory" aria-label="Social links" data-social-links></nav>
-          <div class="footer-meta">
-            <p>© <span id="year"></span> innerchild.universe</p>
-            <p data-copy="footer.credit"></p>
-          </div>
-        </div>
-      </footer>
     </div>
 
     <dialog class="social-dialog" id="social-dialog" aria-labelledby="social-dialog-title">

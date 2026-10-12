@@ -20,10 +20,10 @@
           <a href="./music/" data-route="music" data-copy="nav.music"></a>
         </nav>
         <div class="header-actions">
-          <div class="language-switch" role="group" aria-label="Language">
-            <button type="button" data-lang="en" aria-pressed="true">EN</button>
-            <button type="button" data-lang="vi" aria-pressed="false">VI</button>
-          </div>
+          <button class="language-switch" type="button" data-language="en" aria-label="Language: English. Switch to Vietnamese">
+            <span class="language-en" aria-hidden="true">EN</span>
+            <span class="language-vi" aria-hidden="true">VI</span>
+          </button>
           <button class="icon-button audio-button" id="audio-toggle" type="button" aria-pressed="false" aria-label="Play instrumental">
             <span class="icon-audio-off"><i data-lucide="volume-x"></i></span>
             <span class="icon-audio-on"><i data-lucide="volume-2"></i></span>
@@ -39,10 +39,10 @@
         <div class="universe-flow">
           <div class="universe-stage" aria-hidden="true">
             <div class="universe-memories">
-              <div class="memory-photo memory-photo-portrait"><img src="./images/story/DSCF2603.webp" alt="" width="1333" height="2000" decoding="async" /></div>
-              <div class="memory-photo memory-photo-walk"><img src="./images/story/DSCF2593.webp" alt="" width="2000" height="1333" decoding="async" /></div>
-              <div class="memory-photo memory-photo-guitar"><img src="./images/story/DSCF2560.webp" alt="" width="2000" height="1333" decoding="async" /></div>
-              <div class="memory-photo memory-photo-lake"><img src="./images/story/DSCF2534.webp" alt="" width="2000" height="1333" decoding="async" /></div>
+              <div class="memory-photo memory-photo-portrait"><img src="./images/night/S0N01752.webp" alt="" width="733" height="1100" decoding="async" /></div>
+              <div class="memory-photo memory-photo-walk"><img src="./images/night/S0N01777.webp" alt="" width="1100" height="733" decoding="async" /></div>
+              <div class="memory-photo memory-photo-guitar"><img src="./images/night/S0N01838.webp" alt="" width="1100" height="733" decoding="async" /></div>
+              <div class="memory-photo memory-photo-lake"><img src="./images/night/S0N01803.webp" alt="" width="1100" height="733" decoding="async" /></div>
             </div>
             <canvas id="universe" class="universe-canvas"></canvas>
           </div>
@@ -51,7 +51,9 @@
           <div class="note-field" id="note-field" aria-label="Floating notes"></div>
           <div class="hero-content">
             <p class="eyebrow hero-eyebrow" data-copy="hero.eyebrow"></p>
-            <h1 id="hero-title">ICU</h1>
+            <h1 id="hero-title" class="hero-artwork">
+              <img src="./images/icu-artwork.svg" alt="ICU" width="680" height="320" fetchpriority="high" />
+            </h1>
             <p class="hero-name">innerchild.universe</p>
             <p class="hero-body" data-copy="hero.body"></p>
           </div>
@@ -77,7 +79,7 @@
               <p class="about-signature" data-copy="about.signature"></p>
             </div>
             <div class="pixel-character-wrap" id="story-intro-artwork">
-              <img class="pixel-character" id="story-intro-image" src="./images/main.webp" alt="The three members of ICU standing together." data-copy-alt="about.artworkAlt" width="1411" height="1500" loading="lazy" />
+              <img class="pixel-character" id="story-intro-image" src="./images/night/S0N02071.webp" alt="The three members of ICU together with their guitars at night." data-copy-alt="about.artworkAlt" width="1800" height="1200" loading="lazy" />
               <span class="character-shadow" aria-hidden="true"></span>
             </div>
           </div>

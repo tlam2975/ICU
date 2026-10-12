@@ -4,7 +4,7 @@ All content lives in `public/content.json`. Edit text values, not the field name
 
 ## English and Vietnamese
 
-The `en` and `vi` objects contain navigation, the opening scene, the band introduction, music copy, social headings, and the footer. For example, change `vi.about.title` and `vi.about.body` for the Vietnamese introduction. The visitor's chosen language follows them between the two pages.
+The `en` and `vi` objects contain navigation, the opening scene, the band introduction, music copy, social headings, and the footer. For example, change `vi.about.title` and `vi.about.body` for the Vietnamese introduction. The single EN/VI button switches language with each click and highlights the active half. The visitor's chosen language follows them between the two pages. Each language's `controls.language` label describes the current language and the switch action for screen readers.
 
 ## Add the story photos
 
@@ -60,4 +60,6 @@ Update `en.about.artworkAlt` and `vi.about.artworkAlt` to describe the new photo
 
 The `releases` array is displayed on `/music/`. It currently has one item, "Biết". Each item includes its title, artist, cover path or URL, image dimensions, track URL, and localized type and image description. Add new items at the beginning of the array. You can use a local cover such as `images/releases/new-cover.jpg`.
 
-The latest-release shortcut in the menu automatically uses the first release in the array. `settings.latestTrackUrl` remains as a fallback. The Apple Music link is an artist page, not a verified link to the single. All artist and social links are in `socials`.
+Add an optional `appleMusicUrl` to a release to show its Apple Music button beside the Spotify option. The entry for "Biết" uses the direct Apple Music song link supplied by the band. The button labels are `en.music.appleListen` and `vi.music.appleListen`.
+
+The latest-release shortcut in the menu automatically uses the first release in the array. `settings.latestTrackUrl` remains as a fallback. The general Apple Music link in `socials` is separate from the release link. All artist and social links are in `socials`.

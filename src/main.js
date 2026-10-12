@@ -21,6 +21,8 @@ import '@fontsource/montserrat/500.css';
 import '@fontsource/montserrat/600.css';
 import './style.css';
 import './upgrades.css';
+import './refinements.css';
+import './music.css';
 import { initExperience, revealArrival } from './experience.js';
 import { initFontLab } from './font-lab.js';
 revealArrival();
@@ -34,7 +36,7 @@ const socialDialog = document.querySelector('#social-dialog');
 const socialTrigger = document.querySelector('#social-trigger');
 const audio = document.querySelector('#instrumental');
 const audioButton = document.querySelector('#audio-toggle');
-const langButtons = [...document.querySelectorAll('[data-lang]')];
+const languageSwitch = document.querySelector('.language-switch');
 const musicalSymbols = ['♪', '♫', '♩', '♬', '♫', '♪', '♬'];
 const fragmentIndices = new Set([0, 4, 6]);
 const page = document.body.dataset.page;
@@ -176,6 +178,7 @@ function makeReleases() {
     const label = document.createElement('p');
     const title = document.createElement('h2');
     const meta = document.createElement('p');
+    const actions = document.createElement('div');
     const link = externalLink(release.url, '');
     article.className = 'release-entry';
     article.dataset.release = release.id;
@@ -193,10 +196,18 @@ function makeReleases() {
     label.dataset.copy = index === 0 ? 'music.latestLabel' : 'music.releaseLabel';
     title.textContent = release.title;
     meta.className = 'release-meta';
-    link.className = 'text-link';
+    actions.className = 'release-actions';
+    link.className = 'text-link release-spotify';
     link.querySelector('span').dataset.copy = 'music.spotify';
+    actions.append(link);
+    if (release.appleMusicUrl) {
+      const appleLink = externalLink(release.appleMusicUrl, '');
+      appleLink.className = 'text-link release-apple';
+      appleLink.querySelector('span').dataset.copy = 'music.appleListen';
+      actions.append(appleLink);
+    }
     artwork.append(fallback, image);
-    info.append(label, title, meta, link);
+    info.append(label, title, meta, actions);
     article.append(artwork, info);
     container.append(article);
     releases.push({ release, image, meta });
@@ -263,11 +274,10 @@ function setLanguage(nextLanguage) {
     button.setAttribute('aria-label', note.full);
     button.title = note.full;
   });
-  langButtons.forEach((button) => {
-    button.setAttribute('aria-pressed', String(button.dataset.lang === language));
-  });
+  languageSwitch.dataset.language = language;
+  languageSwitch.setAttribute('aria-label', copy.controls.language);
+  languageSwitch.title = copy.controls.language;
   document.querySelectorAll('.site-nav, .drawer-nav').forEach((nav) => nav.setAttribute('aria-label', copy.controls.mainNav));
-  document.querySelector('.language-switch').setAttribute('aria-label', copy.controls.language);
   noteField?.setAttribute('aria-label', copy.controls.noteField);
   document.querySelector('#note-close')?.setAttribute('aria-label', copy.controls.closeNote);
   document.querySelector('#note-prev')?.setAttribute('aria-label', copy.controls.previousNote);
@@ -310,7 +320,8 @@ async function init() {
   const response = await fetch(new URL('content.json', siteBase));
   if (!response.ok) throw new Error('Could not load content');
   content = await response.json();
-  document.querySelector('#year').textContent = new Date().getFullYear();
+  const year = document.querySelector('#year');
+  if (year) year.textContent = new Date().getFullYear();
   document.querySelector('#social-latest').href = content.releases[0]?.url || content.settings.latestTrackUrl;
   audio.src = new URL(content.settings.audioSrc, siteBase).href;
   audio.volume = 0.55;
@@ -320,6 +331,9 @@ async function init() {
   makeReleases();
   if (noteField) makeNoteButtons();
   makeSocialLinks();
+  document.querySelectorAll('.site-nav a, .language-switch, .icon-button, .social-trigger, .hero-next, .text-link, .drawer-nav a, [data-social-links] a, .social-latest, .footer-contact a').forEach((element) => {
+    element.classList.add('press-button');
+  });
 
   try {
     language = window.localStorage.getItem('icu-language') || 'en';
@@ -331,9 +345,7 @@ async function init() {
   initExperience();
   initFontLab();
 
-  langButtons.forEach((button) => {
-    button.addEventListener('click', () => setLanguage(button.dataset.lang));
-  });
+  languageSwitch.addEventListener('click', () => setLanguage(language === 'en' ? 'vi' : 'en'));
   document.querySelector('#note-close')?.addEventListener('click', () => noteDialog.close());
   document.querySelector('#note-prev')?.addEventListener('click', () => stepNote(-1));
   document.querySelector('#note-next')?.addEventListener('click', () => stepNote(1));
@@ -365,9 +377,10 @@ async function init() {
   audio.addEventListener('play', updateAudioButton);
   audio.addEventListener('pause', updateAudioButton);
 
-  if (noteField) {
+  const universeCanvas = document.querySelector('#universe, #music-universe');
+  if (universeCanvas) {
     const { default: Universe } = await import('./universe.js');
-    new Universe(document.querySelector('#universe'), noteButtons);
+    new Universe(universeCanvas, noteButtons, { ambient: page === 'music' });
   }
 }
 

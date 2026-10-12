@@ -122,28 +122,8 @@ a:focus-visible {
 }
 
 .language-switch {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px;
-  border: 1px solid rgba(245, 241, 232, 0.17);
-  border-radius: 6px;
-}
-
-.language-switch button {
-  min-width: 35px;
-  min-height: 28px;
-  padding: 3px 6px;
-  border: 0;
-  border-radius: 4px;
-  background: transparent;
-  color: rgba(245, 241, 232, 0.55);
-  font-size: 0.7rem;
+  font-size: .6875rem;
   font-weight: 600;
-}
-
-.language-switch button[aria-pressed='true'] {
-  background: rgba(245, 241, 232, 0.16);
-  color: var(--moon);
 }
 
 .icon-button {
@@ -1225,7 +1205,6 @@ dialog::backdrop {
   .site-header { padding: 15px 5%; }
   .wordmark-name { display: none; }
   .header-actions { gap: 2px; }
-  .language-switch button { min-width: 32px; }
   .hero-content h1 { font-size: 5.35rem; }
   .hero-body { max-width: 265px; }
   .about-inner h2 { font-size: 2.3rem; }
