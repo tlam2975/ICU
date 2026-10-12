@@ -3,13 +3,13 @@ import * as THREE from 'three';
 const fragmentIndices = new Set([0, 4, 6]);
 const layouts = {
   wide: [
-    { x: 0.67, y: 0.20, z: 2.8, tilt: -5 },
-    { x: 0.84, y: 0.36, z: -2.5, tilt: 4 },
-    { x: 0.60, y: 0.47, z: 2.1, tilt: 3 },
-    { x: 0.80, y: 0.68, z: -0.8, tilt: -4 },
-    { x: 0.38, y: 0.21, z: -3.6, tilt: 5 },
-    { x: 0.57, y: 0.78, z: 1.4, tilt: 2 },
-    { x: 0.86, y: 0.82, z: -2.1, tilt: -3 }
+    { x: 0.64, y: 0.14, z: 2.8, tilt: -5 },
+    { x: 0.47, y: 0.29, z: -2.5, tilt: 4 },
+    { x: 0.47, y: 0.50, z: 2.1, tilt: 3 },
+    { x: 0.12, y: 0.80, z: -0.8, tilt: -4 },
+    { x: 0.36, y: 0.18, z: -3.6, tilt: 5 },
+    { x: 0.52, y: 0.92, z: 1.4, tilt: 2 },
+    { x: 0.32, y: 0.84, z: -2.1, tilt: -3 }
   ],
   narrow: [
     { x: 0.26, y: 0.18, z: 0.6, tilt: -5 },
@@ -59,6 +59,12 @@ export default class Universe {
     this.visible = true;
     this.time = 0;
     this.texture = glowTexture();
+    this.photos = [...this.flow.querySelectorAll('.memory-photo')];
+    this.noteLayout = [];
+    if (this.elements.length) {
+      const observer = new ResizeObserver(() => this.resize());
+      [this.hero, this.hero.querySelector('.hero-content'), ...this.photos].filter(Boolean).forEach(element => observer.observe(element));
+    }
 
     try {
       this.renderer = new THREE.WebGLRenderer({
@@ -325,7 +331,53 @@ export default class Universe {
   }
 
   layout() {
-    return this.width <= 1100 ? layouts.narrow : layouts.wide;
+    return this.noteLayout;
+  }
+
+  arrangeNotes() {
+    if (!this.elements.length) return;
+    const layout = this.width <= 1100 ? layouts.narrow : layouts.wide;
+    const heroBounds = this.hero.getBoundingClientRect();
+    const stageBounds = this.stage.getBoundingClientRect();
+    const obstacles = [];
+    const addObstacle = (element, origin, gap, offsetY = 0) => {
+      const bounds = element.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      obstacles.push({ left: bounds.left - origin.left - gap, right: bounds.right - origin.left + gap,
+        top: bounds.top - origin.top - gap - offsetY, bottom: bounds.bottom - origin.top + gap - offsetY });
+    };
+    this.photos.forEach(photo => {
+      const style = getComputedStyle(photo);
+      const scrollOffset = this.reducedMotion ? 0 : (parseFloat(style.getPropertyValue('--memory-scroll')) || 0) * (parseFloat(style.getPropertyValue('--depth')) || 0);
+      addObstacle(photo, stageBounds, this.width <= 700 ? 12 : 22, scrollOffset);
+    });
+    this.hero.querySelectorAll('.hero-content, .hero-next').forEach(element => addObstacle(element, heroBounds, 16));
+    const top = (document.querySelector('.site-header')?.offsetHeight || 72) + 12;
+    this.noteLayout = [];
+    // Place paper fragments first, then tuck smaller notes into the remaining sky.
+    const order = layout.map((_, index) => index).sort((a, b) => Number(fragmentIndices.has(b)) - Number(fragmentIndices.has(a)));
+    order.forEach(index => {
+      const element = this.elements[index];
+      element.hidden = false;
+      // Reserve room for the tilt, depth scale, hover and bounded floating motion.
+      const halfWidth = element.offsetWidth * .60 + element.offsetHeight * .09 + 10;
+      const halfHeight = element.offsetHeight * .60 + element.offsetWidth * .09 + 10;
+      const preferred = layout[index];
+      let best = null;
+      let distance = Infinity;
+      for (let y = top + halfHeight; y <= this.height - halfHeight - 16; y += 12) {
+        for (let x = halfWidth + 16; x <= this.width - halfWidth - 16; x += 12) {
+          const rect = { left: x - halfWidth, right: x + halfWidth, top: y - halfHeight, bottom: y + halfHeight };
+          if (obstacles.some(other => rect.left < other.right && rect.right > other.left && rect.top < other.bottom && rect.bottom > other.top)) continue;
+          const score = (x - preferred.x * this.width) ** 2 + (y - preferred.y * this.height) ** 2;
+          if (score < distance) { best = { x, y, rect }; distance = score; }
+        }
+      }
+      if (best) {
+        this.noteLayout[index] = { ...preferred, x: best.x / this.width, y: best.y / this.height };
+        obstacles.push(best.rect);
+      }
+    });
   }
 
   worldPosition(layout) {
@@ -347,6 +399,7 @@ export default class Universe {
     const bounds = this.stage.getBoundingClientRect();
     this.width = Math.max(1, bounds.width);
     this.height = Math.max(1, bounds.height);
+    this.arrangeNotes();
     this.camera.aspect = this.width / this.height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(this.width, this.height, false);
@@ -355,7 +408,10 @@ export default class Universe {
   }
 
   placeFallbackNotes() {
-    const layout = window.innerWidth <= 1100 ? layouts.narrow : layouts.wide;
+    this.width = this.hero.clientWidth;
+    this.height = this.hero.clientHeight;
+    this.arrangeNotes();
+    const layout = this.layout();
     this.elements.forEach((element, index) => {
       const place = layout[index];
       element.hidden = !place;
@@ -420,8 +476,10 @@ export default class Universe {
       }
       const projected = position.clone().project(this.camera);
       if (element.dataset.settled !== 'true') {
-        element.style.left = ((projected.x + 1) * 0.5 * this.width) + 'px';
-        element.style.top = ((1 - projected.y) * 0.5 * this.height) + 'px';
+        const driftX = this.reducedMotion ? 0 : Math.cos(time * 0.00032 + index * 2.1) * 4 + this.motion.x * 3;
+        const driftY = this.reducedMotion ? 0 : Math.sin(time * 0.00053 + index * 1.7) * 5 - this.motion.y * 3;
+        element.style.left = (place.x * this.width + driftX) + 'px';
+        element.style.top = (place.y * this.height + driftY) + 'px';
         const tilt = place.tilt + (this.reducedMotion ? 0 : Math.sin(time * 0.0004 + index) * 2);
         const scale = THREE.MathUtils.clamp(this.baseCameraZ / (this.camera.position.z - place.z), 0.84, 1.15);
         element.style.transform = 'translate(-50%, -50%) rotateX(' + (-this.motion.y * 9) + 'deg) rotateY(' + (this.motion.x * 12) + 'deg) rotate(' + tilt + 'deg) scale(' + scale + ')';

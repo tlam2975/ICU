@@ -239,8 +239,8 @@ a:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 148px;
-  height: 116px;
+  width: 86px;
+  height: 96px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -287,8 +287,8 @@ a:focus-visible {
 .floating-note:nth-child(3n) .note-spark { animation-delay: -4.1s; }
 
 .fragment-note {
-  width: 182px;
-  height: 116px;
+  width: 160px;
+  height: 86px;
   filter: drop-shadow(0 0 16px rgba(var(--note-rgb), 0.2));
 }
 
@@ -298,7 +298,7 @@ a:focus-visible {
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 23px 24px;
+  padding: 14px 18px;
   background:
     repeating-linear-gradient(8deg, transparent 0 3px, rgba(245, 241, 232, 0.025) 3px 4px),
     linear-gradient(135deg, rgba(var(--note-rgb), 0.26), rgba(var(--note-rgb), 0.1));
@@ -1074,8 +1074,8 @@ dialog::backdrop {
   .hero-name { margin-top: 24px; margin-bottom: 28px; }
   .floating-note { width: 82px; height: 78px; }
   .note-spark { font-size: 4rem; }
-  .fragment-note { width: 144px; height: 102px; }
-  .fragment-paper { padding: 19px 18px; }
+  .fragment-note { width: 144px; height: 86px; }
+  .fragment-paper { padding: 14px 18px; }
   .fragment-text { font-size: 0.76rem; }
   .about-inner h2 { max-width: 540px; font-size: 3.5rem; }
   .release-inner,
