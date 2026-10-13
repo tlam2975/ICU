@@ -90,15 +90,25 @@ body { font-weight: var(--body-weight); }
 .story-photo-wrap { justify-self: center; width: min(100%, 560px); }
 .music-page { background: radial-gradient(ellipse at 90% 12%, #35515c66, transparent 50%), linear-gradient(180deg,#101e2c,#203d3e 60%,#10222b); }
 
-/* The clouds are part of the scroll: no scroll lock or forced jumps. */
-.cloud-descent { --fall: 0; position: relative; height: 70svh; margin-top: -1px; background: linear-gradient(#29484b, #718e8c 40%, #d4dcbd 76%, #d8dfc5); }
-.cloud-stage { position: relative; height: 100%; overflow: hidden; isolation: isolate; mask-image: linear-gradient(transparent, #000 16%, #000); }
+/* Let the mist rise into the sky, with room below the band introduction. */
+body[data-page='story'] main { background: #29484b; }
+body[data-page='story'] main > .universe-flow { padding-bottom: clamp(70px, 10svh, 120px); }
+.cloud-descent {
+  --fall: 0;
+  position: relative;
+  z-index: 2;
+  height: 80svh;
+  margin-top: clamp(-220px, -22svh, -140px);
+  background: linear-gradient(180deg, #29484b00 0%, #496b681c 22%, #718e8c 52%, #c2ceae 82%, #d8dfc5 100%);
+  pointer-events: none;
+}
+.cloud-stage { position: relative; height: 100%; overflow: hidden; isolation: isolate; mask-image: linear-gradient(transparent 0%, #000 32%, #000 74%, transparent 100%); }
 .descent-light { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 65%, #fff5cfcc, transparent 58%); opacity: calc(.2 + var(--fall) * .8); }
 .cloud-bank { position: absolute; width: 130%; height: 74%; left: -15%; background: url('../public/images/cloud-bank.svg') center / 100% 100% no-repeat; will-change: transform; }
-.cloud-bank-back { top: 6%; opacity: .7; transform: translateY(calc(var(--fall) * -40vh)) scale(calc(1 + var(--fall) * .4)); }
-.cloud-bank-left { top: 20%; left: -45%; transform: translate(calc(var(--fall) * -30vw), calc(var(--fall) * -55vh)) scale(calc(1 + var(--fall) * .7)); }
-.cloud-bank-right { top: 46%; left: 10%; transform: translate(calc(var(--fall) * 32vw), calc(var(--fall) * -45vh)) scale(calc(1 + var(--fall) * .8)); }
-.descent-caption { position: absolute; z-index: 2; top: 46%; width: 100%; text-align: center; color: #334a43; font-family: var(--font-heading, 'Newsreader'), Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-style: italic; opacity: calc(1 - var(--fall) * .9); }
+.cloud-bank-back { top: 18%; opacity: .6; transform: translateY(calc(var(--fall) * -24vh)) scale(calc(1 + var(--fall) * .4)); }
+.cloud-bank-left { top: 32%; left: -45%; transform: translate(calc(var(--fall) * -30vw), calc(var(--fall) * -32vh)) scale(calc(1 + var(--fall) * .7)); }
+.cloud-bank-right { top: 48%; left: 10%; transform: translate(calc(var(--fall) * 32vw), calc(var(--fall) * -26vh)) scale(calc(1 + var(--fall) * .8)); }
+.descent-caption { position: absolute; z-index: 2; top: 58%; width: 100%; margin: 0; padding: 0 24px; text-align: center; color: #334a43; font-family: var(--font-heading, 'Newsreader'), Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 2rem); font-style: italic; opacity: calc(1 - var(--fall) * .65); }
 .meadow-horizon { position: absolute; z-index: -1; inset: 44% -5% -2%; background: url('../public/images/meadow.svg') bottom / 100% 100% no-repeat; transform: translateY(calc((1 - var(--fall)) * 30vh)); }
 .earth-story { position: relative; overflow: hidden; background: #d8dfc5; color: #253e35; }
 .earth-story::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .08; background: url('../public/images/grass.svg') repeat; }
@@ -154,7 +164,7 @@ body { font-weight: var(--body-weight); }
   .fragment-note { width: 110px; height: 72px; }
   .fragment-paper { padding: 10px 12px; }
   .intro-photo { max-height: 520px; }
-  .cloud-descent { height: 55svh; }
+  .cloud-descent { height: 65svh; margin-top: -120px; }
   .cloud-bank { width: 190%; left: -45%; }
   .cloud-bank-left { left: -85%; }
   .cloud-bank-right { left: 0; }
@@ -168,7 +178,7 @@ body { font-weight: var(--body-weight); }
   .footer-directory { gap: 22px; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .cloud-descent { height: 45svh; }
+  .cloud-descent { height: 55svh; }
   .cloud-stage { position: relative; height: 100%; }
   .cloud-bank { will-change: auto; }
 }

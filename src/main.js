@@ -5,6 +5,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Menu,
+  Play,
   Volume2,
   VolumeX,
   X
@@ -24,10 +25,9 @@ import './upgrades.css';
 import './refinements.css';
 import './music.css';
 import { initExperience, revealArrival } from './experience.js';
-import { initFontLab } from './font-lab.js';
 revealArrival();
 
-const iconSet = { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Menu, Volume2, VolumeX, X };
+const iconSet = { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Menu, Play, Volume2, VolumeX, X };
 const noteField = document.querySelector('#note-field');
 const noteDialog = document.querySelector('#note-dialog');
 const noteTitle = document.querySelector('#note-dialog-title');
@@ -175,13 +175,17 @@ function makeReleases() {
     const fallback = document.createElement('span');
     const image = document.createElement('img');
     const info = document.createElement('div');
+    const summary = document.createElement('div');
     const label = document.createElement('p');
     const title = document.createElement('h2');
     const meta = document.createElement('p');
-    const actions = document.createElement('div');
-    const link = externalLink(release.url, '');
+    const description = document.createElement('p');
+    const platforms = document.createElement('div');
     article.className = 'release-entry';
+    if (index === 0) article.classList.add('release-entry--featured');
     article.dataset.release = release.id;
+    title.id = 'release-title-' + release.id;
+    article.setAttribute('aria-labelledby', title.id);
     artwork.className = 'release-artwork';
     fallback.className = 'cover-fallback';
     fallback.textContent = 'ICU';
@@ -190,27 +194,38 @@ function makeReleases() {
     image.width = release.width || 300;
     image.height = release.height || 300;
     image.loading = index === 0 ? 'eager' : 'lazy';
+    image.decoding = 'async';
     image.addEventListener('error', () => { image.hidden = true; });
     info.className = 'release-copy';
+    summary.className = 'release-summary';
     label.className = 'eyebrow';
     label.dataset.copy = index === 0 ? 'music.latestLabel' : 'music.releaseLabel';
     title.textContent = release.title;
     meta.className = 'release-meta';
-    actions.className = 'release-actions';
-    link.className = 'text-link release-spotify';
-    link.querySelector('span').dataset.copy = 'music.spotify';
-    actions.append(link);
-    if (release.appleMusicUrl) {
-      const appleLink = externalLink(release.appleMusicUrl, '');
-      appleLink.className = 'text-link release-apple';
-      appleLink.querySelector('span').dataset.copy = 'music.appleListen';
-      actions.append(appleLink);
-    }
+    description.className = 'release-description';
+    platforms.className = 'release-platforms';
+    const destinations = release.platforms?.length ? release.platforms : [
+      { id: 'spotify', url: release.url },
+      ...(release.appleMusicUrl ? [{ id: 'apple', url: release.appleMusicUrl }] : [])
+    ];
+    destinations.forEach((platform, platformIndex) => {
+      const link = externalLink(platform.url, '');
+      link.className = platformIndex === 0 ? 'listen-button press-button' : 'text-link press-button';
+      link.dataset.platform = platform.id;
+      link.querySelector('span').dataset.copy = 'music.' + platform.id;
+      if (platformIndex === 0) {
+        const play = document.createElement('i');
+        play.dataset.lucide = 'play';
+        link.prepend(play);
+      }
+      platforms.append(link);
+    });
     artwork.append(fallback, image);
-    info.append(label, title, meta, actions);
+    summary.append(label, title, meta);
+    info.append(summary, description, platforms);
     article.append(artwork, info);
     container.append(article);
-    releases.push({ release, image, meta });
+    releases.push({ release, image, meta, description });
   });
 }
 
@@ -233,11 +248,19 @@ function updatePageContent() {
     caption.textContent = copy.caption || '';
     caption.hidden = !copy.caption;
   });
-  releases.forEach(({ release, image, meta }) => {
+  releases.forEach(({ release, image, meta, description }) => {
     const copy = release[language] || release.en;
     image.alt = copy.coverAlt;
     meta.textContent = [release.artist, copy.type].filter(Boolean).join(' · ');
+    description.textContent = copy.description || '';
+    description.hidden = !copy.description;
   });
+  const heroListen = document.querySelector('#hero-listen');
+  if (heroListen) {
+    const latest = content.releases[0];
+    heroListen.href = latest?.platforms?.[0]?.url || latest?.url || content.settings.latestTrackUrl;
+    heroListen.querySelector('span').textContent = content[language].hero.listen.replace('{title}', latest?.title || 'ICU');
+  }
   document.title = (page === 'music' ? content[language].music.pageTitle + ' · ' : '') + 'ICU · innerchild.universe';
 }
 
@@ -322,7 +345,8 @@ async function init() {
   content = await response.json();
   const year = document.querySelector('#year');
   if (year) year.textContent = new Date().getFullYear();
-  document.querySelector('#social-latest').href = content.releases[0]?.url || content.settings.latestTrackUrl;
+  const latest = content.releases[0];
+  document.querySelector('#social-latest').href = latest?.platforms?.[0]?.url || latest?.url || content.settings.latestTrackUrl;
   audio.src = new URL(content.settings.audioSrc, siteBase).href;
   audio.volume = 0.55;
 
@@ -343,7 +367,6 @@ async function init() {
   setLanguage(content[language] ? language : 'en');
   iconize();
   initExperience();
-  initFontLab();
 
   languageSwitch.addEventListener('click', () => setLanguage(language === 'en' ? 'vi' : 'en'));
   document.querySelector('#note-close')?.addEventListener('click', () => noteDialog.close());

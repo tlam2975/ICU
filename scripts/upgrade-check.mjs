@@ -9,6 +9,7 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base + '?fontlab=1');
+    assert.equal(await page.locator('.font-lab').count(), 0, 'Staging font lab is still available');
     await page.waitForSelector('.story-photo img');
     assert.equal(await page.locator('.story-photo img').count(), 5);
     for (const photo of await page.locator('.story-photo img').all()) {
@@ -25,36 +26,19 @@ try {
     await page.evaluate(() => scrollBy({ top: innerHeight * .8, behavior: 'instant' }));
     await page.waitForTimeout(100);
     assert.ok(await page.locator('.cloud-descent').evaluate(element => Number(element.style.getPropertyValue('--fall'))) > start);
-    await page.locator('.font-lab-toggle').click();
-    await page.locator('[name=source]').fill('https://fonts.google.com/specimen/Lora');
-    await page.locator('.font-lab-apply').click();
-    await page.waitForFunction(() => document.querySelector('.font-lab-status').textContent.includes('applied'), { timeout: 25000 });
-    assert.ok(await page.locator('#story-title').evaluate(element => getComputedStyle(element).fontFamily.includes('Lora')));
-    await page.locator('[data-compare]').click();
-    assert.ok(await page.locator('#story-title').evaluate(element => getComputedStyle(element).fontFamily.includes('Newsreader')));
-    await page.locator('[data-compare]').click();
-    await page.reload();
-    await page.waitForFunction(() => document.documentElement.style.getPropertyValue('--font-heading').includes('Lora'));
-    await page.locator('.font-lab-toggle').click();
-    await page.locator('[name=source]').fill('https://example.com/not-a-font');
-    await page.locator('.font-lab-apply').click();
-    assert.match(await page.locator('.font-lab-status').textContent(), /Paste a Google Fonts/);
-    await page.locator('[data-lab-close]').click();
     await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
     await page.locator('#social-trigger').click();
     await page.locator('.drawer-nav [data-route=music]').click();
-    await page.waitForURL('**/music/?fontlab=1');
-    await page.waitForFunction(() => document.documentElement.style.getPropertyValue('--font-heading').includes('Lora'));
+    await page.waitForURL('**/music/');
+    await page.waitForSelector('.release-entry');
+    assert.equal(await page.locator('.font-lab').count(), 0);
     await page.waitForTimeout(800);
     assert.equal(await page.locator('.route-glow').evaluate(element => getComputedStyle(element).opacity), '0');
     await page.goBack();
-    await page.waitForSelector('.font-lab-toggle');
-    await page.locator('.font-lab-toggle').click();
-    await page.locator('[data-reset]').click();
+    await page.waitForSelector('.story-photo img');
     assert.equal(await page.evaluate(() => document.documentElement.style.getPropertyValue('--font-heading')), '');
-    assert.ok(await page.locator('.font-lab-history button').count() > 0);
     assert.deepEqual(errors, []);
-    console.log(width + ': all photos, cloud scroll, font loading, history, comparison, persistence, invalid URL, route transition, back navigation, reset passed.');
+    console.log(width + ': all photos, cloud scroll, staging tool removal, route transition, and back navigation passed.');
     await page.close();
   }
 } finally { await browser.close(); }

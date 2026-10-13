@@ -45,12 +45,4 @@ npm run test:site
 
 The checks serve `dist/` under `/ICU/` with no SPA fallback and cover both routes, English/Vietnamese, mobile layouts, ten photo chapters, audio, and the 3D scene. They use the installed Google Chrome on macOS; set `CHROME_PATH` for another installation. Set `SITE_URL` to check an already-running deployment instead.
 
-## Font lab
-
-Open `http://127.0.0.1:5173/?fontlab=1` while running the dev server. The **Aa Font lab** button is in the bottom right. The panel is also available automatically during local development. In a production build it only appears when `?fontlab=1` is present; ordinary visitors keep the default fonts.
-
-Choose Headings, Labels & navigation, or Body text. Enter a family name (for example `Lora`), a Google Fonts specimen URL, or a `fonts.googleapis.com/css2` URL, choose a weight, and press Preview font. A CSS URL supplies its own font styles; its first family is used. Fonts need an internet connection and must support the selected weight. Check both EN and VI for language coverage.
-
-Recent fonts are saved as reusable buttons. Compare original toggles the default fonts without losing your preview. Reset all restores the default fonts while keeping recent choices. Copy choices exports your current choices as text. Your choices stay in this browser and follow links between the two pages while in font lab mode; they do not change the public defaults.
-
 The Music link uses a warm expanding glow across the existing two HTML routes. Reduced motion skips this effect and uses a shorter, static cloud section. Normal browser navigation, direct URLs, modified clicks, and the back button remain available. Audio remains controlled separately on each page.

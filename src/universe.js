@@ -14,8 +14,20 @@ const layouts = {
   narrow: [
     { x: 0.26, y: 0.18, z: 0.6, tilt: -5 },
     { x: 0.75, y: 0.22, z: -0.7, tilt: 4 },
-    { x: 0.71, y: 0.80, z: 0.9, tilt: 3 },
+    { x: 0.71, y: 0.84, z: 0.9, tilt: 3 },
     { x: 0.25, y: 0.82, z: -0.5, tilt: -4 }
+  ],
+  tablet: [
+    { x: 0.26, y: 0.18, z: 0.6, tilt: -5 },
+    { x: 0.75, y: 0.22, z: -0.7, tilt: 4 },
+    { x: 0.71, y: 0.80, z: 0.9, tilt: 3 },
+    { x: 0.89, y: 0.78, z: -0.5, tilt: -4 }
+  ],
+  compact: [
+    { x: 0.66, y: 0.25, z: 0.6, tilt: -5 },
+    { x: 0.87, y: 0.22, z: -0.7, tilt: 4 },
+    { x: 0.64, y: 0.72, z: 0.9, tilt: 3 },
+    { x: 0.89, y: 0.80, z: -0.5, tilt: -4 }
   ]
 };
 
@@ -336,7 +348,8 @@ export default class Universe {
 
   arrangeNotes() {
     if (!this.elements.length) return;
-    const layout = this.width <= 1100 ? layouts.narrow : layouts.wide;
+    const layout = this.height <= 520 && this.width > this.height ? layouts.compact
+      : this.width <= 700 ? layouts.narrow : this.width <= 1100 ? layouts.tablet : layouts.wide;
     const heroBounds = this.hero.getBoundingClientRect();
     const stageBounds = this.stage.getBoundingClientRect();
     const obstacles = [];

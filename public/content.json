@@ -2,7 +2,7 @@
   "settings": {
     "audioSrc": "audio/biet_saubienkaraoke1.mp3",
     "latestTrackUrl": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
-    "appleMusicUrl": "https://music.apple.com/vn/artist/icu"
+    "appleMusicUrl": "https://music.apple.com/vn/artist/icu/6816671334"
   },
   "story": {
     "introImage": {
@@ -104,19 +104,35 @@
       "id": "biet",
       "title": "Biết",
       "artist": "ICU",
-      "cover": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02d114f0719cfb225d72f66df7",
-      "width": 300,
-      "height": 300,
+      "cover": "images/releases/biet.webp",
+      "width": 640,
+      "height": 640,
       "url": "https://open.spotify.com/intl-vi/track/0z5frkODnXuWK5AxOlp7t2?si=a3d0074047924840",
       "appleMusicUrl": "https://music.apple.com/vn/album/bi%E1%BA%BFt/6818998459?i=6818998462",
       "en": {
         "type": "Single",
-        "coverAlt": "Cover artwork for Biết by ICU"
+        "coverAlt": "Cover artwork for Biết by ICU",
+        "description": "Biết is out now. Listen with ICU wherever you are."
       },
       "vi": {
         "type": "Đĩa đơn",
-        "coverAlt": "Ảnh bìa Biết của ICU"
-      }
+        "coverAlt": "Ảnh bìa Biết của ICU",
+        "description": "Biết đã có mặt trên các nền tảng. Hãy stream cùng ICU nhé."
+      },
+      "platforms": [
+        {
+          "id": "spotify",
+          "url": "https://open.spotify.com/track/0z5frkODnXuWK5AxOlp7t2"
+        },
+        {
+          "id": "apple",
+          "url": "https://music.apple.com/vn/album/bi%E1%BA%BFt/6818998459?i=6818998462"
+        },
+        {
+          "id": "youtube",
+          "url": "https://www.youtube.com/watch?v=_9pH76kPydI"
+        }
+      ]
     }
   ],
   "socials": [
@@ -142,7 +158,7 @@
     },
     {
       "label": "Apple Music",
-      "url": "https://music.apple.com/vn/artist/icu"
+      "url": "https://music.apple.com/vn/artist/icu/6816671334"
     },
     {
       "label": "LinkedIn",
@@ -157,13 +173,14 @@
     "nav": {
       "about": "Our universe",
       "music": "Music",
-      "socials": "Elsewhere",
+      "socials": "Menu",
       "menuTitle": "Find your way"
     },
     "hero": {
       "eyebrow": "a quiet place for what you feel",
       "body": "Some feelings stay with us. Here, they have room to glow.",
-      "next": "Come closer"
+      "next": "Come closer",
+      "listen": "Listen to {title}"
     },
     "notes": {
       "label": "a fragment for you",
@@ -208,7 +225,7 @@
       "eyebrow": "feet on the grass, heads in the clouds",
       "title": "Our little world.",
       "body": "Three people. A few songs. And all the moments in between.",
-      "descent": "A little closer to earth",
+      "descent": "Through the clouds, into our world",
       "footerTitle": "See you under the same sky.",
       "contact": "Say hello",
       "back": "Back to the sky"
@@ -216,18 +233,19 @@
     "music": {
       "pageTitle": "Music",
       "eyebrow": "stay for a song",
-      "title": "Listen from where you are.",
+      "title": "Songs from our little world.",
       "body": "The latest release is waiting on Spotify. The instrumental you hear here is yours to start or pause.",
       "latestLabel": "Latest release",
       "releaseLabel": "Release",
       "spotify": "Listen on Spotify",
       "appleListen": "Listen on Apple Music",
       "artistLabel": "Artist page",
-      "apple": "Find ICU on Apple Music"
+      "apple": "Apple Music",
+      "youtube": "YouTube"
     },
     "social": {
       "eyebrow": "find the signal",
-      "title": "Elsewhere with ICU",
+      "title": "Find ICU here",
       "latest": "Listen to the latest release",
       "body": "The songs travel. So do we. Meet us wherever feels like you."
     },
@@ -253,13 +271,14 @@
     "nav": {
       "about": "Vũ trụ của chúng tớ",
       "music": "Âm nhạc",
-      "socials": "ICU ở đây",
+      "socials": "Menu",
       "menuTitle": "Một lối vào vũ trụ"
     },
     "hero": {
       "eyebrow": "Chào mừng đến với vũ trụ của",
       "body": "Hãy để âm nhạc được vang lên và đi thật xa hơn nữa!",
-      "next": "Đi tiếp nào"
+      "next": "Đi tiếp nào",
+      "listen": "Nghe {title} cùng ICU"
     },
     "notes": {
       "label": "một mảnh dành cho bạn",
@@ -304,7 +323,7 @@
       "eyebrow": "chân chạm cỏ, đầu chạm mây",
       "title": "Thế giới nhỏ của chúng tớ.",
       "body": "Ba con người. Vài bài hát. Và những khoảnh khắc ở giữa.",
-      "descent": "Gần mặt đất hơn một chút",
+      "descent": "Qua những tầng mây, về thế giới của chúng tớ",
       "footerTitle": "Hẹn gặp dưới cùng một bầu trời.",
       "contact": "Gửi lời chào",
       "back": "Trở lại bầu trời"
@@ -312,14 +331,15 @@
     "music": {
       "pageTitle": "Âm nhạc",
       "eyebrow": "Cùng nghe nhạc nhé",
-      "title": "Nghe từ nơi bạn đang đứng.",
+      "title": "Những bài hát từ thế giới nhỏ của chúng tớ.",
       "body": "Biết đã có mặt trên mọi nền tảng, hãy stream cùng ICU nhé. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
       "latestLabel": "Bài hát mới nhất",
       "releaseLabel": "Bài hát",
       "spotify": "Nghe trên Spotify",
       "appleListen": "Nghe trên Apple Music",
       "artistLabel": "Trang nghệ sĩ",
-      "apple": "Tìm ICU trên Apple Music"
+      "apple": "Apple Music",
+      "youtube": "YouTube"
     },
     "social": {
       "eyebrow": "theo dấu âm thanh",
