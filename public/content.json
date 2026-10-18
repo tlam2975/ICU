@@ -24,7 +24,7 @@
           "paragraphs": []
         },
         "vi": {
-          "title": "Gần mặt đất hơn một chút.",
+          "title": "Chúng tôi nhận ra đam mê khi bắt đầu chơi nhạc với nhau từ những ngày tháng học cấp ba.",
           "alt": "Ba thành viên nằm trên cỏ bên cây đàn guitar.",
           "paragraphs": []
         }
@@ -41,7 +41,7 @@
           "paragraphs": []
         },
         "vi": {
-          "title": "Một khoảng trời để lang thang.",
+          "title": "Và rồi sau 3 năm chúng tôi vẫn ở đây",
           "alt": "Các thành viên đi dạo bên hồ.",
           "paragraphs": []
         }
@@ -58,7 +58,7 @@
           "paragraphs": []
         },
         "vi": {
-          "title": "Cùng nhau, giữa những khoảng lặng.",
+          "title": "Vẫn còn rất nhiều thứ để khám phá trên hành trình này",
           "alt": "Ba thành viên trên lối đi rợp bóng cây.",
           "paragraphs": []
         }
@@ -292,18 +292,18 @@
     },
     "about": {
       "eyebrow": "3 ",
-      "title": "Những điều mình bình thường nhất, rồi thành bài hát.",
+      "title": "Những điều chúng mình cho rằng là bình thường nhất, đó là nơi các bài hát được ra đời",
       "body": "ICU chỉ là sự kết hợp của 3 đứa trẻ còn nhiều hoài bão bên trong, mong muốn được đem đến cho mọi người những điều đơn giản nhất.",
       "artworkAlt": "Ba thành viên ICU bên những cây đàn guitar trong buổi chụp đêm.",
       "signature": "innerchilduniverse"
     },
     "story": {
       "outroEyebrow": "từ bầu trời chúng tớ, đến bạn",
-      "outroTitle": "Câu chuyện còn tiếp, trong một bài hát.",
+      "outroTitle": "Đừng vội, nghe thử nhạc của chúng mình đã...",
       "musicLink": "Âm nhạc & những nơi có ICU",
-      "eyebrow": "chân chạm cỏ, đầu chạm mây",
-      "title": "Thế giới nhỏ của chúng tớ.",
-      "body": "Ba con người. Vài bài hát. Và những khoảnh khắc ở giữa.",
+      "eyebrow": "chúng tôi thấy bạn rồi.",
+      "title": "Chào mừng đến vũ trụ của ICU",
+      "body": "vậy bạn đã thấy chúng tôi ở đâu đó chưa?",
       "descent": "Gần mặt đất hơn một chút",
       "footerTitle": "Hẹn gặp dưới cùng một bầu trời.",
       "contact": "Gửi lời chào",
@@ -313,7 +313,7 @@
       "pageTitle": "Âm nhạc",
       "eyebrow": "Cùng nghe nhạc nhé",
       "title": "Nghe từ nơi bạn đang đứng.",
-      "body": "Biết đã có mặt trên mọi nền tảng, hãy stream cùng ICU nhé. Bản không lời ở đây, bạn có thể bật lên hoặc tạm dừng bất cứ lúc nào.",
+      "body": "Biết đã có mặt trên mọi nền tảng rồi nha. Hãy stream thật nhiều cùng ICU nhé.",
       "latestLabel": "Bài hát mới nhất",
       "releaseLabel": "Bài hát",
       "spotify": "Nghe trên Spotify",
@@ -325,7 +325,7 @@
       "eyebrow": "theo dấu âm thanh",
       "title": "Gặp ICU ở những nơi này",
       "latest": "Nghe bài hát mới nhất",
-      "body": "Những bài hát đi xa, mang theo một chút chúng tớ. Gặp ICU ở nơi bạn thấy gần mình nhé."
+      "body": "Góp sức cùng chúng mình để âm nhạc đi thật xa nhé!"
     },
     "footer": {
       "line": "Một chút ánh sáng cho những điều ở bên trong.",
