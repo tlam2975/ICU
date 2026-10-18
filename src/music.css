@@ -49,9 +49,9 @@
   animation: garland-twinkle 3.6s ease-in-out var(--twinkle-delay, 0s) infinite;
 }
 
-.music-page .release-section { position: relative; padding-top: 290px; padding-bottom: 125px; }
-.music-page .release-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 7%; }
-.music-page .music-heading { position: relative; }
+.music-page .release-section { position: relative; padding-top: 235px; padding-bottom: 90px; }
+.music-page .release-inner { display: block; max-width: 1080px; }
+.music-page .music-heading { position: relative; display: block; margin-bottom: 42px; }
 .music-page .music-heading::before {
   content: '';
   position: absolute;
@@ -64,15 +64,15 @@
 .music-page .music-heading h1 {
   width: fit-content;
   max-width: 100%;
-  margin: 24px 0 34px;
-  padding-bottom: 18px;
+  margin: 0 0 18px;
+  padding-bottom: 0;
   color: var(--music-cream);
-  font-size: clamp(4.3rem, 7.5vw, 7.5rem);
+  font-size: clamp(4rem, 6vw, 6rem);
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -.045em;
   text-shadow: 0 3px 0 #746f5766, 0 0 44px #f0d6a01f;
-  border-bottom: 2px solid #d6b97780;
+  border: 0;
 }
 .music-page .music-heading h2 {
   color: var(--music-cream);
@@ -84,40 +84,38 @@
 }
 .music-page .music-heading > p:last-child { color: var(--music-cream); }
 
-/* One bright cream frame holds the artwork, release details, and both platforms. */
+/* A record sleeve: the photograph and title share one clear row. */
 .music-page .release-entry {
-  gap: 26px;
-  padding: clamp(18px, 2vw, 28px);
-  border: 2px solid #fffcee;
-  border-radius: 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 5vw, 64px);
+  padding: clamp(24px, 3vw, 40px);
+  border: 1px solid #fffcee;
+  border-radius: 20px;
   background: var(--music-cream);
   color: #294b40;
-  box-shadow: 0 7px 0 #c7bea2, 0 28px 58px #04101870, 0 0 85px #ffefc52b;
+  box-shadow: 0 4px 0 #c7bea2, 0 24px 58px #04101850;
 }
 .music-page .release-artwork {
   padding: 0;
   border: 1px solid #d9cdad;
-  border-radius: 20px;
+  border-radius: 8px;
   background: #f4ebd0;
   box-shadow: 0 3px 12px #4d4e3214;
 }
 .music-page .release-artwork img {
-  border-radius: 18px;
+  border-radius: 7px;
 }
 .music-page .cover-fallback { color: #42574b; }
-.music-page .release-copy .eyebrow {
-  display: inline-block;
-  padding: 7px 10px;
-  border: 1px solid #bac4a6;
-  border-radius: 6px;
-  background: #e8edd9;
+.music-page .release-copy { display: block; }
+.music-page .release-summary .eyebrow {
+  margin: 0;
   color: #385443;
   font-size: .68rem;
   line-height: 1.6;
   letter-spacing: .04em;
 }
 .music-page .release-copy h2 {
-  margin: 22px 0 14px;
+  margin: 16px 0 8px;
   color: #294b40;
   font-size: clamp(3.8rem, 5.5vw, 5.8rem);
   font-weight: 600;
@@ -126,27 +124,43 @@
   text-shadow: none;
 }
 .music-page .release-meta { color: #52634f; }
-.release-actions { display: grid; gap: 14px; justify-items: stretch; }
-.music-page .release-actions .text-link {
-  justify-content: space-between;
+.music-page .release-description {
+  margin: 20px 0 0;
+  max-width: 36ch;
+  color: #405747;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.music-page .release-platforms {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 26px;
+  width: 100%;
+}
+:root .music-page .release-platforms .press-button {
+  --button-face: #f0e8cd;
+  --button-edge: #d6caaa;
+  --button-base: #c5b998;
+  --button-ink: #294638;
+  --button-travel: 3px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
   gap: 10px;
-  padding: 12px 14px;
-  font-size: .74rem;
+  font-size: .75rem;
+  border-radius: 9px;
   text-align: left;
 }
-.release-actions .release-spotify {
+:root .music-page .release-platforms .listen-button {
+  grid-column: 1 / -1;
   --button-face: #2c5142;
   --button-edge: #44644f;
   --button-base: #152f25;
   --button-ink: #fff9e8;
 }
-.release-actions .release-apple {
-  --button-face: #f0e8cd;
-  --button-edge: #b7af91;
-  --button-base: #b7af91;
-  --button-ink: #294638;
-}
-.release-actions .press-button:focus-visible { outline-color: #385d48; }
+.music-page .release-platforms .text-link { justify-content: space-between; }
+.music-page .release-platforms .press-button:focus-visible { outline-color: #385d48; }
 .music-page .social-heading h2 {
   color: #fff0cb;
   font-size: clamp(2.6rem, 4vw, 4rem);
@@ -168,21 +182,39 @@
   45% { opacity: .9; transform: scale(1.1); filter: drop-shadow(0 0 5px #fff8e299) drop-shadow(0 0 9px #d9dfca55); }
 }
 @media (max-width: 1100px) {
-  .music-page .release-inner { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 9%; }
-  .music-page .release-section { padding-top: 235px; padding-bottom: 80px; }
-  .music-page .release-artwork { max-width: 350px; }
-  .music-page .release-entry { gap: 32px; }
-  .music-page .release-copy h2 { margin-top: 16px; }
+  .music-page .release-section { padding-top: 205px; padding-bottom: 80px; }
 }
 @media (max-width: 700px) {
-  .music-page .release-section { padding-top: 220px; padding-bottom: 70px; }
-  .music-page .release-inner { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-  .music-page .music-heading h1 { margin-top: 22px; font-size: clamp(3.65rem, 16vw, 5.9rem); }
-  .music-page .music-heading h2 { font-size: 2.4rem; }
-  .music-page .release-entry { padding: 20px; border-radius: 28px; gap: 26px; }
-  .music-page .release-artwork { width: 100%; max-width: none; border-radius: 17px; }
-  .music-page .release-artwork img { border-radius: 15px; }
-  .music-page .release-copy h2 { font-size: 4.5rem; }
+  .music-garland { inset-block-start: 75px; height: 110px; opacity: .42; }
+  .music-note-garland { width: 650px; }
+  .music-page .release-section { padding-top: 168px; padding-bottom: 40px; }
+  .music-page .music-heading { margin-bottom: 28px; }
+  .music-page .music-heading h1 { margin: 0 0 14px; font-size: clamp(3rem, 12vw, 4.2rem); }
+  .music-page .music-heading > p:last-child { max-width: 30ch; font-size: 1rem; line-height: 1.65; }
+  .music-page .release-entry {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    grid-template-areas: 'art summary' 'description description' 'platforms platforms';
+    align-items: center;
+    padding: 20px;
+    border-radius: 18px;
+    gap: 0 20px;
+  }
+  .music-page .release-artwork { grid-area: art; width: 100%; max-width: none; }
+  .music-page .release-copy { display: contents; }
+  .music-page .release-summary { grid-area: summary; min-width: 0; }
+  .music-page .release-summary .eyebrow { font-size: .6rem; line-height: 1.5; letter-spacing: .035em; }
+  .music-page .release-copy h2 { margin: 12px 0 4px; font-size: clamp(2.7rem, 12vw, 4.1rem); line-height: 1.15; }
+  .music-page .release-meta { font-size: .75rem; }
+  .music-page .release-description { grid-area: description; max-width: none; margin-top: 22px; }
+  .music-page .release-platforms { grid-area: platforms; margin-top: 22px; }
+  .music-page .social-section-inner { padding-top: 32px; }
+  .music-page .social-directory { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .music-page .social-directory .press-button { min-height: 52px; font-size: .85rem; padding: 12px 16px; }
+  .music-page .social-heading h2 { font-size: 2.5rem; }
+}
+@media (max-width: 360px) {
+  .music-page .release-entry { padding: 16px; column-gap: 16px; }
+  :root .music-page .release-platforms .press-button { font-size: .7rem; padding-inline: 8px; gap: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .garland-charm, .garland-charm > use, .garland-sparkles > * { animation: none; }

@@ -60,6 +60,8 @@ Update `en.about.artworkAlt` and `vi.about.artworkAlt` to describe the new photo
 
 The `releases` array is displayed on `/music/`. It currently has one item, "Biết". Each item includes its title, artist, cover path or URL, image dimensions, track URL, and localized type and image description. Add new items at the beginning of the array. You can use a local cover such as `images/releases/new-cover.jpg`.
 
-Add an optional `appleMusicUrl` to a release to show its Apple Music button beside the Spotify option. The entry for "Biết" uses the direct Apple Music song link supplied by the band. The button labels are `en.music.appleListen` and `vi.music.appleListen`.
+The homepage listening button, featured music layout, and latest-release shortcut in the menu automatically use the first release in the array. `settings.latestTrackUrl` remains as a fallback. The homepage label uses `en.hero.listen` and `vi.hero.listen`; keep `{title}` where the release title should appear.
 
-The latest-release shortcut in the menu automatically uses the first release in the array. `settings.latestTrackUrl` remains as a fallback. The general Apple Music link in `socials` is separate from the release link. All artist and social links are in `socials`.
+Each release can include `platforms`, an array of `{ "id": "spotify", "url": "..." }` entries. Supported IDs are `spotify`, `apple`, and `youtube`; use verified links to that release. The first platform becomes the primary listening button and the homepage destination. If `platforms` is omitted, the existing `url` becomes the Spotify button and optional `appleMusicUrl` adds an Apple Music button. Add an optional `description` to the release's `en` and `vi` objects for the text beside its cover. New releases receive the same photo frame treatment as the band's memories.
+
+Biết's cover is stored locally at `images/releases/biet.webp`. Its platform links point to the song on Spotify and Apple Music and ICU's official YouTube visualizer. Artist and social links remain in `socials`; the Apple Music artist URL includes ICU's numeric catalog ID.
