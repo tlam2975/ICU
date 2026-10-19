@@ -19,7 +19,7 @@
         "width": 2000,
         "height": 1333,
         "en": {
-          "title": "A little closer to earth.",
+          "title": "We discovered our passion when we started making music together in high school.",
           "alt": "Three bandmates lying on the grass with a guitar.",
           "paragraphs": []
         },
@@ -36,7 +36,7 @@
         "width": 2000,
         "height": 1333,
         "en": {
-          "title": "Room to wander.",
+          "title": "And three years later, we're still here.",
           "alt": "The band walking beside a lake.",
           "paragraphs": []
         },
@@ -53,7 +53,7 @@
         "width": 2000,
         "height": 1333,
         "en": {
-          "title": "Together, in the in-between.",
+          "title": "There is still so much left to discover on this journey.",
           "alt": "Three bandmates on a tree-lined walkway.",
           "paragraphs": []
         },
@@ -112,7 +112,7 @@
       "en": {
         "type": "Single",
         "coverAlt": "Cover artwork for Biết by ICU",
-        "description": "Biết is out now. Listen with ICU wherever you are."
+        "description": "Biết is now available across platforms. Stream it with ICU."
       },
       "vi": {
         "type": "Đĩa đơn",
@@ -174,69 +174,69 @@
       "about": "Our universe",
       "music": "Music",
       "socials": "Menu",
-      "menuTitle": "Find your way"
+      "menuTitle": "A way into the universe"
     },
     "hero": {
-      "eyebrow": "a quiet place for what you feel",
-      "body": "Some feelings stay with us. Here, they have room to glow.",
-      "next": "Come closer",
-      "listen": "Listen to {title}"
+      "eyebrow": "Welcome to the universe of",
+      "body": "Let the music ring out and travel even farther!",
+      "next": "Let's keep going",
+      "listen": "Listen to {title} with ICU"
     },
     "notes": {
-      "label": "a fragment for you",
+      "label": "a little piece for you",
       "items": [
         {
-          "fragment": "still here",
-          "full": "You are still here. Let that be enough for tonight."
+          "fragment": "Biết",
+          "full": "You know... and I cry..."
         },
         {
-          "full": "The younger you never needed to grow in a hurry."
+          "full": "You are like a sunflower"
         },
         {
-          "full": "Even in the quiet, something in you keeps singing."
+          "full": "Turning toward the sun, but not for me"
         },
         {
-          "full": "For a moment, let the sea hold what your heart cannot."
+          "full": "Turning toward someone who once remembered my name"
         },
         {
-          "fragment": "softness survived",
-          "full": "After everything, your tenderness is still here."
+          "fragment": "Among the trees...",
+          "full": "I don't know what I did wrong, I don't know how I came to love..."
         },
         {
-          "full": "You can begin again without making a sound."
+          "full": "Among the trees, clouds, and leaves"
         },
         {
-          "fragment": "whole, in pieces",
-          "full": "Every piece of you belongs here, even the ones still finding their place."
+          "fragment": "You came and left behind a forest of flowers",
+          "full": "Why didn't you stay?"
         }
       ]
     },
     "about": {
-      "eyebrow": "three people, one inner sky",
-      "title": "The feelings we carry become songs.",
-      "body": "ICU is three people making music for the parts of us that are hard to name. A place for memory, tenderness, and the child within who still looks up at the sky.",
+      "eyebrow": "3",
+      "title": "The things we think are the most ordinary are where songs are born.",
+      "body": "ICU is simply three kids with big dreams inside, hoping to share the simplest things with everyone.",
       "artworkAlt": "The three members of ICU together with their guitars at night.",
       "signature": "innerchild.universe"
     },
     "story": {
-      "outroEyebrow": "from our sky to yours",
-      "outroTitle": "The story continues in a song.",
-      "musicLink": "Music & all our places",
-      "eyebrow": "feet on the grass, heads in the clouds",
-      "title": "Our little world.",
-      "body": "Three people. A few songs. And all the moments in between.",
-      "descent": "Through the clouds, into our world",
+      "outroEyebrow": "from our sky to you",
+      "outroTitle": "Don't rush off—listen to our music first...",
+      "musicLink": "Music & all the places to find ICU",
+      "eyebrow": "we see you.",
+      "title": "Welcome to ICU's universe",
+      "body": "Have you seen us somewhere before?",
+      "descent": "Through the clouds, back to our world",
       "footerTitle": "See you under the same sky.",
       "contact": "Say hello",
       "back": "Back to the sky"
     },
     "music": {
       "pageTitle": "Music",
-      "eyebrow": "stay for a song",
+      "eyebrow": "Let's listen to some music",
       "title": "Songs from our little world.",
-      "body": "The latest release is waiting on Spotify. The instrumental you hear here is yours to start or pause.",
-      "latestLabel": "Latest release",
-      "releaseLabel": "Release",
+      "body": "Biết is now available on every platform. Give it lots of streams with ICU.",
+      "latestLabel": "Latest song",
+      "releaseLabel": "Song",
       "spotify": "Listen on Spotify",
       "appleListen": "Listen on Apple Music",
       "artistLabel": "Artist page",
@@ -244,14 +244,14 @@
       "youtube": "YouTube"
     },
     "social": {
-      "eyebrow": "find the signal",
-      "title": "Find ICU here",
+      "eyebrow": "follow the sound",
+      "title": "Find ICU in these places",
       "latest": "Listen to the latest release",
-      "body": "The songs travel. So do we. Meet us wherever feels like you."
+      "body": "Help us carry the music far and wide!"
     },
     "footer": {
       "line": "A little light, for the feelings inside.",
-      "socials": "All our places",
+      "socials": "Everywhere you can find ICU",
       "credit": "Designed by Tung Lam, Khanh Phuong, Lewis"
     },
     "controls": {
