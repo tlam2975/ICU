@@ -381,6 +381,8 @@ async function init() {
   });
   socialTrigger.addEventListener('click', openSocials);
   document.querySelector('#social-close').addEventListener('click', closeSocials);
+  // Same-page links (like Our universe → #about) should close the menu before scrolling.
+  document.querySelectorAll('.drawer-nav a').forEach((link) => link.addEventListener('click', closeSocials));
   socialDialog.addEventListener('close', () => socialTrigger.setAttribute('aria-expanded', 'false'));
   socialDialog.addEventListener('click', (event) => {
     if (event.target === socialDialog) closeSocials();
