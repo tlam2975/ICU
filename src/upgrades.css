@@ -66,10 +66,10 @@ body { font-weight: var(--body-weight); }
 @media (max-width: 700px) {
   .memory-photo { padding: 5px 5px 17px; }
   .memory-photo::before { width: 8px; height: 8px; top: 1px; }
-  .memory-photo-portrait { left: 55%; top: 9%; width: 32%; height: 23%; --tilt: 7deg; }
-  .memory-photo-walk { display: none; }
-  .memory-photo-guitar { left: 49%; top: 70%; width: 43%; height: 20%; --tilt: 5deg; }
-  .memory-photo-lake { left: 7%; top: 74%; width: 44%; height: 19%; --tilt: -7deg; }
+  .memory-photo-portrait { left: 8%; top: 11%; width: 37%; height: 21%; --tilt: -6deg; }
+  .memory-photo-walk { left: 55%; top: 11%; width: 37%; height: 21%; --tilt: 7deg; }
+  .memory-photo-guitar { left: 51%; top: 74%; width: 41%; height: 18%; --tilt: 5deg; }
+  .memory-photo-lake { left: 7%; top: 74%; width: 41%; height: 18%; --tilt: -7deg; }
 }
 @media (prefers-reduced-motion: reduce) {
   .memory-photo { transform: rotate(var(--tilt)); }

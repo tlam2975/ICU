@@ -14,9 +14,9 @@
 .hero-name { margin-top: 22px; }
 .memory-photo img { filter: saturate(.88) contrast(.97) brightness(1.08); }
 .memory-photo-portrait img { object-position: 50% 55%; }
-.memory-photo-walk img { object-position: 50% 50%; }
+.memory-photo-walk img { object-position: 50% 0%; }
 .memory-photo-guitar img { object-position: 50% 55%; }
-.memory-photo-lake img { object-position: 55% 50%; }
+.memory-photo-lake img { object-position: 50% 15%; }
 .story-photo-wrap {
   padding: 12px 12px 28px;
   border: 1px solid #a7b3a35c;
@@ -168,19 +168,41 @@
 }
 @media (max-width: 700px) {
   .wordmark-name { display: none; }
-  .hero-content { top: 31%; }
-  .hero-content .hero-artwork { width: 290px; margin-top: 22px; }
-  .hero-name { margin-top: 20px; margin-bottom: 20px; }
-  .hero-next.press-button { bottom: 24px; padding: 10px 16px; }
+  .hero-content { top: 34%; }
+  .hero-content .hero-artwork { width: 240px; margin-top: 12px; }
+  .hero-name { margin-top: 12px; margin-bottom: 12px; }
+  .hero-release { margin-top: 12px; }
+  .hero-next.press-button { bottom: 12px; padding: 10px 16px; }
   .header-actions { gap: 8px; }
   .social-directory { gap: 13px; }
   .social-directory .press-button { padding: 12px; font-size: .8rem; }
   .text-link.press-button { font-size: .78rem; padding: 12px 16px; }
 }
 @media (max-width: 700px) and (max-height: 720px) {
-  .hero-content { top: 29%; }
-  .hero-content .hero-artwork { width: 240px; margin-top: 20px; }
-  .hero-name { margin-top: 18px; margin-bottom: 16px; }
+  .hero-content .hero-artwork { width: 170px; margin-top: 8px; }
+  .hero-name { margin-top: 8px; margin-bottom: 8px; }
+  .hero-release { margin-top: 8px; }
+  .hero-release-label { margin-top: 4px; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero-content { top: 24%; left: 6%; width: 40%; }
+  .hero-content .hero-artwork { width: 150px; margin-top: 8px; }
+  .hero-name { margin: 6px 0 8px 4px; }
+  .hero-release { margin-top: 8px; }
+  .hero-release-label { margin-top: 4px; }
+  .memory-photo-portrait { left: 55%; top: 24%; width: 18%; height: 31%; }
+  .memory-photo-portrait img { object-position: 50% 25%; }
+  .memory-photo-walk { left: 76%; top: 25%; width: 18%; height: 31%; }
+  .memory-photo-guitar { left: 52%; top: 59%; width: 23%; height: 25%; }
+  .memory-photo-lake { left: 78%; top: 60%; width: 18%; height: 25%; }
+}
+@media (max-width: 700px) and (max-height: 620px) and (orientation: portrait) {
+  .hero-content .hero-artwork { width: 120px; }
+  .hero-name { font-size: .75rem; }
+  .hero-body { font-size: .95rem; }
+  .hero-listen { min-height: 40px; padding: 8px 12px; font-size: .75rem; }
+  .memory-photo-guitar, .memory-photo-lake { top: 76%; width: 38%; height: 13.5%; }
+  .hero-next.press-button { bottom: 6px; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root .press-button { transition: none; }

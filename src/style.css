@@ -1314,7 +1314,6 @@ dialog::backdrop {
   .hero-listen { min-height: 48px; padding: 12px 18px; }
   .hero-release-label { margin-top: 7px; font-size: 0.7rem; }
   .hero-next { left: auto; right: 6%; bottom: 12px; }
-  .memory-photo-lake { display: none; }
 }
 
 @keyframes character-mobile {
